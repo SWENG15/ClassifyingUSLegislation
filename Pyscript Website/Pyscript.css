@@ -1,0 +1,15 @@
+
+body {
+  background-image: url('background-image-home.jpg');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+}
+
+title {
+  color:white;
+}
+
+nav{
+  color:white;
+}
