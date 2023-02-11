@@ -12,6 +12,15 @@
     <script defer src="https://pyscript.net/alpha/pyscript.js"></script>
   </head>
 
+  <style>
+body {
+  background-image: url('background-image.jpg');
+  background-size: 50% 100%;
+} 
+}
+</style>
+
+
 
   <body class="container">
    <nav>
@@ -23,9 +32,28 @@
   </div>
   <div id="output"></div>
 
+  <label for="bill">Bill Search Portal</label>
+<br>
+
+<textarea id="bill" name="bill" rows="5" cols="50" placeholder="Enter Bill">
+</textarea>
+
+<div>
+      <button id="new-bill-btn" class="buttonStyle" type="submit" pys-onClick="add_bill">
+      
+        Search Legislation
+      </button>
+    </div>
+
 
   </body>
 
+  <py-script>
+
+
+
+
+</py-script>
 
 </html>
 

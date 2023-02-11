@@ -11,10 +11,18 @@
     <link rel="stylesheet" href="Pyscript.css" />
     <script defer src="https://pyscript.net/alpha/pyscript.js"></script>
   </head>
+
+  <style>
+body {
+  background-image: url('background-image-home.jpg');
+
+} 
+}
+</style>
         
 
 
-<b><p style="color:white;">Today is <u><label id='today'></label></u></p></b>
+
   <body class="container">
    <nav>
       <a href="./SWENG Pyscript Website.html">Home</a>
@@ -24,6 +32,10 @@
     </nav>
   </div>
   <div id="output"></div>
+
+  
+
+  
 
 
 
@@ -35,8 +47,7 @@
  
 #print("Welcome to Group 15 SWENG Project 7")
 #print("Classifying US State Legislation")
-import datetime as dt
-pyscript.write('today', dt.date.today().strftime('%A %B %d, %Y'))
+
 
   
 from datetime import datetime as dt
@@ -105,12 +116,12 @@ new_task_content.element.onkeypress = add_task_event
     <section>
 
     <div class="text-center w-full mb-8">
-      <h1 style="color:white;">Classifying US State Legislation</h1>
+      <h1>Classifying US State Legislation: Bill Search Portal</h1>
     </div>
     <div>
       <input id="new-task-content" class="border flex-1 mr-3 border-gray-300 p-2 rounded" type="text">
-      <button id="new-task-btn" class="p-2 text-white bg-blue-600 border border-blue-600 rounded" type="submit" pys-onClick="add_task">
-        Search Legislation
+      <button id="learn-more-btn" class="homeButton" type="submit" pys-onClick="add_task" >
+        Learn More
       </button>
     </div>
 

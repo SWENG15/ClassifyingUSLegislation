@@ -1,6 +1,5 @@
 
 body {
-  background-image: url('background-image-home.jpg');
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-size: cover;
@@ -11,5 +10,133 @@ title {
 }
 
 nav{
-  color:white;
+  /* height:24px;
+width:370.00091552734375px;
+padding-left:10px;
+padding-right:10px;
+display:flex;
+flex-direction:row;
+justify-content:flex-start;
+align-items:center;
+gap:17px;
+position:absolute;
+top:40px;
+left:750px; */
+
+height:36px;
+width:370.00091552734375px;
+padding-left:10px;
+padding-right:10px;
+display:flex;
+flex-direction:row;
+justify-content:flex-start;
+align-items:center;
+gap:17px;
+position:relative;
+color: white;
+}
+
+label {
+  /* display: block;
+  color: azure; */
+
+  color: black;
+text-align:left;
+vertical-align:text-top;
+font-size:16px;
+font-family:PT Mono;
+line-height:auto;
+border-style:hidden;
+outline:none;
+top:170px;
+left:1048px;
+position:absolute;
+width:288px;
+
+}
+
+textarea {
+  /* border-radius: 25px;
+  border: 1px solid #ccc;
+  padding: 10px; 
+  max-width: 100%;
+  line-height: 1.5;
+
+  box-shadow: 1px 1px 1px #999;
+
+  */
+
+  background-color:#ffffff;
+height:400px;
+width:402px;
+padding:0px;
+border-style:hidden;
+outline:none;
+top:200px;
+left:955px;
+position:absolute;
+border-radius:4px;
+border:1px solid #d4d7de;
+} 
+
+h1 {
+  color:#ffffff;
+  text-align:left;
+  vertical-align:text-top;
+  font-size:58px;
+  font-family:Martel;
+  letter-spacing:0.20000000298023224px;
+  line-height:65px;
+  border-style:hidden;
+  outline:none;
+  top:312px;
+  left:885px;
+  position:absolute;
+  width:509px;
+}
+
+.homeButton {
+  background-color: #2247c1;
+height:50px;
+width:205px;
+border-radius:37px;
+padding-left:36px;
+padding-right:36px;
+padding-top:10px;
+padding-bottom:10px;
+display:flex;
+flex-direction:column;
+gap:10px;
+position:relative;
+text-align: center;
+}
+
+#learn-more-btn {
+  left: 400px;
+  top: 430px;
+  color: white;
+  text-align: center;
+
+}
+
+.buttonStyle {
+  background-color: #2247c1;
+height:50px;
+width:205px;
+border-radius:37px;
+padding-left:36px;
+padding-right:36px;
+padding-top:10px;
+padding-bottom:10px;
+display:flex;
+flex-direction:column;
+gap:10px;
+position:relative;
+}
+
+#new-bill-btn {
+  left: 1000px;
+  top: 650px;
+  color: white;
+  
 }
