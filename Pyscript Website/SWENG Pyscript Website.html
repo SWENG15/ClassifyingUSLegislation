@@ -4,31 +4,50 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
 
-    <title>Classifying US State Legislation</title>
+    <title style="font-size: 26px">Classifying US State Legislation</title>
 
     <link rel="icon" type="image/png" href="favicon.png" />
     <link rel="stylesheet" href="https://pyscript.net/alpha/pyscript.css" />
+    <link rel="stylesheet" href="Pyscript.css" />
     <script defer src="https://pyscript.net/alpha/pyscript.js"></script>
   </head>
 
+  <style>
+body {
+  background-image: url('background-image-home.jpg');
 
-<b><p>Today is <u><label id='today'></label></u></p></b>
+} 
+}
+</style>
+        
+
+
+
   <body class="container">
-   <ul id="navigation">
-    <li class="home">Home</li>
-    <li class="about">About</li>
-    <li class="services">Services</li>
-    <li class="contact">Contact</li></ul>
+   <nav>
+      <a href="./SWENG Pyscript Website.html">Home</a>
+      <a href="./About.html">About</a>
+      <a href="./Service.html">Service</a>
+      <a href="./Contact.html">Contact</a>
+    </nav>
   </div>
   <div id="output"></div>
+
+  
+
+  
+
+
+
 
   </body>
   
   <py-script>
+
+ 
 #print("Welcome to Group 15 SWENG Project 7")
 #print("Classifying US State Legislation")
-import datetime as dt
-pyscript.write('today', dt.date.today().strftime('%A %B %d, %Y'))
+
 
   
 from datetime import datetime as dt
@@ -47,12 +66,6 @@ tasks = []
 task_template = Element("task-template").select(".task", from_content=True)
 task_list = Element("list-tasks-container")
 new_task_content = Element("new-task-content")
-
-#define the elements for the navigiation bar
-ul_element = Element("navigation")
-first_element = ul_element.select('.home').add_class('first')
-second_element = ul_element.select('.about').remove_class('about')
-div_element = Element("output")
 
 
 
@@ -103,12 +116,12 @@ new_task_content.element.onkeypress = add_task_event
     <section>
 
     <div class="text-center w-full mb-8">
-      <h1 class="text-1xl font-bold text-gray-800 uppercase tracking-tight">Classifying US State Legislation</h1>
+      <h1>Classifying US State Legislation: Bill Search Portal</h1>
     </div>
     <div>
       <input id="new-task-content" class="border flex-1 mr-3 border-gray-300 p-2 rounded" type="text">
-      <button id="new-task-btn" class="p-2 text-white bg-blue-600 border border-blue-600 rounded" type="submit" pys-onClick="add_task">
-        Search Legislation
+      <button id="learn-more-btn" class="homeButton" type="submit" pys-onClick="add_task" >
+        Learn More
       </button>
     </div>
 
@@ -124,6 +137,8 @@ new_task_content.element.onkeypress = add_task_event
             </label>
         </section>
     </template>
+
+  
 
   </section>
   </main>
