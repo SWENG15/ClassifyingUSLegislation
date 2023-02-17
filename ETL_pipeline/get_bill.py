@@ -3,6 +3,7 @@
 import json
 import csv
 import base64
+# pylint: disable=import-error
 from bs4 import BeautifulSoup
 import requests
 import env
