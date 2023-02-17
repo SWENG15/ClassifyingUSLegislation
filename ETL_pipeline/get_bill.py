@@ -1,16 +1,18 @@
+"""This module is used to Extract, Transform and Load bill data."""
+
 import json
 import csv
+import base64
+from bs4 import BeautifulSoup
+import requests
 import env
 from legiscan import LegiScan
 import codes
-from bs4 import BeautifulSoup
-import requests
-import base64
 
 
-#Given a base64 encoded html document, return only the text
 def extract_bill_text(base64_enc):
-    doc_html = base64.b64decode(doc_text64)
+    """Given a base64 encoded html document, return only the text"""
+    doc_html = base64.b64decode(base64_enc)
     soup = BeautifulSoup(doc_html, "html.parser")
     content = soup.find('div', {'class':'document'})
     return content.text
@@ -18,16 +20,15 @@ def extract_bill_text(base64_enc):
 #Create Legiscan API session
 legis = LegiScan(env.API_KEY)
 
-#Define search
+#Define Search
 bills = legis.search(state='sc', query='status:passed')
-bills['summary']
 
 #Create csv file and define its header columns
-csv_filename = "dataset.csv"
-header = ['ID', 'Title', 'Text', 'Status'] 
-with open(csv_filename, 'w') as csvfile: 
-    csvwriter = csv.writer(csvfile) 
-    csvwriter.writerow(header) 
+CSV_FILENAME = "dataset.csv"
+header = ['ID', 'Title', 'Text', 'Status']
+with open(CSV_FILENAME, 'w', encoding='UTF-8') as csvfile:
+    csvwriter = csv.writer(csvfile)
+    csvwriter.writerow(header)
 
     #Populate csv file with each bill being one row
     for b in bills['results']:
@@ -36,13 +37,13 @@ with open(csv_filename, 'w') as csvfile:
 
         print("Bill Title: " + str(bill_title))
         print("Bill ID: " + str(bill_id))
-    
+
         #Write bill json
         url = f"https://api.legiscan.com/?key={env.API_KEY}&op=getBill&id={bill_id}"
-        response = requests.get(url)
+        response = requests.get(url, timeout = 10)
         data = response.json()
         filename = f"pulled_bills/bill_{bill_id}.json"
-        with open(filename, 'w') as f:
+        with open(filename, 'w', encoding='UTF-8') as f:
             json.dump(data, f)
 
         #Get bill status number and find text equivalent
@@ -53,7 +54,7 @@ with open(csv_filename, 'w') as csvfile:
         num_texts = len(data['bill']['texts'])
 
         #Only write to csv if the text field won't be empty
-        if(num_texts > 0):
+        if num_texts > 0:
             bill_doc_id = data['bill']['texts'][num_texts - 1]['doc_id']
             print("Doc ID: " + str(bill_doc_id) + "\n")
             doc_text64 = legis.get_bill_text(bill_doc_id).get('doc')
@@ -63,6 +64,3 @@ with open(csv_filename, 'w') as csvfile:
             #Write all relevant bill information into csv
             csv_row = [bill_id, bill_title, document_text, bill_status]
             csvwriter.writerow(csv_row)
-
-
-
