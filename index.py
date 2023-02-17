@@ -1,31 +1,32 @@
-#print("Welcome to Group 15 SWENG Project 7")
-#print("Classifying US State Legislation")
+"""This module is used for the python code of the PyScript website homepage"""
 
-
-  
 from datetime import datetime as dt
 
 def remove_class(element, class_name):
+    """remove_class removes a class from an element"""
     element.element.classList.remove(class_name)
 
 
 def add_class(element, class_name):
+    """add_class adds a class to an element"""
     element.element.classList.add(class_name)
-
 
 tasks = []
 
 # define the task template that will be use to render new templates to the page
+
+# Disable undefined variable as the class is defined at runtime
+# pylint: disable=undefined-variable
 task_template = Element("task-template").select(".task", from_content=True)
 task_list = Element("list-tasks-container")
 new_task_content = Element("new-task-content")
 
-
-
+# pylint: disable=unused-argument
 def add_task(*ags, **kws):
+    """add_task adds a task to the page"""
     # ignore empty task
     if not new_task_content.element.value:
-        return None
+        return
 
     # create task
     task_id = f"task-{len(tasks)}"
@@ -57,8 +58,10 @@ def add_task(*ags, **kws):
     task_html_check.element.onclick = check_task
 
 
-def add_task_event(e):
-    if e.key == "Enter":
+def add_task_event(event):
+    """add_task_event deals with if there is an event on the website. 
+    Currently just deals with enter key input."""
+    if event.key == "Enter":
         add_task()
 
 
