@@ -56,3 +56,12 @@ docker run -p 5500:5500 web-app
 ```
 
 Then, you should be able to access the website at 127.0.0.1:5500.
+
+## To install ETL pipeline dependencies run:
+```
+pip install -r requirements.txt
+```
+Also create an env.py file with the line: 
+```
+API_KEY = "YOUR_LEGISCAN_API_KEY"
+```
