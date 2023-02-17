@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+
+    <title style="font-size: 26px">Classifying US State Legislation</title>
+
+    <link rel="icon" type="image/png" href="favicon.png" />
+    <link rel="stylesheet" href="https://pyscript.net/alpha/pyscript.css" />
+    <link rel="stylesheet" href="Pyscript Website/Pyscript.css" />
+    <script defer src="https://pyscript.net/alpha/pyscript.js"></script>
+  </head>
+
+  <style>
+body {
+  background-image: url('Pyscript Website/background-image-home.jpg');
+
+} 
+}
+</style>
+        
+
+
+
+  <body class="container">
+   <nav>
+      <a href="./">Home</a>
+      <a href="./Pyscript Website/About.html">About</a>
+      <a href="./Pyscript Website/Service.html">Service</a>
+      <a href="./Pyscript Website/Contact.html">Contact</a>
+    </nav>
+  </div>
+  <div id="output"></div>
+
+  
+
+  
+
+
+
+
+  </body>
+  
+  <py-script src="./index.py"></py-script>
+
+  <main class="max-w-xs mx-auto mt-4">
+    <section>
+
+    <div class="text-center w-full mb-8">
+      <h1>Classifying US State Legislation: Bill Search Portal</h1>
+    </div>
+    <div>
+      <input id="new-task-content" class="border flex-1 mr-3 border-gray-300 p-2 rounded" type="text">
+      <button id="learn-more-btn" class="homeButton" type="submit" pys-onClick="add_task" >
+        Learn More
+      </button>
+    </div>
+
+    <py-list id="myList"></py-list>
+    <div id="list-tasks-container" class="flex flex-col-reverse mt-4">
+  </div>
+
+    <template id="task-template">
+        <section class="task bg-white my-1">
+            <label for="flex items-center p-2 ">
+                <input class="mr-2" type="checkbox" class="task-check">
+                <p class="m-0 inline"></p>
+            </label>
+        </section>
+    </template>
+
+  
+
+  </section>
+  </main>
+</body>
+</html>
