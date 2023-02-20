@@ -1,2 +1,4 @@
-env.py
-__pycache__
+/__pycache__/
+/ETL_pipeline/__pycache__/
+/.pytest_cache/
+/ETL_pipeline/env.py
