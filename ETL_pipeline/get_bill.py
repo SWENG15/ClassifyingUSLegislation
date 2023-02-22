@@ -5,30 +5,46 @@ import csv
 import base64
 # pylint: disable=import-error
 from bs4 import BeautifulSoup
+from bs4.element import Comment
 import requests
 import env
 from legiscan import LegiScan
 import codes
 
+#Used for states with non-standard formatting
+def tag_visible(element):
+    """Used to detect which text is visible on a page"""
+    if element.parent.name in ['style', 'script', 'head', 'title', 'meta', '[document]']:
+        return False
+    if isinstance(element, Comment):
+        return False
+    return True
 
-def extract_bill_text(base64_enc):
+def extract_bill_text(base64_enc,state):
     """Given a base64 encoded html document, return only the text"""
     doc_html = base64.b64decode(base64_enc)
     soup = BeautifulSoup(doc_html, "html.parser")
-    content = soup.find('div', {'class':'document'})
-    return content.text
+    #States that use standard formatting (List will be expanded from sc in future)
+    if state == 'sc':
+        content = soup.find('div', {'class':'document'})
+        return content.text
+    texts = soup.findAll(text=True)
+    visible_texts = filter(tag_visible, texts)
+    return " ".join(t.strip() for t in visible_texts)
 
 #Create Legiscan API session
 legis = LegiScan(env.API_KEY)
 
 #Define Search
-bills = legis.search(state='sc', query='status:passed')
+QUERY_STATE = 'wv'
+SEARCH_QUERY = 'fire'
+bills = legis.search(state=QUERY_STATE, query=SEARCH_QUERY)
 
 #Create csv file and define its header columns
 CSV_FILENAME = "dataset.csv"
-header = ['ID', 'Title', 'Text', 'Status']
+header = ['ID', 'Title', 'Text', 'Status', 'Subject']
 with open(CSV_FILENAME, 'w', encoding='UTF-8') as csvfile:
-    csvwriter = csv.writer(csvfile)
+    csvwriter = csv.writer(csvfile, delimiter=',')
     csvwriter.writerow(header)
 
     #Populate csv file with each bill being one row
@@ -59,9 +75,19 @@ with open(CSV_FILENAME, 'w', encoding='UTF-8') as csvfile:
             bill_doc_id = data['bill']['texts'][num_texts - 1]['doc_id']
             print("Doc ID: " + str(bill_doc_id) + "\n")
             doc_text64 = legis.get_bill_text(bill_doc_id).get('doc')
-            document_text = extract_bill_text(doc_text64)
+            document_text = "\"" + extract_bill_text(doc_text64, QUERY_STATE) + "\""
             print(document_text)
 
+            num_subjects = len(data['bill']['subjects'])
+            # pylint: disable=invalid-name
+            bill_subject = "No Subject Provided"
+            if num_subjects > 0:
+                #Get bill subject matter
+                bill_subject = data['bill']['subjects'][0]['subject_name']
+                print("Bill Subject: " + str(bill_subject))
+            else:
+                print("No Bill Subject")
+
             #Write all relevant bill information into csv
-            csv_row = [bill_id, bill_title, document_text, bill_status]
+            csv_row = [bill_id, bill_title, document_text, bill_status, bill_subject]
             csvwriter.writerow(csv_row)

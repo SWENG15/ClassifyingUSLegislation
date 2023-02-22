@@ -117,7 +117,7 @@ class LegiScan(object):
            title/description information.  The amendment text is base64 encoded
            to allow for PDF and Word data transfer.
         """
-        url = self._url('getAmendment', {'id': amendment})
+        url = self._url('getAmendment', {'id': amendment_id})
         return self._get(url)['amendment']
 
     def get_supplement(self, supplement_id):
