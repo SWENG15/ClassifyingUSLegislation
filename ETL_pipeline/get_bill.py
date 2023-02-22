@@ -79,6 +79,7 @@ with open(CSV_FILENAME, 'w', encoding='UTF-8') as csvfile:
             print(document_text)
 
             num_subjects = len(data['bill']['subjects'])
+            # pylint: disable=invalid-name
             bill_subject = "No Subject Provided"
             if num_subjects > 0:
                 #Get bill subject matter
