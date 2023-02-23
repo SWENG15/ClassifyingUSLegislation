@@ -38,17 +38,18 @@ legis = LegiScan(env.API_KEY)
 #Define Search
 QUERY_STATE = 'wv'
 SEARCH_QUERY = 'fire'
-bills = legis.search(state=QUERY_STATE, query=SEARCH_QUERY)
-
-#Create csv file and define its header columns
-CSV_FILENAME = "dataset.csv"
-header = ['ID', 'Title', 'Text', 'Status', 'Subject']
-with open(CSV_FILENAME, 'w', encoding='UTF-8') as csvfile:
+for PAGE_INDEX in range(10):
+ for YEAR_INDEX in range(4):
+  bills = legis.search(state=QUERY_STATE, query=SEARCH_QUERY,year=YEAR_INDEX, page=PAGE_INDEX)
+  #Create csv file and define its header columns
+  CSV_FILENAME = "dataset.csv"
+  header = ['ID', 'Title', 'Text', 'Status', 'Subject']
+  with open(CSV_FILENAME, 'w', encoding='UTF-8') as csvfile:
     csvwriter = csv.writer(csvfile, delimiter=',')
     csvwriter.writerow(header)
 
     #Populate csv file with each bill being one row
-    for b in bills['results']:
+    for b in bills['results'][PAGE_INDEX]:
         bill_id = b['bill_id']
         bill_title = b['title']
 
