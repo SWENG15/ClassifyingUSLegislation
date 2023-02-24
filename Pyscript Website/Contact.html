@@ -29,23 +29,19 @@
   </div>
   <div id="output"></div>
 
-  <header>Contact Us</header>
-  <form class="form_layout">
+  <form id="form_layout" class ="form_layout">
+      <header>Contact Us</header>
       <table>
         <tr>
-          <td>First Name:</td>
-          <td><input type="text" class="border flex-1 mr-3 border-gray-300 p-1 rounded" name="fname" ></td>
-          <td>Last Name:</td>
-          <td><input type="text" class="border flex-1 mr-3 border-gray-300 p-1 rounded" name="lname" ></td>
+          <td>First Name<input type="text" class="form-field" name="fname" placeholder="First Name..."></td>
+          <td>Last Name<input type="text" class="form-field" name="lname" placeholder="Last Name..."></td>
         </tr>
         <tr>
-          <td>Email:</td>
-          <td><input type="email" class="border flex-1 mr-3 border-gray-300 p-1 rounded" name="email" ></td>
-          <td>Message:</td>
-          <td><input type="text" placeholder="Type your message..." class="border flex-1 mr-3 border-gray-300 p-1 rounded" name="message" ></td>
+          <td>Email<input type="email" class="form-field" name="email" placeholder="Email..." ></td>
+          <td>Message<input type="text" class="form-field" name="message" placeholder="Type your message..."></td>
         </tr>
       </table>
-      <button id="submit-btn" class="p-1 text-white bg-indigo-500 border border-indigo-500 rounded submit_button" type="submit" pys-onClick="submit_task">
+      <button id="form-btn" class="formButton" type="submit" pys-onClick="submit_task" >
         Submit
       </button>
   </form>
