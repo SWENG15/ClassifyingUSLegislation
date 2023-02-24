@@ -18,7 +18,6 @@ body {
   background-image: url('background-image-home.jpg');
   
 } 
-}
 </style>
 
 
@@ -32,11 +31,37 @@ body {
   </div>
   <div id="output"></div>
 
-  <div data-paperform-id="zck1sgdp"></div>
-  <script>(function() {var script = document.createElement('script'); 
-              script.src = "https://paperform.co/__embed.min.js"; document.body.appendChild(script); })()
-  </script>
-  
+  <p style="text-align:center; color: #fff; font-size:36px">Contact Us</p>
+  <form>
+    <div class="text_div w-full">
+      <table style="color: #fff">
+        <tr>
+          <td>First Name:</td>
+          <td><input type="text" class="border flex-1 mr-3 border-gray-300 p-1 rounded" name="fname" ></td>
+          <td>Last Name:</td>
+          <td><input type="text" class="border flex-1 mr-3 border-gray-300 p-1 rounded" name="lname" ></td>
+        </tr>
+        <tr>
+          <td>Email:</td>
+          <td><input type="email" class="border flex-1 mr-3 border-gray-300 p-1 rounded" name="email" ></td>
+          <td>Message:</td>
+          <td><input type="text" placeholder="Type your message..." class="border flex-1 mr-3 border-gray-300 p-1 rounded" name="message" ></td>
+        </tr>
+      </table>
+      <button id="submit-btn" class="p-1 text-white bg-indigo-500 border border-indigo-500 rounded" type="submit" pys-onClick="submit_task">
+        Submit
+      </button>
+    </div>
+  </form>
+
+  <!--<div class="address_div">
+    <p><b>Dublin Office Location</b><br>
+      Dublin, Ireland<br>
+      36 Blackbourne Square, Rathfarnham Gate, Dublin 14, Ireland, D14 DW30<br>
+      <b>Phone:</b> 01 492 7444</p>
+  </div>-->
+  <div class="phone_div"><b>Phone:</b>1-855-776-7956</div>
+  <div class="email_div"><b>Email: </b>webquery@propylon.com</div>
 </body>
 
 </html>
