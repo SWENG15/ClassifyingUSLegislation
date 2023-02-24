@@ -40,6 +40,12 @@ body {
   </div>
   <div id="output"></div>
 
+<div class="states-btn-group">
+  <button>South Carolina</button>
+  <button>California</button>
+  <button>Washington</button>
+</div>
+
   <label for="bill">Bill Classification Portal</label>
 <br>
 
@@ -49,7 +55,7 @@ body {
 </textarea>
 
     <div>
-      <button id="new-bill-btn" class="buttonStyle" type="submit" pys-onClick="submit_bill">
+      <button id="new-bill-btn" class="buttonStyle" type="submit" pys-onClick="document.getElementById('BillInput').value = ''">
         Classify Bill
       </button>
     </div>

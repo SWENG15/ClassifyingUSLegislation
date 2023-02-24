@@ -119,19 +119,42 @@ h1 {
 
 }
 
+/* Bills page CSS */
+.states-btn-group button {
+  background-color: white; /* Green background */
+  border: 1px solid green; /* Green border */
+  color: black; /* White text */
+  padding: 10px 24px; /* Some padding */
+  cursor: pointer; /* Pointer/hand icon */
+  width: 10%; /* Set a width if needed */
+  display: block; /* Make the buttons appear below each other */
+}
+
+.states-btn-group button:not(:last-child) {
+  border-bottom: none; /* Prevent double borders */
+}
+
+/* Add a background color on hover */
+.states-btn-group button:hover {
+  background-color: lightblue;
+  
+}
+
 .buttonStyle {
   background-color: #2247c1;
-  height:50px;
-  width:205px;
+  height:60px;
+  width:10%;
   border-radius:37px;
   padding-left:36px;
   padding-right:36px;
   padding-top:10px;
   padding-bottom:10px;
   display:flex;
-  flex-direction:column;
+  flex-direction:row;
   gap:10px;
-  position:relative;
+  position:fixed;
+  text-align: center;
+  right: 5px;
 }
 
 #new-bill-btn {
