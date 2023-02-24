@@ -37,7 +37,7 @@ legis = LegiScan(env.API_KEY)
 
 #Define Search
 QUERY_STATE = 'wv'
-SEARCH_QUERY = 'fire'
+SEARCH_QUERY = 'the'
   #Create csv file and define its header columns
 
 CSV_FILENAME = "dataset.csv"
