@@ -14,12 +14,10 @@
   </head>
 
   <style>
-body {
-  background-image: url('background-image-home.jpg');
-  
-} 
-</style>
-
+    body {
+      background-image: url('background-image-home.jpg');
+    } 
+  </style>
 
   <body class="container">
    <nav>
@@ -31,10 +29,9 @@ body {
   </div>
   <div id="output"></div>
 
-  <p style="text-align:center; color: #fff; font-size:36px">Contact Us</p>
-  <form>
-    <div class="text_div w-full">
-      <table style="color: #fff">
+  <header>Contact Us</header>
+  <form class="form_layout">
+      <table>
         <tr>
           <td>First Name:</td>
           <td><input type="text" class="border flex-1 mr-3 border-gray-300 p-1 rounded" name="fname" ></td>
@@ -48,10 +45,9 @@ body {
           <td><input type="text" placeholder="Type your message..." class="border flex-1 mr-3 border-gray-300 p-1 rounded" name="message" ></td>
         </tr>
       </table>
-      <button id="submit-btn" class="p-1 text-white bg-indigo-500 border border-indigo-500 rounded" type="submit" pys-onClick="submit_task">
+      <button id="submit-btn" class="p-1 text-white bg-indigo-500 border border-indigo-500 rounded submit_button" type="submit" pys-onClick="submit_task">
         Submit
       </button>
-    </div>
   </form>
 
   <!--<div class="address_div">

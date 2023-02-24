@@ -169,9 +169,18 @@ h1 {
   width:90%;
   height:40px;
 }
-.text_div {
+.form_layout {
   margin:auto;
   text-align:center;
   padding:10px;
   width:50%; 
-} 
+  color: #fff;
+  position: center;
+}
+header {
+  text-align:center; 
+  color: #fff; 
+  font-size:36px;
+}
+
+
