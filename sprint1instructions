@@ -1,0 +1,4 @@
+Download anaconda to run jupyter notebooks or VScode with Juyter notebook extension
+place the jupyter notebook and the csv file in the same folder
+run anaconda(jupyter), navigate to aforementioned folder and open it from there
+Code which doesnt work has been commented, as far as i can tell, its a problem with data types present in csv file
