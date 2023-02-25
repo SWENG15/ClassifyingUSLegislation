@@ -42,7 +42,7 @@ def train_model(training_data='../ETL_pipeline/datasets/subject_dataset.csv'):
     #test_size determines how much of the data is used to test the model,
     # with the remaining used to train
     # X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
-    x_train, _, y_train, _ = train_test_split(text, subject, test_size=0)
+    x_train, _, y_train, _ = train_test_split(text, subject, test_size=0.1)
 
     # Train a Naive Bayes classifier on the training data
     clf = MultinomialNB()
