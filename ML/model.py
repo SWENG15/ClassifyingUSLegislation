@@ -1,13 +1,18 @@
+"""
+model provides the ML classification for state legislation,
+including training the models as well as returning classifications
+"""
+import csv
+import codecs
 import pandas as pd
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.naive_bayes import MultinomialNB
 from sklearn.model_selection import train_test_split
-from sklearn.metrics import accuracy_score
-import csv
-import codecs
-
+# from sklearn.metrics import accuracy_score
 
 def train_model(training_data='../ETL_pipeline/datasets/subject_dataset.csv'):
+    """train_model trains a Naive Bayes classifier for subject matter based on 
+        the path to a dataset given (optionally) in args"""
     # Load the data from a CSV file in Latin1 encoding
     with codecs.open(training_data, 'r', encoding='Latin1') as file:
         reader = csv.reader(file)
@@ -30,29 +35,38 @@ def train_model(training_data='../ETL_pipeline/datasets/subject_dataset.csv'):
     data['combined_text'] = data['text'] + ' ' + data['title']
 
     # Split the data into training and testing sets
-    X = data['combined_text']
-    y = data['subject']
+    text = data['combined_text']
+    subject = data['subject']
     vectorizer = CountVectorizer()
-    X = vectorizer.fit_transform(X)
-    #test_size determines how much of the data is used to test the model, with the remaining used to train
-    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
+    text = vectorizer.fit_transform(text)
+    #test_size determines how much of the data is used to test the model,
+    # with the remaining used to train
+    # X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
+    x_train, _, y_train, _ = train_test_split(text, subject, test_size=0)
 
     # Train a Naive Bayes classifier on the training data
     clf = MultinomialNB()
-    clf.fit(X_train, y_train)
+    clf.fit(x_train, y_train)
 
-    y_pred = clf.predict(X_test)
-    score = accuracy_score(y_test, y_pred)
-    #print(score)
+    # y_pred = clf.predict(X_test)
+    # score = accuracy_score(y_test, y_pred)
+    # print(score)
 
     return clf, vectorizer
 
 def predict_subject(clf, vectorizer, text):
+    """
+    predict_subject predicts the subject of a bill given
+    its text and a trained classification model 
+    (and the vectorizer necessary to get the text into the correct format)
+    """
     # Take new text and predict its subject
-    #the input would go in new text string
-    #the new text string has a problem, namely if the text has a ' in it, it would give an error, so omit that out beefore inputting
+    # the input would go in new text string
+    # If the new text string has a problem,
+    # namely if the text has a ' in it, it would give an error,
+    # so omit that out beefore inputting
     input_test = vectorizer.transform([text])
-    input_pred = clf.predict(input_test)    
+    input_pred = clf.predict(input_test)
 
     # Print the predicted subject for the new text
     return input_pred
