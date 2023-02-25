@@ -9,15 +9,14 @@ import model as ml
 # and each state's model should be remembered
 classifier, vectorizer = ml.train_model('subject_dataset.csv')
 
-# Disable undefined variable as the class is defined at runtime
-# pylint: disable=undefined-variable
-submitted_bill = Element("bill")
-
-def submit_bill():
+def submit_bill(*_):
     """submit_bill runs when a new bill's text is submitted"""
-    print("Submitted succesfully \n")
-    submitted_bill.clear()
-    if not submitted_bill.element.value:
-        print("Bill empty")
+    # Disable undefined variable as the class is defined at runtime
+    # pylint: disable=undefined-variable
+    text = Element("bill").element.value
+    Element("bill").clear()
+    if not text:
+        Element('output').element.innerText = "Bill empty"
     else:
-        print(ml.predict_subject(classifier,vectorizer,submitted_bill.element.value))
+        subject = ml.predict_subject(classifier,vectorizer,text)
+        Element('output').element.innerText = subject[0]
