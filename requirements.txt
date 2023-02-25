@@ -1,6 +1,0 @@
-beautifulsoup4==4.11.2
-requests==2.28.2
-pandas
-scikit-learn
-pylint
-pytest

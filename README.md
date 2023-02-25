@@ -4,13 +4,39 @@ University project to design ML classification for US State Legislation.
 # About
 This is the base template for the US State Legislation website for SWENG. 
 
-
 # Run the Website
+
+## Run the Website Uncontainerised
 The website is implemented using Pyscript.
-It is run using Visual Studio Code.
+You can run it using Visual Studio Code, although you will need to install the dependencies in requirements/web-app.txt. If you do not want to do this, then read the next section.
 1. Install pyscript extension, along with the Live Server extension. Live Server allows you to run pyscript directly in your browser.
 2. Go to Settings in Visual Studio Code, then search for “Format on save”, and uncheck the box "Editor: Format On Save". This prevents certain python syntax errors.
 3. Save the file and click the "Go Live" in the bottom right of the Visual Studio Code screen. The website should start up in your browser.
+
+## Run the Website Containerised
+If you do not want to install dependencies to run this project, you can run it using Docker instead.
+To build the current version, 
+```
+docker build -t web-app .
+```
+
+Then, to run that
+```
+docker run -p 5500:5500 web-app
+```
+
+Then, you should be able to access the website at 127.0.0.1:5500.
+
+
+## Run Releases
+### Release 1
+This release just has a basic front end, and no ML classification model linked. To run this, run the following with Docker Desktop open:
+
+```
+docker run --name=web-app-container -p 5500:5500 clairegregg/classifying-us-legislation:v0-alpha
+```
+
+
 
 # Testing and Linting
 
@@ -42,24 +68,9 @@ py -m pylint filename.py
 
  This will tell you any issues with your code, which you should fix before committing.
 
-# Using Docker
-A Dockerfile has been added to this project for the purposes of deployment.
-
-To build the current version, 
-```
-docker build -t web-app .
-```
-
-Then, to run that
-```
-docker run -p 5500:5500 web-app
-```
-
-Then, you should be able to access the website at 127.0.0.1:5500.
-
 ## To install ETL pipeline dependencies run:
 ```
-pip install -r requirements.txt
+pip install -r requirements/pulling-data.txt
 ```
 Also create an env.py file with the line: 
 ```
