@@ -61,7 +61,7 @@ with open(CSV_FILENAME, 'w', encoding='UTF-8') as csvfile:
             data = response.json()
             filename = f"pulled_bills/bill_{bill_id}.json"
             with open(filename, 'w', encoding='UTF-8') as f:
-                      json.dump(data, f)
+                json.dump(data, f)
 
             #Get bill status number and find text equivalent
             bill_status = codes.BILL_STATUS[data['bill']['status']]
@@ -83,10 +83,10 @@ with open(CSV_FILENAME, 'w', encoding='UTF-8') as csvfile:
                 bill_subject = "No Subject Provided"
                 if num_subjects > 0:
                    #Get bill subject matter
-                   bill_subject = data['bill']['subjects'][0]['subject_name']
-                   print("Bill Subject: " + str(bill_subject))
+                    bill_subject = data['bill']['subjects'][0]['subject_name']
+                    print("Bill Subject: " + str(bill_subject))
                 else:
-                   print("No Bill Subject")
+                    print("No Bill Subject")
 
                 #Write all relevant bill information into csv
                 csv_row = [bill_id, bill_title, document_text, bill_status, bill_subject]
