@@ -1,4 +1,5 @@
 /__pycache__/
 /ETL_pipeline/__pycache__/
+/ETL_pipeline/pulled_bills/
 /.pytest_cache/
 /ETL_pipeline/env.py
