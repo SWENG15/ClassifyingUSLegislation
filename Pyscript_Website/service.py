@@ -7,7 +7,7 @@ import model as ml
 # Once seperate states are added,
 # this should be run when a state is selected,
 # and each state's model should be remembered
-classifier, vectorizer = ml.train_model('subject_dataset.csv')
+classifier, vectorizer = ml.train_model('dataset.csv')
 
 def submit_bill(*_):
     """submit_bill runs when a new bill's text is submitted"""
