@@ -4,14 +4,15 @@ including training the models as well as returning classifications
 """
 import sys
 import csv
+import sys
 import codecs
 import pandas as pd
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.naive_bayes import MultinomialNB
 from sklearn.model_selection import train_test_split
-# from sklearn.metrics import accuracy_score
+from sklearn.metrics import accuracy_score
 
-def train_model(training_data='../ETL_pipeline/datasets/subject_dataset.csv'):
+def train_model(training_data='../ETL_pipeline/dataset.csv'):
     """train_model trains a Naive Bayes classifier for subject matter based on 
         the path to a dataset given (optionally) in args"""
     
@@ -50,16 +51,16 @@ def train_model(training_data='../ETL_pipeline/datasets/subject_dataset.csv'):
     text = vectorizer.fit_transform(text)
     #test_size determines how much of the data is used to test the model,
     # with the remaining used to train
-    # X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
+    #x_train, x_test, y_train, y_test = train_test_split(text, subject, test_size=0.2)
     x_train, _, y_train, _ = train_test_split(text, subject, test_size=0.1)
 
     # Train a Naive Bayes classifier on the training data
     clf = MultinomialNB()
     clf.fit(x_train, y_train)
 
-    # y_pred = clf.predict(X_test)
-    # score = accuracy_score(y_test, y_pred)
-    # print(score)
+    #y_pred = clf.predict(x_test)
+    #score = accuracy_score(y_test, y_pred)
+    #print(score)
 
     return clf, vectorizer
 
