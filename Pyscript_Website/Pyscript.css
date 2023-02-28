@@ -1,0 +1,248 @@
+
+body {
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+}
+
+title {
+  color:white;
+}
+
+nav{
+  /* height:24px;
+width:370.00091552734375px;
+padding-left:10px;
+padding-right:10px;
+display:flex;
+flex-direction:row;
+justify-content:flex-start;
+align-items:center;
+gap:17px;
+position:absolute;
+top:40px;
+left:750px; */
+
+  height:36px;
+  width:370.00091552734375px;
+  padding-left:10px;
+  padding-right:10px;
+  display:flex;
+  flex-direction:row;
+  justify-content:flex-start;
+  align-items:center;
+  gap:17px;
+  position:relative;
+  color: white;
+}
+
+label {
+  /* display: block;
+  color: azure; */
+
+  color: black;
+  text-align:left;
+  vertical-align:text-top;
+  font-size:16px;
+  font-family:PT Mono;
+  line-height:auto;
+  border-style:hidden;
+  outline:none;
+  top:170px;
+  left:1048px;
+  position:absolute;
+  width:288px;
+
+}
+
+textarea {
+  /* border-radius: 25px;
+  border: 1px solid #ccc;
+  padding: 10px; 
+  max-width: 100%;
+  line-height: 1.5;
+
+  box-shadow: 1px 1px 1px #999;
+
+  */
+
+  background-color:#ffffff;
+  height:400px;
+  width:402px;
+  padding:0px;
+  border-style:hidden;
+  outline:none;
+  top:200px;
+  left:955px;
+  position:absolute;
+  border-radius:4px;
+  border:1px solid #d4d7de;
+} 
+
+h1 {
+  color:#ffffff;
+  text-align:left;
+  vertical-align:text-top;
+  font-size:58px;
+  font-family:Martel;
+  letter-spacing:0.20000000298023224px;
+  line-height:65px;
+  border-style:hidden;
+  outline:none;
+  top:312px;
+  left:885px;
+  position:absolute;
+  width:509px;
+}
+
+.homeButton {
+  background-color: #2247c1;
+  height:50px;
+  width:205px;
+  border-radius:37px;
+  padding-left:36px;
+  padding-right:36px;
+  padding-top:10px;
+  padding-bottom:10px;
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+  position:relative;
+  text-align: center;
+}
+
+#learn-more-btn {
+  left: 400px;
+  top: 430px;
+  color: white;
+  text-align: center;
+
+}
+
+/* Bills page CSS */
+.states-btn-group button {
+  background-color: white; /* Green background */
+  border: 1px solid green; /* Green border */
+  color: black; /* White text */
+  padding: 10px 24px; /* Some padding */
+  cursor: pointer; /* Pointer/hand icon */
+  width: 10%; /* Set a width if needed */
+  display: block; /* Make the buttons appear below each other */
+}
+
+.states-btn-group button:not(:last-child) {
+  border-bottom: none; /* Prevent double borders */
+}
+
+/* Add a background color on hover */
+.states-btn-group button:hover {
+  background-color: lightblue;
+  
+}
+
+.buttonStyle {
+  background-color: #2247c1;
+  height:60px;
+  width:10%;
+  border-radius:37px;
+  padding-left:36px;
+  padding-right:36px;
+  padding-top:10px;
+  padding-bottom:10px;
+  display:flex;
+  flex-direction:row;
+  gap:10px;
+  position:fixed;
+  text-align: center;
+  right: 5px;
+}
+
+#new-bill-btn {
+  left: 1000px;
+  top: 650px;
+  color: white;
+}
+
+/* Contact Page CSS */
+.address_div {
+  text-align:left;
+  position:fixed;
+  padding:100px 10px;
+  bottom:0;
+  width:90%;
+  height:40px;
+}
+.email_div {
+  color: #000;
+  text-shadow: -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, 1px 1px 0 #fff;
+  text-align:left;         
+  position:fixed;
+  padding:10px 10px;
+  bottom:0;
+  width:90%;
+  height:40px;
+  margin: auto;
+}
+.phone_div {
+  color: #000;
+  text-shadow: -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, 1px 1px 0 #fff;
+  text-align:right;
+  position:fixed;
+  padding:10px 10px;
+  bottom:0;
+  width:90%;
+  height:40px;
+  margin:auto;
+}
+#form {
+  margin-left: auto; 
+  margin-right: auto;
+  top: 15px;
+}
+.form_layout { 
+  display: flex;
+  color: #fff;
+  gap: 50px;
+  flex-direction: column;
+  position: relative;
+  text-align: center;
+}
+header {
+  text-align: center;
+  font-size: 36px;
+}
+#form-btn {
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 15px;
+  top: 15px; 
+  color: white;
+  text-align: center;
+}
+.formButton {
+  background-color: #3F51B5;
+  height: 50px;
+  width: 100px;
+  border-radius: 36px;
+  padding-left: 25px;
+  padding-right: 20px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  text-align: center;
+}
+.form-field {
+  margin: auto;
+  display: block;
+  width: 60%;
+  padding: 8px 8px;
+  line-height: 25px;
+  font-size: 14px;
+  font-weight: 500;
+  border-radius: 6px;
+  color: #99A3BA;
+  border: 1px solid #CDD9ED;
+  transition: border .3s ease;
+  }
+::placeholder {   
+    color: #99A3BA;
+  }

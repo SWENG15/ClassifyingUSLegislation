@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+
+    <title>Classifying US State Legislation</title>
+
+    <link rel="icon" type="image/png" href="favicon.png" />
+    <link rel="stylesheet" href="https://pyscript.net/alpha/pyscript.css" />
+    <link rel="stylesheet" href="Pyscript.css">
+    <script defer src="https://pyscript.net/alpha/pyscript.js"></script>
+
+  </head>
+
+  <style>
+    body {
+      background-image: url('background-image-home.jpg');
+    } 
+  </style>
+
+  <body class="container">
+   <nav>
+      <a href="../index.html">Home</a>
+      <a href="./About.html">About</a>
+      <a href="./Service.html">Service</a>
+      <a href="./Contact.html">Contact</a>
+    </nav>
+  </div>
+  <div id="output"></div>
+
+  <form id="form_layout" class ="form_layout">
+      <header>Contact Us</header>
+      <table>
+        <tr>
+          <td>First Name<input type="text" class="form-field" name="fname" placeholder="First Name..."></td>
+          <td>Last Name<input type="text" class="form-field" name="lname" placeholder="Last Name..."></td>
+        </tr>
+        <tr>
+          <td>Email<input type="email" class="form-field" name="email" placeholder="Email..." ></td>
+          <td>Message<input type="text" class="form-field" name="message" placeholder="Type your message..."></td>
+        </tr>
+      </table>
+      <button id="form-btn" class="formButton" type="submit" pys-onClick="submit_task" >
+        Submit
+      </button>
+  </form>
+
+  <!--<div class="address_div">
+    <p><b>Dublin Office Location</b><br>
+      Dublin, Ireland<br>
+      36 Blackbourne Square, Rathfarnham Gate, Dublin 14, Ireland, D14 DW30<br>
+      <b>Phone:</b> 01 492 7444</p>
+  </div>-->
+  <div class="phone_div"><b>Phone:</b>1-855-776-7956</div>
+  <div class="email_div"><b>Email: </b>webquery@propylon.com</div>
+</body>
+
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width,initial-scale=1" />
+		<title>Classifying US State Legislation</title>
+		<link rel="icon" type="image/png" href="favicon.png" />
+		<link rel="stylesheet" href="https://pyscript.net/alpha/pyscript.css" />
+		<link rel="stylesheet" href="Pyscript.css">
+		<script defer src="https://pyscript.net/alpha/pyscript.js"></script>
+<py-env>
+  - pandas
+  - scikit-learn
+  - paths:
+    - ../ML/model.py
+    - ../ETL_pipeline/datasets/subject_dataset.csv
+</py-env>
+	</head>
+	<style>
+		body {
+		background-image: url('background-image.jpg');
+		background-size: 50% 100%;
+		} 
+	</style>
+	<body class="container">
+		<nav>
+			<a href="../index.html">Home</a>
+			<a href="./About.html">About</a>
+			<a href="./Service.html">Service</a>
+			<a href="./Contact.html">Contact</a>
+		</nav>
+		<div id="output"></div>
+		<div class="states-btn-group">
+			<button>South Carolina</button>
+			<button>California</button>
+			<button>Washington</button>
+		</div>
+		<label for="bill">Bill Classification Portal</label>
+		<br>
+		<div>
+			<textarea id="bill" name="bill" rows="5" cols="50" placeholder="Enter Bill Text"></textarea>
+			<div>
+				<button id="new-bill-btn" class="buttonStyle" type="submit" pys-onClick="submit_bill">
+				Classify Bill
+				</button>
+			</div>
+			<py-script src="service.py"/>
+			<py-script src="../ML/model.py"/>
+		</div>
+	</body>
+</html>
