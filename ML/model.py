@@ -2,19 +2,26 @@
 model provides the ML classification for state legislation,
 including training the models as well as returning classifications
 """
-import csv
 import sys
+import csv
 import codecs
 import pandas as pd
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.naive_bayes import MultinomialNB
 from sklearn.model_selection import train_test_split
-from sklearn.metrics import accuracy_score
+#from sklearn.metrics import accuracy_score
 
 def train_model(training_data='../ETL_pipeline/dataset.csv'):
     """train_model trains a Naive Bayes classifier for subject matter based on 
         the path to a dataset given (optionally) in args"""
-    csv.field_size_limit(sys.maxsize)
+
+    max_int = sys.maxsize
+    while True:
+        try:
+            csv.field_size_limit(max_int)
+            break
+        except OverflowError:
+            max_int = int(max_int/10)
     # Load the data from a CSV file in Latin1 encoding
     with codecs.open(training_data, 'r', encoding='Latin1') as file:
         reader = csv.reader(file)
