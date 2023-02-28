@@ -54,7 +54,12 @@ label {
   width:288px;
 
 }
-
+.textarea_layout {
+  margin-top: auto;
+  margin-bottom: auto;
+  margin-right: auto;
+  margin-left:60%;
+}
 textarea {
   /* border-radius: 25px;
   border: 1px solid #ccc;
@@ -74,7 +79,6 @@ textarea {
   outline:none;
   top:200px;
   left:955px;
-  position:absolute;
   border-radius:4px;
   border:1px solid #d4d7de;
 } 
