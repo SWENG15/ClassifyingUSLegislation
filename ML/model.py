@@ -2,6 +2,7 @@
 model provides the ML classification for state legislation,
 including training the models as well as returning classifications
 """
+import sys
 import csv
 import codecs
 import pandas as pd
@@ -13,6 +14,14 @@ from sklearn.model_selection import train_test_split
 def train_model(training_data='../ETL_pipeline/datasets/subject_dataset.csv'):
     """train_model trains a Naive Bayes classifier for subject matter based on 
         the path to a dataset given (optionally) in args"""
+    
+    maxInt = sys.maxsize
+    while True:
+        try:
+            csv.field_size_limit(maxInt)
+            break
+        except OverflowError:
+            maxInt = int(maxInt/10)
     # Load the data from a CSV file in Latin1 encoding
     with codecs.open(training_data, 'r', encoding='Latin1') as file:
         reader = csv.reader(file)

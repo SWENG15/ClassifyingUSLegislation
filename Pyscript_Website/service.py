@@ -55,13 +55,14 @@ def change_state(new_state, states_dict):
     # Case that new state is actually new
     if state != new_state:
         # If the model for this state has already been trained, use that model
-        if states.has_key(state):
+        if new_state in states:
             new_classifier = states_dict[state][0]
             new_vectorizer = states_dict[state][1]
 
         # If the model for this state has not already been trained, train it
         # and add it to the dictionary of models
         else:
-            new_classifier, new_vectorizer = ml.train_model(state+'dataset.csv')
+            new_classifier, new_vectorizer = ml.train_model(str(new_state)+'-dataset.csv')
+            states[new_state] = (new_classifier,new_vectorizer)
 
     return new_state, new_classifier, new_vectorizer, states
