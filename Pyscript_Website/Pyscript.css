@@ -48,8 +48,8 @@ label {
   line-height:auto;
   border-style:hidden;
   outline:none;
-  top:170px;
-  left:1048px;
+  top:35px;
+  left:940px;
   position:absolute;
   width:288px;
 
@@ -81,6 +81,8 @@ textarea {
   left:955px;
   border-radius:4px;
   border:1px solid #d4d7de;
+
+  
 } 
 
 h1 {
@@ -124,6 +126,55 @@ h1 {
 }
 
 /* Bills page CSS */
+.choose-state {
+  top: 100px;
+  left: 100px;
+  color: white;
+  
+}
+
+.rigatoni {
+  top: 100px;
+  left: 120px;
+}
+
+
+.dropbtn {
+  background-color: #04AA6D;
+  color: white;
+  padding: 16px;
+  font-size: 16px;
+  border: none;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content a:hover {background-color: #ddd;}
+
+.dropdown:hover .dropdown-content {display: block;}
+
+.dropdown:hover .dropbtn {background-color: #3e8e41;}
+
+
 .states-btn-group button {
   background-color: white; /* Green background */
   border: 1px solid green; /* Green border */
@@ -144,6 +195,28 @@ h1 {
   
 }
 
+.output_style {
+  color: #1a1a1a;
+  line-height: 25px;
+  text-align: right;
+  padding-top: 20px;
+  font-size: 14px;
+  font-weight: 500;
+  margin: auto;
+  border-radius: 10px;
+  height: 40px;
+  width: 400px;
+  font-family:PT Mono;
+  
+}
+
+.output_header {
+
+  top: 600px;
+  color: #1a1a1a;
+  left: 900px;
+  margin: right;
+}
 .buttonStyle {
   background-color: #2247c1;
   height:60px;
@@ -162,8 +235,8 @@ h1 {
 }
 
 #new-bill-btn {
-  left: 1000px;
-  top: 650px;
+  left: 970px;
+  top: 500px;
   color: white;
 }
 
