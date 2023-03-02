@@ -126,17 +126,6 @@ h1 {
 }
 
 /* Bills page CSS */
-.choose-state {
-  top: 100px;
-  left: 100px;
-  color: white;
-  
-}
-
-.rigatoni {
-  top: 100px;
-  left: 120px;
-}
 
 
 .dropbtn {
@@ -175,25 +164,7 @@ h1 {
 .dropdown:hover .dropbtn {background-color: #3e8e41;}
 
 
-.states-btn-group button {
-  background-color: white; /* Green background */
-  border: 1px solid green; /* Green border */
-  color: black; /* White text */
-  padding: 10px 24px; /* Some padding */
-  cursor: pointer; /* Pointer/hand icon */
-  width: 10%; /* Set a width if needed */
-  display: block; /* Make the buttons appear below each other */
-}
 
-.states-btn-group button:not(:last-child) {
-  border-bottom: none; /* Prevent double borders */
-}
-
-/* Add a background color on hover */
-.states-btn-group button:hover {
-  background-color: lightblue;
-  
-}
 
 .output_style {
   color: #1a1a1a;
