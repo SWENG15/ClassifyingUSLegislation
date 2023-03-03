@@ -29,6 +29,13 @@ Then, you should be able to access the website at 127.0.0.1:5500.
 
 
 ## Run Releases
+### Release 2
+This release a fully functioning prototype. To run this, run the following with Docker Desktop open:
+
+```
+docker run --name=web-app-container -p 5500:5500 clairegregg/classifying-us-legislation:v1
+```
+
 ### Release 1
 This release just has a basic front end, and no ML classification model linked. To run this, run the following with Docker Desktop open:
 
