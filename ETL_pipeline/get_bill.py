@@ -1,6 +1,5 @@
 """This module is used to Extract, Transform and Load bill data."""
 
-import json
 import csv
 import base64
 # pylint: disable=import-error
