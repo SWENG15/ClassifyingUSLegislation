@@ -25,5 +25,5 @@ def test_bill_extraction():
         #Try to delete the test csv, if permission is denied catch exception
         try:
             os.remove(test_fname)
-        except OSError as e:
-            print("Error: %s - %s." % (e.filename, e.strerror))
+        except OSError as error:
+            print(f"Error: {error.filename} - {error.strerror}.")
