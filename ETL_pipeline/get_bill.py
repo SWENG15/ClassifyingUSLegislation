@@ -63,10 +63,6 @@ def get_bills_from_search(query_state, search_query, csv_name, num_pages, legi_e
                 url = f"https://api.legiscan.com/?key={env.API_KEY}&op=getBill&id={bill_id}"
                 response = requests.get(url, timeout = 10)
                 data = response.json()
-                # pylint: disable=invalid-name
-                filename = f"ETL_pipeline/pulled_bills/bill_{bill_id}.json"
-                with open(filename, 'w', encoding='UTF-8') as f:
-                    json.dump(data, f)
 
                 #Get bill status number and find text equivalent
                 bill_status = codes.BILL_STATUS[data['bill']['status']]
