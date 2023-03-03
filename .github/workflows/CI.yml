@@ -29,6 +29,14 @@ jobs:
       run: |
         pylint $(git ls-files '*.py')  
         
+    - name: Write env file (LegiScan API key)
+      uses: DamianReeves/write-file-action@master
+      with:
+        path: ETL_pipeline/env.py
+        write-mode: overwrite
+        contents: |
+          API_KEY = "${{ secrets.LEGISCAN_API_KEY }}"
+        
     - name: Test with pytest
       run: |
         pytest $(git ls-files '*test.py')
