@@ -29,20 +29,29 @@
 			<a href="./Service.html">Service</a>
 			<a href="./Contact.html">Contact</a>
 		</nav>
-		<div id="output" style="background-color:white"></div>
-		<div class="states-btn-group">
-			<button id="WV" type="submit" pys-onClick="choose_state(new_state='west-virginia')">West Virginia</button>
-			<button id="none" type="submit" pys-onClick="choose_state">Not Available</button>
-		</div>
+		
+		<div class="dropdown">
+  			<button class="dropbtn">Select State</button>
+  				<div class="dropdown-content">
+    				<a href="#" id="WV" pys-onClick="choose_state(new_state='west-virginia')">West Virginia</a>
+    				<a href="#" id="none" pys-onClick="choose_state">Not Available</a>
+    			</div>
+  		</div>	
+		
 		<label for="bill">Bill Classification Portal</label>
 		<br>
 		<div>
-			<textarea id="bill" name="bill" rows="5" cols="50" placeholder="Enter Bill Text"></textarea>
+			<textarea class="textarea_layout" id="bill" name="bill" rows="5" cols="50" placeholder="Enter Bill Text"></textarea>
 			<div>
 				<button id="new-bill-btn" class="buttonStyle" type="submit" pys-onClick="submit_bill">
 				Classify Bill
 				</button>
+				<div id="output" class="output_style"></div>
+				
 			</div>
+
+			
+			
 			<py-script src="service.py"/>
 			<py-script src="../ML/model.py"/>
 		</div>
