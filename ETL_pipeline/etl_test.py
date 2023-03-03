@@ -2,6 +2,7 @@
 import os
 import get_bill
 from legiscan import LegiScan
+# pylint: disable=import-error
 import env
 
 def test_bill_extraction():
