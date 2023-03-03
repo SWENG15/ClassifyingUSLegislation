@@ -5,3 +5,4 @@
 /.pytest_cache/
 /ETL_pipeline/env.py
 /PyscriptWebsite/__pycache__/
+/ML/__pycache__/
