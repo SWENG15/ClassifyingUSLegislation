@@ -64,7 +64,7 @@ def get_bills_from_search(query_state, search_query, csv_name, num_pages, legi_e
                 response = requests.get(url, timeout = 10)
                 data = response.json()
                 # pylint: disable=invalid-name
-                filename = f"pulled_bills/bill_{bill_id}.json"
+                filename = f"ETL_pipeline/pulled_bills/bill_{bill_id}.json"
                 with open(filename, 'w', encoding='UTF-8') as f:
                     json.dump(data, f)
 
