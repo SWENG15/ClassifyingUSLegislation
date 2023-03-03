@@ -4,3 +4,4 @@
 /ETL_pipeline/pytest.csv
 /.pytest_cache/
 /ETL_pipeline/env.py
+/PyscriptWebsite/__pycache__/
