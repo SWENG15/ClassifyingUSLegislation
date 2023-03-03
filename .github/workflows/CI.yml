@@ -1,0 +1,43 @@
+name: Continuous Integration
+
+on: [push]
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    name: Linting and Testing
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.8"]
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v3
+      with:
+        python-version: ${{ matrix.python-version }}
+        
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements/web-app.txt
+        pip install -r requirements/pulling-data.txt
+        
+    - name: Analysing the code with pylint
+      run: |
+        pylint $(git ls-files '*.py')  
+        
+    - name: Write env file (LegiScan API key)
+      uses: DamianReeves/write-file-action@master
+      with:
+        path: ETL_pipeline/env.py
+        write-mode: overwrite
+        contents: |
+          API_KEY = "${{ secrets.LEGISCAN_API_KEY }}"
+        
+    - name: Test with pytest
+      run: |
+        pytest $(git ls-files '*test.py')
+  
