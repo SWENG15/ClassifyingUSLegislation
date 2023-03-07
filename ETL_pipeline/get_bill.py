@@ -39,7 +39,7 @@ def get_bills_from_search(query_state, search_query, csv_name, num_pages, legi_e
     """Given a search state and query, produce a csv file of the relevant information"""
     #Make a list of already pulled bills to avoid duplicates
     already_pulled = []
-    with open('already_pulled.txt', encoding='UTF-8') as pulled:
+    with open('already_pulled.txt', 'a+', encoding='UTF-8') as pulled:
         contents = pulled.read()
         already_pulled = contents.split()
     if csv_name == "pytest.csv":
