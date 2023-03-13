@@ -187,10 +187,16 @@ textarea {
 
 .output_header {
 
-  top: 600px;
+  line-height: 25px;
+  text-align: right;
+  padding-top: 20px;
+  font-size: 20px;
+  font-weight: 500;
+  margin: auto;
+  height: 30px;
+  width: 390px;
+  font-family: Georgia, serif;
   color: #1a1a1a;
-  left: 900px;
-  margin: right;
 }
 .buttonStyle {
   background-color: #2247c1;
