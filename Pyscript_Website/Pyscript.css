@@ -57,7 +57,7 @@ h1 {
 .homeButton {
   background-color: #2247c1;
   height:50px;
-  width:205px;
+  width:180px;
   border-radius:37px;
   padding-left:36px;
   padding-right:36px;
@@ -67,7 +67,10 @@ h1 {
   flex-direction:column;
   gap:10px;
   position:relative;
+  color: white;
   text-align: center;
+  top:450px;
+  left: 360px;
 }
 
 #learn-more-btn {
@@ -185,13 +188,7 @@ textarea {
   
 }
 
-.output_header {
 
-  top: 600px;
-  color: #1a1a1a;
-  left: 900px;
-  margin: right;
-}
 .buttonStyle {
   background-color: #2247c1;
   height:60px;
