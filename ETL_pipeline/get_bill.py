@@ -10,6 +10,9 @@ import env
 from legiscan import LegiScan
 import codes
 
+# importing required modules
+from PyPDF2 import PdfReader
+
 #Used for states with non-standard formatting
 def tag_visible(element):
     """Used to detect which text is visible on a page"""
@@ -35,7 +38,7 @@ def extract_bill_text(base64_enc,state):
 legis = LegiScan(env.API_KEY)
 
 #Define Search
-QUERY_STATE = 'wv'
+QUERY_STATE = 'nj'
 SEARCH_QUERY = 'the'
   #Create csv file and define its header columns
 
@@ -93,4 +96,4 @@ def get_bills_from_search(query_state, search_query, csv_name, num_pages, legi_e
                     csvwriter.writerow(csv_row)
 
 if __name__ == "__main__":
-    get_bills_from_search(QUERY_STATE, SEARCH_QUERY, "dataset.csv", 50, legis)
+    get_bills_from_search(QUERY_STATE, SEARCH_QUERY, "dataset.csv", 194, legis)
