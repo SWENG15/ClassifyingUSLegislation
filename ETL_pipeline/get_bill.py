@@ -10,6 +10,8 @@ import env
 from legiscan import LegiScan
 import codes
 
+from PyPDF2 import PdfReader
+
 #Used for states with non-standard formatting
 def tag_visible(element):
     """Used to detect which text is visible on a page"""
@@ -39,6 +41,16 @@ def extract_bill_text_to_pdf(base64_enc, doc_id):
         f.write(text)
         f.close()
     return filename
+
+def read_pdf_text(filename):
+     # creating a pdf reader object
+    reader = PdfReader('filename')
+    i = 0
+    for i in range(len(reader.pages)):
+        page = reader.pages[i]
+        text += page.extract_text()
+    print(text)
+    return text
 
 #Create Legiscan API session
 legis = LegiScan(env.API_KEY)
@@ -90,14 +102,16 @@ def get_bills_from_search(query_state, search_query, csv_name, num_pages, legi_e
 
                     # If it is a pdf
                     if doc['mime'] == "application/pdf":
-                        filename = extract_bill_text_to_pdf(doc_text64, bill_doc_id)
-                        print(f"New pdf stored in {filename}")
-                        # Get the text from the saved pdf into document_text
-                        # Delete the saved pdf
-                    
+                       filename = extract_bill_text_to_pdf(doc_text64, bill_doc_id)
+                       print(f"New pdf stored in {filename}")
+                       # Get the text from the saved pdf into document_text
+                       document_text = read_pdf_text(filename)
+                       # Delete the saved pdf
+                       
                     # check here instead if it is a html file
-                    document_text = "\"" + extract_bill_text(doc_text64, QUERY_STATE) + "\""
-                    print(document_text)
+                    else:
+                        document_text = "\"" + extract_bill_text(doc_text64, QUERY_STATE) + "\""
+                        print(document_text)
 
                     num_subjects = len(data['bill']['subjects'])
                     # pylint: disable=invalid-name
@@ -114,4 +128,4 @@ def get_bills_from_search(query_state, search_query, csv_name, num_pages, legi_e
                     csvwriter.writerow(csv_row)
 
 if __name__ == "__main__":
-    get_bills_from_search(QUERY_STATE, SEARCH_QUERY, "dataset.csv", 50, legis)
+    get_bills_from_search(QUERY_STATE, SEARCH_QUERY, "dataset.csv", 2, legis)
