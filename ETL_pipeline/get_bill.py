@@ -36,15 +36,15 @@ def extract_bill_text(base64_enc,state):
 def extract_bill_text_to_pdf(base64_enc, doc_id):
     """Given a base64 encoded pdf document, return the name of a pdf file the text has been written to"""
     text = base64.b64decode(base64_enc)
-    filename = f"doc_{doc_id}.pdf"
+    filename = f"pulled_bills/doc_{doc_id}.pdf"
     with open(filename,'wb') as f:
         f.write(text)
-        f.close()
     return filename
 
 def read_pdf_text(filename):
      # creating a pdf reader object
-    reader = PdfReader('filename')
+    reader = PdfReader(filename)
+    text = ""
     i = 0
     for i in range(len(reader.pages)):
         page = reader.pages[i]
@@ -57,7 +57,7 @@ legis = LegiScan(env.API_KEY)
 
 #Define Search
 QUERY_STATE = 'al'
-SEARCH_QUERY = ''
+SEARCH_QUERY = 'the'
 
 # pylint: disable=too-many-locals
 def get_bills_from_search(query_state, search_query, csv_name, num_pages, legi_env):
@@ -72,16 +72,17 @@ def get_bills_from_search(query_state, search_query, csv_name, num_pages, legi_e
             #Populate csv file with each bill being one row
             # pylint: disable=invalid-name
             for b in bills['results']:
+                print(b)
                 bill_id = b['bill_id']
-                bill_title = b['title']
 
-                print("Bill Title: " + str(bill_title))
                 print("Bill ID: " + str(bill_id))
 
                 #Write bill json
                 url = f"https://api.legiscan.com/?key={env.API_KEY}&op=getBill&id={bill_id}"
                 response = requests.get(url, timeout = 10)
                 data = response.json()
+                bill_title = data['bill']['title']
+                print("Bill Title: " + str(bill_title))
 
                 #Get bill status number and find text equivalent
                 if data['bill']['status'] == 0:
