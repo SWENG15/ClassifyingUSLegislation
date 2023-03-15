@@ -2,6 +2,8 @@
 
 import csv
 import base64
+from io import StringIO
+import re
 # pylint: disable=import-error
 from bs4 import BeautifulSoup
 from bs4.element import Comment
@@ -45,13 +47,20 @@ def extract_bill_text_to_pdf(base64_enc, doc_id):
 def read_pdf_text(filename):
      # creating a pdf reader object
     reader = PdfReader(filename)
-    text = ""
+    output_text = ''
     i = 0
     for i in range(len(reader.pages)):
         page = reader.pages[i]
-        text += page.extract_text()
-    print(text)
-    return text
+        text = page.extract_text()
+
+        # Remove line numbers
+        lines = StringIO(text).readlines()
+        text = ''.join([re.sub(r'^\d+\s+', '', line) for line in lines])
+
+        output_text += text
+    print(output_text)
+    
+    return output_text
 
 #Create Legiscan API session
 legis = LegiScan(env.API_KEY)
