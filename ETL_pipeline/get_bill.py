@@ -31,13 +31,21 @@ def extract_bill_text(base64_enc,state):
     visible_texts = filter(tag_visible, texts)
     return " ".join(t.strip() for t in visible_texts)
 
+def extract_bill_text_to_pdf(base64_enc, doc_id):
+    """Given a base64 encoded pdf document, return the name of a pdf file the text has been written to"""
+    text = base64.b64decode(base64_enc)
+    filename = f"doc_{doc_id}.pdf"
+    with open(filename,'wb') as f:
+        f.write(text)
+        f.close()
+    return filename
+
 #Create Legiscan API session
 legis = LegiScan(env.API_KEY)
 
 #Define Search
-QUERY_STATE = 'wv'
-SEARCH_QUERY = 'the'
-  #Create csv file and define its header columns
+QUERY_STATE = 'al'
+SEARCH_QUERY = ''
 
 # pylint: disable=too-many-locals
 def get_bills_from_search(query_state, search_query, csv_name, num_pages, legi_env):
@@ -64,6 +72,9 @@ def get_bills_from_search(query_state, search_query, csv_name, num_pages, legi_e
                 data = response.json()
 
                 #Get bill status number and find text equivalent
+                if data['bill']['status'] == 0:
+                    print("No status")
+                    continue
                 bill_status = codes.BILL_STATUS[data['bill']['status']]
                 print("Bill Status: " + bill_status)
 
@@ -74,7 +85,17 @@ def get_bills_from_search(query_state, search_query, csv_name, num_pages, legi_e
                 if num_texts > 0:
                     bill_doc_id = data['bill']['texts'][num_texts - 1]['doc_id']
                     print("Doc ID: " + str(bill_doc_id) + "\n")
-                    doc_text64 = legi_env.get_bill_text(bill_doc_id).get('doc')
+                    doc = legi_env.get_bill_text(bill_doc_id)
+                    doc_text64 = doc.get('doc')
+
+                    # If it is a pdf
+                    if doc['mime'] == "application/pdf":
+                        filename = extract_bill_text_to_pdf(doc_text64, bill_doc_id)
+                        print(f"New pdf stored in {filename}")
+                        # Get the text from the saved pdf into document_text
+                        # Delete the saved pdf
+                    
+                    # check here instead if it is a html file
                     document_text = "\"" + extract_bill_text(doc_text64, QUERY_STATE) + "\""
                     print(document_text)
 
