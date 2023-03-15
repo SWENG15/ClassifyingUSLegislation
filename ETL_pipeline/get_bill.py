@@ -4,16 +4,17 @@ import csv
 import base64
 from io import StringIO
 import re
+import os
 # pylint: disable=import-error
 from bs4 import BeautifulSoup
 from bs4.element import Comment
+from PyPDF2 import PdfReader
 import requests
 import env
 from legiscan import LegiScan
 import codes
-import os
 
-from PyPDF2 import PdfReader
+
 
 #Used for states with non-standard formatting
 def tag_visible(element):
@@ -37,18 +38,19 @@ def extract_bill_text(base64_enc,state):
     return " ".join(t.strip() for t in visible_texts)
 
 def extract_bill_text_to_pdf(base64_enc, doc_id):
-    """Given a base64 encoded pdf document, return the name of a pdf file the text has been written to"""
+    """Given a base64 encoded pdf document, return the name of the file text has been written to"""
     text = base64.b64decode(base64_enc)
     filename = f"pulled_bills/doc_{doc_id}.pdf"
-    with open(filename,'wb') as f:
-        f.write(text)
+    with open(filename,'wb') as file:
+        file.write(text)
     return filename
 
 def read_pdf_text(filename):
+    """Return text from pdf document, cleaning line numbers"""
      # creating a pdf reader object
     reader = PdfReader(filename)
     output_text = ''
-    i = 0
+    # pylint: disable=consider-using-enumerate
     for i in range(len(reader.pages)):
         page = reader.pages[i]
         text = page.extract_text()
@@ -59,7 +61,7 @@ def read_pdf_text(filename):
 
         output_text += text
     print(output_text)
-    
+
     return output_text
 
 #Create Legiscan API session
@@ -113,13 +115,13 @@ def get_bills_from_search(query_state, search_query, csv_name, num_pages, legi_e
 
                     # If it is a pdf
                     if doc['mime'] == "application/pdf":
-                       filename = extract_bill_text_to_pdf(doc_text64, bill_doc_id)
-                       print(f"New pdf stored in {filename}")
-                       # Get the text from the saved pdf into document_text
-                       document_text = read_pdf_text(filename)
-                       # Delete the saved pdf
-                       os.remove(filename)
-                       print("File Deleted successfully")
+                        filename = extract_bill_text_to_pdf(doc_text64, bill_doc_id)
+                        print(f"New pdf stored in {filename}")
+                        # Get the text from the saved pdf into document_text
+                        document_text = read_pdf_text(filename)
+                        # Delete the saved pdf
+                        os.remove(filename)
+                        print("File Deleted successfully")
                     # check here instead if it is a html file
                     else:
                         document_text = "\"" + extract_bill_text(doc_text64, QUERY_STATE) + "\""
