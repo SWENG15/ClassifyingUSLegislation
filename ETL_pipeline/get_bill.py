@@ -9,6 +9,7 @@ import requests
 import env
 from legiscan import LegiScan
 import codes
+import os
 
 from PyPDF2 import PdfReader
 
@@ -108,7 +109,8 @@ def get_bills_from_search(query_state, search_query, csv_name, num_pages, legi_e
                        # Get the text from the saved pdf into document_text
                        document_text = read_pdf_text(filename)
                        # Delete the saved pdf
-                       
+                       os.remove(filename)
+                       print("File Deleted successfully")
                     # check here instead if it is a html file
                     else:
                         document_text = "\"" + extract_bill_text(doc_text64, QUERY_STATE) + "\""
