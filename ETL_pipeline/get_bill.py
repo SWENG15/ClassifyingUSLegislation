@@ -69,7 +69,7 @@ legis = LegiScan(env.API_KEY)
 
 #Define Search
 QUERY_STATE = 'al'
-SEARCH_QUERY = 'the'
+SEARCH_QUERY = 'specific+test'
 
 # pylint: disable=too-many-locals
 def get_bills_from_search(query_state, search_query, csv_name, num_pages, legi_env):
@@ -84,9 +84,7 @@ def get_bills_from_search(query_state, search_query, csv_name, num_pages, legi_e
             #Populate csv file with each bill being one row
             # pylint: disable=invalid-name
             for b in bills['results']:
-                print(b)
                 bill_id = b['bill_id']
-
                 print("Bill ID: " + str(bill_id))
 
                 #Write bill json
@@ -97,11 +95,12 @@ def get_bills_from_search(query_state, search_query, csv_name, num_pages, legi_e
                 print("Bill Title: " + str(bill_title))
 
                 #Get bill status number and find text equivalent
+                bill_status = "No status"
                 if data['bill']['status'] == 0:
                     print("No status")
-                    continue
-                bill_status = codes.BILL_STATUS[data['bill']['status']]
-                print("Bill Status: " + bill_status)
+                else:
+                    bill_status = codes.BILL_STATUS[data['bill']['status']]
+                    print("Bill Status: " + bill_status)
 
                 #Find number of texts associated with bill and select most recent one
                 num_texts = len(data['bill']['texts'])
@@ -140,6 +139,8 @@ def get_bills_from_search(query_state, search_query, csv_name, num_pages, legi_e
                     #Write all relevant bill information into csv
                     csv_row = [bill_id, bill_title, document_text, bill_status, bill_subject]
                     csvwriter.writerow(csv_row)
+                else:
+                    print("No texts")
 
 if __name__ == "__main__":
-    get_bills_from_search(QUERY_STATE, SEARCH_QUERY, "dataset.csv", 4, legis)
+    get_bills_from_search(QUERY_STATE, SEARCH_QUERY, "dataset.csv", 2, legis)
