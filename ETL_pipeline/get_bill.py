@@ -68,6 +68,8 @@ def read_pdf_text(filename):
 legis = LegiScan(env.API_KEY)
 
 # pylint: disable=too-many-locals
+# pylint: disable=too-many-branches
+# pylint: disable=too-many-statements
 def get_bills_from_search(query_state, search_query, csv_name, num_pages, legi_env):
     """Given a search state and query, produce a csv file of the relevant information"""
     already_pulled = []
