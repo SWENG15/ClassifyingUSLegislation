@@ -8,7 +8,7 @@ import os
 # pylint: disable=import-error
 from bs4 import BeautifulSoup
 from bs4.element import Comment
-from PyPDF4 import PdfReader
+from PyPDF2 import PdfReader
 import requests
 import env
 from legiscan import LegiScan
