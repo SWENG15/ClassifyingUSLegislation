@@ -29,31 +29,25 @@
   </div>
   <div id="output"></div>
 
-  <form class ="form_layout">
+  <form class ="form_layout" onsubmit ="return false">
       <header>Contact Us</header>
       <table class="table_layout">
         <tr>
-          <td>First Name<input type="text" class="form_field" name="fname" placeholder="First Name..."></td>
-          <td>Last Name<input type="text" class="form_field" name="lname" placeholder="Last Name..."></td>
+          <td>First Name<input type="text" class="form_field" name="fname" id="fname" placeholder="First Name..."></td>
+          <td>Last Name<input type="text" class="form_field" name="lname" id="lname" placeholder="Last Name..."></td>
         </tr>
         <tr>
-          <td>Email<input type="email" class="form_field" name="email" placeholder="Email..." ></td>
-          <td>Message<input type="text" class="form_field" name="message" placeholder="Type your message..."></td>
+          <td>Email<input type="email" class="form_field" name="email" id="email" placeholder="Email..." ></td>
+          <td>Message<input type="text" class="form_field" name="message" id="message" placeholder="Type your message..."></td>
         </tr>
       </table>
-      <button id="form-btn" class="formButton" type="submit" pys-onClick="submit_task" >
+      <button id="form-btn" class="formButton" type="submit-form" pys-onClick="submit_contact_form" >
         Submit
       </button>
   </form>
 
-  <!--<div class="address_div">
-    <p><b>Dublin Office Location</b><br>
-      Dublin, Ireland<br>
-      36 Blackbourne Square, Rathfarnham Gate, Dublin 14, Ireland, D14 DW30<br>
-      <b>Phone:</b> 01 492 7444</p>
-  </div>-->
-  
-  <!--<div class="text_position">-->
+  <p id='form_recieved' class="display_request_sent"></p>
+
   <div class="background_position">
     <div class="phone_background"></div>
     <div class="phone"><b>Phone: </b>1-855-776-7956</div>
@@ -61,6 +55,9 @@
     <div class="email"><b>Email: </b>webquery@propylon.com</div>
   </div>
   <!--</div>-->
+  <div>
+    <py-script src="contact.py"/>
+  </div>
 </body>
 
 </html>

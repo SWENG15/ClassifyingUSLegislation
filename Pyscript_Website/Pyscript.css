@@ -36,8 +36,6 @@ left:750px; */
   color: white;
 }
 
-
-
 h1 {
   color:#ffffff;
   text-align:left;
@@ -166,10 +164,6 @@ textarea {
   
 } 
 
-
-
-
-
 .output_style {
   color: #1a1a1a;
   line-height: 25px;
@@ -216,6 +210,13 @@ textarea {
 }
 
 /* Contact Page CSS */
+.display_request_sent {
+  text-align: center;
+  color: #fff;
+  text-shadow: -1px -1px 0 #8a7c7c, 1px -1px 0 #8a7c7c, -1px 1px 0 #8a7c7c, 1px 1px 0 #8a7c7c;
+  font-size: 20px;
+  margin-top: 20px;
+}
 .address_div {
   text-align:left;
   position:fixed;
@@ -296,6 +297,9 @@ header {
   top: 15px; 
   color: white;
   text-align: center;
+}
+button[type=submit-form]:hover{
+  border: 2.5px solid hsl(231, 100%, 69%);
 }
 .formButton {
   background-color: #3F51B5;
