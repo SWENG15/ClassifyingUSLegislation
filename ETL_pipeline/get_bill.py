@@ -10,8 +10,6 @@ import env
 from legiscan import LegiScan
 import codes
 
-# importing required modules
-from PyPDF2 import PdfReader
 
 #Used for states with non-standard formatting
 def tag_visible(element):
