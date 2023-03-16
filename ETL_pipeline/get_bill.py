@@ -67,16 +67,20 @@ def read_pdf_text(filename):
 #Create Legiscan API session
 legis = LegiScan(env.API_KEY)
 
-#Define Search
-QUERY_STATE = 'al'
-SEARCH_QUERY = 'specific+test'
-
 # pylint: disable=too-many-locals
 def get_bills_from_search(query_state, search_query, csv_name, num_pages, legi_env):
     """Given a search state and query, produce a csv file of the relevant information"""
+    already_pulled = []
+    if csv_name == "pytest.csv":
+        already_pulled = []
+    else:
+        with open('already_pulled.txt', 'r+', encoding='UTF-8') as pulled:
+            contents = pulled.read()
+            already_pulled = contents.split()
+    print(already_pulled)
     csv_filename = csv_name
     header = ['ID', 'Title', 'Text', 'Status', 'Subject']
-    with open(csv_filename, 'w', encoding='UTF-8') as csvfile:
+    with open(csv_filename, 'a+', encoding='UTF-8') as csvfile:
         csvwriter = csv.writer(csvfile, delimiter=',')
         csvwriter.writerow(header)
         for page_index in range(num_pages):
@@ -87,60 +91,70 @@ def get_bills_from_search(query_state, search_query, csv_name, num_pages, legi_e
                 bill_id = b['bill_id']
                 print("Bill ID: " + str(bill_id))
 
-                #Write bill json
-                url = f"https://api.legiscan.com/?key={env.API_KEY}&op=getBill&id={bill_id}"
-                response = requests.get(url, timeout = 10)
-                data = response.json()
-                bill_title = data['bill']['title']
-                print("Bill Title: " + str(bill_title))
-
-                #Get bill status number and find text equivalent
-                bill_status = "No status"
-                if data['bill']['status'] == 0:
-                    print("No status")
+                if str(bill_id) in already_pulled:
+                    print("This bill has already been pulled.")
                 else:
-                    bill_status = codes.BILL_STATUS[data['bill']['status']]
-                    print("Bill Status: " + bill_status)
+                    if csv_name != "pytest.csv":
+                        with open('already_pulled.txt', 'a', encoding='utf-8') as f:
+                            f.write(" " + str(bill_id))
+                    #Write bill json
+                    url = f"https://api.legiscan.com/?key={env.API_KEY}&op=getBill&id={bill_id}"
+                    response = requests.get(url, timeout = 10)
+                    data = response.json()
+                    bill_title = data['bill']['title']
+                    print("Bill Title: " + str(bill_title))
 
-                #Find number of texts associated with bill and select most recent one
-                num_texts = len(data['bill']['texts'])
-
-                #Only write to csv if the text field won't be empty
-                if num_texts > 0:
-                    bill_doc_id = data['bill']['texts'][num_texts - 1]['doc_id']
-                    print("Doc ID: " + str(bill_doc_id) + "\n")
-                    doc = legi_env.get_bill_text(bill_doc_id)
-                    doc_text64 = doc.get('doc')
-
-                    # If it is a pdf
-                    if doc['mime'] == "application/pdf":
-                        filename = extract_bill_text_to_pdf(doc_text64, bill_doc_id)
-                        print(f"New pdf stored in {filename}")
-                        # Get the text from the saved pdf into document_text
-                        document_text = read_pdf_text(filename)
-                        # Delete the saved pdf
-                        os.remove(filename)
-                        print("File Deleted successfully")
-                    # check here instead if it is a html file
+                    #Get bill status number and find text equivalent
+                    bill_status = "No status"
+                    if data['bill']['status'] == 0:
+                        print("No status")
                     else:
-                        document_text = "\"" + extract_bill_text(doc_text64, QUERY_STATE) + "\""
-                        print(document_text)
+                        bill_status = codes.BILL_STATUS[data['bill']['status']]
+                        print("Bill Status: " + bill_status)
 
-                    num_subjects = len(data['bill']['subjects'])
-                    # pylint: disable=invalid-name
-                    bill_subject = "No Subject Provided"
-                    if num_subjects > 0:
-                    #Get bill subject matter
-                        bill_subject = data['bill']['subjects'][0]['subject_name']
-                        print("Bill Subject: " + str(bill_subject))
+                    #Find number of texts associated with bill and select most recent one
+                    num_texts = len(data['bill']['texts'])
+
+                    #Only write to csv if the text field won't be empty
+                    if num_texts > 0:
+                        bill_doc_id = data['bill']['texts'][num_texts - 1]['doc_id']
+                        print("Doc ID: " + str(bill_doc_id) + "\n")
+                        doc = legi_env.get_bill_text(bill_doc_id)
+                        doc_text64 = doc.get('doc')
+
+                        # If it is a pdf
+                        if doc['mime'] == "application/pdf":
+                            filename = extract_bill_text_to_pdf(doc_text64, bill_doc_id)
+                            print(f"New pdf stored in {filename}")
+                            # Get the text from the saved pdf into document_text
+                            document_text = read_pdf_text(filename)
+                            # Delete the saved pdf
+                            os.remove(filename)
+                            print("File Deleted successfully")
+                        # check here instead if it is a html file
+                        else:
+                            document_text = "\"" + extract_bill_text(doc_text64, QUERY_STATE) + "\""
+                            print(document_text)
+
+                        num_subjects = len(data['bill']['subjects'])
+                        # pylint: disable=invalid-name
+                        bill_subject = "No Subject Provided"
+                        if num_subjects > 0:
+                        #Get bill subject matter
+                            bill_subject = data['bill']['subjects'][0]['subject_name']
+                            print("Bill Subject: " + str(bill_subject))
+                        else:
+                            print("No Bill Subject")
+
+                        #Write all relevant bill information into csv
+                        csv_row = [bill_id, bill_title, document_text, bill_status, bill_subject]
+                        csvwriter.writerow(csv_row)
                     else:
-                        print("No Bill Subject")
+                        print("No texts")
 
-                    #Write all relevant bill information into csv
-                    csv_row = [bill_id, bill_title, document_text, bill_status, bill_subject]
-                    csvwriter.writerow(csv_row)
-                else:
-                    print("No texts")
+#Define Search
+QUERY_STATE = 'wv'
+SEARCH_QUERY = 'and'
 
 if __name__ == "__main__":
     get_bills_from_search(QUERY_STATE, SEARCH_QUERY, "dataset.csv", 2, legis)
