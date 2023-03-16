@@ -39,7 +39,7 @@ def get_bills_from_search(query_state, search_query, csv_name, num_pages, legi_e
     """Given a search state and query, produce a csv file of the relevant information"""
     #Make a list of already pulled bills to avoid duplicates
     already_pulled = []
-    with open('already_pulled.txt', 'a+', encoding='UTF-8') as pulled:
+    with open('already_pulled.txt', 'r+', encoding='UTF-8') as pulled:
         contents = pulled.read()
         already_pulled = contents.split()
     if csv_name == "pytest.csv":
@@ -53,7 +53,7 @@ def get_bills_from_search(query_state, search_query, csv_name, num_pages, legi_e
         if len(contents) == 0:
             csvwriter.writerow(header)
         for page_index in range(num_pages):
-            bills = legi_env.search(state=query_state, query=search_query, page=page_index)
+            bills = legi_env.search(state=query_state, query=search_query, page=page_index+50)
             #Populate csv file with each bill being one row
             # pylint: disable=invalid-name
             for b in bills['results']:
@@ -104,7 +104,7 @@ def get_bills_from_search(query_state, search_query, csv_name, num_pages, legi_e
 
 #Define Search
 QUERY_STATE = 'wv'
-SEARCH_QUERY = 'police'
+SEARCH_QUERY = 'and'
 
 if __name__ == "__main__":
     get_bills_from_search(QUERY_STATE, SEARCH_QUERY, "dataset.csv", 50, legis)
