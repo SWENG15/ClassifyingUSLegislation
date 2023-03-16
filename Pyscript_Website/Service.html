@@ -14,6 +14,7 @@
   - paths:
     - ../ML/model.py
     - ../ETL_pipeline/datasets/west-virginia-dataset.csv
+    - ../ETL_pipeline/datasets/new-jersey-dataset.csv
 </py-env>
 	</head>
 	<style>
@@ -34,6 +35,7 @@
   			<button class="dropbtn">Select State</button>
   				<div class="dropdown-content">
     				<a href="#" id="WV" pys-onClick="choose_state(new_state='west-virginia')">West Virginia</a>
+					<a href="#" id="NJ" pys-onClick="choose_state(new_state='new-jersey')">New Jersey</a>
     				<a href="#" id="none" pys-onClick="choose_state">Not Available</a>
     			</div>
   		</div>	

@@ -4,7 +4,6 @@
 # pylint: disable=import-error
 import model as ml
 
-
 # Pylint labels these as constants incorrectly
 # pylint: disable=invalid-name
 state, classifier, vectorizer = None, None, None
