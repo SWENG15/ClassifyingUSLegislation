@@ -51,10 +51,9 @@ def get_bills_from_search(query_state, search_query, csv_name, num_pages, legi_e
     with open(csv_filename, 'a+', encoding='UTF-8') as csvfile:
         csvwriter = csv.writer(csvfile, delimiter=',')
         contents = csvfile.read()
-        if len(contents) == 0:
-            csvwriter.writerow(header)
+        csvwriter.writerow(header)
         for page_index in range(num_pages):
-            bills = legi_env.search(state=query_state, query=search_query, page=page_index+50)
+            bills = legi_env.search(state=query_state, query=search_query, page=page_index)
             #Populate csv file with each bill being one row
             # pylint: disable=invalid-name
             for b in bills['results']:
@@ -67,8 +66,9 @@ def get_bills_from_search(query_state, search_query, csv_name, num_pages, legi_e
                 if str(bill_id) in already_pulled:
                     print("This bill has already been pulled.")
                 else:
-                    with open('already_pulled.txt', 'a', encoding='utf-8') as f:
-                        f.write(" " + str(bill_id))
+                    if csv_name != "pytest.csv":
+                        with open('already_pulled.txt', 'a', encoding='utf-8') as f:
+                            f.write(" " + str(bill_id))
                     #Write bill json
                     url = f"https://api.legiscan.com/?key={env.API_KEY}&op=getBill&id={bill_id}"
                     response = requests.get(url, timeout = 10)
