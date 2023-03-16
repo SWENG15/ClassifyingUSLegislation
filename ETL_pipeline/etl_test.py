@@ -12,7 +12,7 @@ def test_bill_extraction():
     get_bill.get_bills_from_search("al", "specific+test", test_fname, 2, legis)
     #Test that csv was created
     assert os.path.exists(test_fname) is True
-    with open(test_fname, 'r', encoding='UTF-8') as test_csv:
+    with open(test_fname, 'r+', encoding='UTF-8') as test_csv:
         first_line = test_csv.readline().rstrip()
         #Test that csv isn't empty
         assert first_line == "ID,Title,Text,Status,Subject"

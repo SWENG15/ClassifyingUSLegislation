@@ -72,6 +72,7 @@ legis = LegiScan(env.API_KEY)
 # pylint: disable=too-many-statements
 def get_bills_from_search(query_state, search_query, csv_name, num_pages, legi_env):
     """Given a search state and query, produce a csv file of the relevant information"""
+    #Make a list of already pulled bills to avoid duplicates
     already_pulled = []
     if csv_name == "pytest.csv":
         already_pulled = []
@@ -147,7 +148,6 @@ def get_bills_from_search(query_state, search_query, csv_name, num_pages, legi_e
                             print("Bill Subject: " + str(bill_subject))
                         else:
                             print("No Bill Subject")
-
                         #Write all relevant bill information into csv
                         csv_row = [bill_id, bill_title, document_text, bill_status, bill_subject]
                         csvwriter.writerow(csv_row)
