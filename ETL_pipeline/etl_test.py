@@ -9,7 +9,7 @@ def test_bill_extraction():
     """This function tests change_state when there is an input"""
     legis = LegiScan(env.API_KEY)
     test_fname = "pytest.csv"
-    get_bill.get_bills_from_search("wv", "specific+query", test_fname, 2, legis)
+    get_bill.get_bills_from_search("nj", "specific+query", test_fname, 2, legis)
     #Test that csv was created
     assert os.path.exists(test_fname) is True
     with open(test_fname, 'r', encoding='UTF-8') as test_csv:
