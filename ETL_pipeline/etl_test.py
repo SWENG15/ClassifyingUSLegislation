@@ -4,7 +4,6 @@ import get_bill
 from legiscan import LegiScan
 # pylint: disable=import-error
 import env
-import PyPDF2
 
 def test_bill_extraction():
     """This function tests change_state when there is an input"""
