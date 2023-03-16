@@ -40,7 +40,7 @@ def extract_bill_text(base64_enc,state):
 def extract_bill_text_to_pdf(base64_enc, doc_id):
     """Given a base64 encoded pdf document, return the name of the file text has been written to"""
     text = base64.b64decode(base64_enc)
-    filename = f"ETL_pipeline/pulled_bills/doc_{doc_id}.pdf"
+    filename = f"doc_{doc_id}.pdf"
     with open(filename,'wb') as file:
         file.write(text)
     return filename
