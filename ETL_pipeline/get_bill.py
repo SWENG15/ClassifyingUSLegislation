@@ -14,8 +14,6 @@ import env
 from legiscan import LegiScan
 import codes
 
-
-
 #Used for states with non-standard formatting
 def tag_visible(element):
     """Used to detect which text is visible on a page"""
@@ -66,6 +64,14 @@ def read_pdf_text(filename):
 
 #Create Legiscan API session
 legis = LegiScan(env.API_KEY)
+
+
+#Define Search
+QUERY_STATE = 'nj'
+SEARCH_QUERY = 'the'
+#Define Search
+#QUERY_STATE = 'wv'
+#SEARCH_QUERY = 'and'
 
 # pylint: disable=too-many-locals
 # pylint: disable=too-many-branches
@@ -154,9 +160,7 @@ def get_bills_from_search(query_state, search_query, csv_name, num_pages, legi_e
                     else:
                         print("No texts")
 
-#Define Search
-QUERY_STATE = 'wv'
-SEARCH_QUERY = 'and'
+
 
 if __name__ == "__main__":
-    get_bills_from_search(QUERY_STATE, SEARCH_QUERY, "dataset.csv", 2, legis)
+    get_bills_from_search(QUERY_STATE, SEARCH_QUERY, "dataset.csv", 194, legis)
