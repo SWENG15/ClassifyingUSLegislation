@@ -1,13 +1,13 @@
-"""This module tests the ML classification model defined in model.py"""
+"""This module tests the ML classification model defined in subject_model.py"""
 
-import model
+import subject_model
 
 MODEL_TRAINING_DATA_PATH = 'ETL_pipeline/datasets/west-virginia-dataset.csv'
 
 def test_train_model():
     """This test confirms that training the model does not return null"""
     # Train model with test data
-    clf, vectorizer = model.train_model(training_data=MODEL_TRAINING_DATA_PATH)
+    clf, vectorizer = subject_model.train_model(training_data=MODEL_TRAINING_DATA_PATH)
 
     # Check that the classifier and vectorizer are not None
     assert clf is not None
@@ -30,15 +30,15 @@ def test_predict_subject():
     with open('ML/test_data/test5.txt','r', encoding="utf-8") as file:
         test_text_5 = file.read()
     # Train model with test data
-    clf, vectorizer = model.train_model(training_data=MODEL_TRAINING_DATA_PATH)
+    clf, vectorizer = subject_model.train_model(training_data=MODEL_TRAINING_DATA_PATH)
 
 
     # Predict subject for test text
-    pred1 = model.predict_subject(clf, vectorizer, test_text_1)
-    pred2 = model.predict_subject(clf, vectorizer, test_text_2)
-    pred3 = model.predict_subject(clf, vectorizer, test_text_3)
-    pred4 = model.predict_subject(clf, vectorizer, test_text_4)
-    pred5 = model.predict_subject(clf, vectorizer, test_text_5)
+    pred1 = subject_model.predict_subject(clf, vectorizer, test_text_1)
+    pred2 = subject_model.predict_subject(clf, vectorizer, test_text_2)
+    pred3 = subject_model.predict_subject(clf, vectorizer, test_text_3)
+    pred4 = subject_model.predict_subject(clf, vectorizer, test_text_4)
+    pred5 = subject_model.predict_subject(clf, vectorizer, test_text_5)
 
     # Check that the predicted subject is not None
     assert pred1 is not None

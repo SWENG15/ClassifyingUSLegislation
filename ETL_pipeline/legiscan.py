@@ -140,7 +140,7 @@ class LegiScan(object):
         url = self._url('getSponsor', {'id': people_id})
         return self._get(url)['person']
 
-    def search(self, state, bill_number=None, query=None, year=2, page=1):
+    def search(self, state, bill_number=None, query=None, year=1, page=1):
         """Get a page of results for a search against the LegiScan full text
            engine; returns a paginated result set.
 
