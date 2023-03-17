@@ -82,7 +82,7 @@ def predict_subject(clf, vectorizer, text):
     return input_pred
 
 
-def train_regression_model(training_data='../ETL_pipeline/dataset.csv'):
+def train_regression_model(training_data='../ETL_pipeline/datasets/west-virginia-dataset.csv'):
     """
     train_regression_model trains the model to estimate how likely a bill is to pass or fail
     """
