@@ -22,7 +22,7 @@ def setup_and_teardown():
 def test_change_state_none():
     """This function tests change_state when the input is None"""
     import service
-    assert service.change_state(None,{})==(None,None,None,{})
+    assert service.change_state(None,{})==(None,None,None,None,None,{})
 
 def test_change_state():
     """This function tests change_state when there is an input"""
