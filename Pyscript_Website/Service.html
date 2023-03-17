@@ -15,6 +15,7 @@
     - ../ML/model.py
     - ../ETL_pipeline/datasets/west-virginia-dataset.csv
     - ../ETL_pipeline/datasets/new-jersey-dataset.csv
+    - ../ETL_pipeline/datasets/alabama-dataset.csv
 </py-env>
 	</head>
 	<style>
@@ -36,6 +37,7 @@
   				<div class="dropdown-content">
     				<a href="#" id="WV" pys-onClick="choose_state(new_state='west-virginia')">West Virginia</a>
 					<a href="#" id="NJ" pys-onClick="choose_state(new_state='new-jersey')">New Jersey</a>
+					<a href="#" id="AL" pys-onClick="choose_state(new_state='alabama')">Alabama</a>
     				<a href="#" id="none" pys-onClick="choose_state">Not Available</a>
     			</div>
   		</div>	
@@ -48,6 +50,7 @@
 				<button id="new-bill-btn" class="buttonStyle" type="submit" pys-onClick="submit_bill">
 				Classify Bill
 				</button>
+				<h2 class="output_header">Subject</h2>
 				<div id="output" class="output_style"></div>
 				
 			</div>
