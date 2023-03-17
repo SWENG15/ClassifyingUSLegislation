@@ -2,6 +2,7 @@
 model provides the ML classification for state legislation,
 including training the models as well as returning classifications
 """
+#pylint: disable=duplicate-code
 import sys
 import csv
 import codecs
