@@ -1,4 +1,4 @@
-"""This module tests the ML classification model defined in model.py"""
+"""This module tests the ML classification model defined in subject_model.py"""
 
 import model
 

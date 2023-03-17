@@ -13,10 +13,10 @@ def setup_and_teardown():
     These set up the environment more similarly to how it will be set up at runtime.
     """
     # These need to be copied in the same way they are at runtime by pyscript
-    shutil.copy("ML/model.py","Pyscript_Website/model.py")
+    shutil.copy("ML/subject_model.py","Pyscript_Website/subject_model.py")
     shutil.copy("ETL_pipeline/datasets/west-virginia-dataset.csv","west-virginia-dataset.csv")
     yield
-    os.remove("Pyscript_Website/model.py")
+    os.remove("Pyscript_Website/subject_model.py")
     os.remove("west-virginia-dataset.csv")
 
 def test_change_state_none():

@@ -9,8 +9,7 @@ import pandas as pd
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.naive_bayes import MultinomialNB
 from sklearn.model_selection import train_test_split
-#from sklearn.metrics import accuracy_score
-#from sklearn.metrics import mean_squared_error
+from sklearn.metrics import mean_squared_error
 from sklearn.linear_model import LogisticRegression
 
 def train_model(training_data='../ETL_pipeline/dataset.csv'):
@@ -84,7 +83,9 @@ def predict_subject(clf, vectorizer, text):
 
 
 def train_regression_model(training_data='../ETL_pipeline/dataset.csv'):
-    
+    """
+    train_regression_model trains the model to estimate how likely a bill is to pass or fail
+    """
     max_int = sys.maxsize
     while True:
         try:
@@ -92,14 +93,15 @@ def train_regression_model(training_data='../ETL_pipeline/dataset.csv'):
             break
         except OverflowError:
             max_int = int(max_int/10)
-    
+
     with codecs.open(training_data, 'r', encoding='Latin1') as file:
         reader = csv.reader(file)
         data = pd.DataFrame(reader, columns=['ID', 'title', 'text', 'status', 'subject'])
-        
-    # Only the bills with the tags passed and vetoed will be considered in the training of the regression algorithm
+
+    # Only the bills with the tags 'passed' and 'vetoed'
+    # will be considered in the training of the regression algorithm
     bill_tags = ["Passed", "Vetoed"]
-    data = data[data.status.isin(bill_tags) == True]
+    data = data[data.status.isin(bill_tags)]
 
     # Replace missing values with an empty string
     data['title'] = data['title'].fillna('')
@@ -108,7 +110,7 @@ def train_regression_model(training_data='../ETL_pipeline/dataset.csv'):
 
     # Combine text and title columns
     data['combined_text'] = data['text'] + ' ' + data['title']
-    
+
     # Drop the ID column
     data = data.drop('ID', axis=1)
     # Drop the Subject column
@@ -117,7 +119,7 @@ def train_regression_model(training_data='../ETL_pipeline/dataset.csv'):
     data = data.drop('text', axis=1)
     # Drop the title column
     data = data.drop('title', axis=1)
-    
+
     # Get one hot encoding of column status
     one_hot = pd.get_dummies(data['status'])
     # Drop column 'status' as it is now encoded
@@ -127,24 +129,25 @@ def train_regression_model(training_data='../ETL_pipeline/dataset.csv'):
 
     # Split the data into training and testing sets
     text = data['combined_text']
-    #If the bill has been passed this column will have a 1. If the bill has been vetoed it will have a 0.
+    #If the bill has been passed this column will have a 1.
+    #If the bill has been vetoed it will have a 0.
     status = data['Passed']
     vectorizer = CountVectorizer()
     text = vectorizer.fit_transform(text)
 
-    #test_size determines how much of the data is used to test the model, with the remaining used to train
-    X_train, X_test, y_train, y_test = train_test_split(text, status, test_size=0.1)
+    #test_size determines how much of the data is used to test the model, remaining used to train
+    x_train, x_test, y_train, y_test = train_test_split(text, status, test_size=0.1)
+    #x_train, _, y_train, _ = train_test_split(text, status, test_size=0.1)
 
     # Train a logistic regression model on the training set
     model = LogisticRegression()
-    model.fit(X_train, y_train)
+    model.fit(x_train, y_train)
 
     # Calculate the error rate using the testing set
-#     y_pred = model.predict(X_test)
-#     error_rate = mean_squared_error(y_test, y_pred)
+    y_pred = model.predict(x_test)
+    error_rate = mean_squared_error(y_test, y_pred)
+    print(f"Error rate: {error_rate}")
 
-#     print(f"Error rate: {error_rate}")
-    
     return model, vectorizer
 
 def predict_pass(model, vectorizer, text):
@@ -160,7 +163,7 @@ def predict_pass(model, vectorizer, text):
     # namely if the text has a ' in it, it would give an error,
     # so omit that out beefore inputting
     input_test = vectorizer.transform([text])
-    #This gets the likelihood of the bill passing as opposed to just classifying whether it will pass or fail
+    #This gets the likelihood of the bill passing - does not just classify whether it will pass/fail
     input_pred = model.predict_proba(input_test)[:, 1]
 
     # Return the predicted likelihood for the new text
