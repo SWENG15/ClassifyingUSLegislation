@@ -27,6 +27,6 @@ def test_change_state_none():
 def test_change_state():
     """This function tests change_state when there is an input"""
     import service
-    state,_,_,states= service.change_state("west-virginia",{})
+    state,_,_,_,_,states= service.change_state("west-virginia",{})
     assert state=="west-virginia"
     assert "west-virginia" in states
