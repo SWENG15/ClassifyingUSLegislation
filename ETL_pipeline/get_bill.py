@@ -164,4 +164,3 @@ def get_bills_from_search(query_state, search_query, csv_name, num_pages, legi_e
 
 if __name__ == "__main__":
     get_bills_from_search(QUERY_STATE, SEARCH_QUERY, "dataset.csv", 194, legis)
-
