@@ -29,8 +29,15 @@ Then, you should be able to access the website at 127.0.0.1:5500.
 
 
 ## Run Releases
+### Release 3
+This release contains an expanded prototype, with checking for the probability of a bill passing. To run this, run the following with Docker Desktop open:
+
+```
+docker run --name=web-app-container -p 5500:5500 clairegregg/classifying-us-legislation:v2
+```
+
 ### Release 2
-This release a fully functioning prototype. To run this, run the following with Docker Desktop open:
+This release contains a fully functioning prototype. To run this, run the following with Docker Desktop open:
 
 ```
 docker run --name=web-app-container -p 5500:5500 clairegregg/classifying-us-legislation:v1
