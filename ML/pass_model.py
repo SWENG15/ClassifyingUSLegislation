@@ -2,6 +2,7 @@
 model provides the ML classification for state legislation,
 including training the models as well as returning classifications
 """
+#pylint: disable=duplicate-code
 import sys
 import csv
 import codecs
@@ -81,7 +82,7 @@ def predict_subject(clf, vectorizer, text):
     # Print the predicted subject for the new text
     return input_pred
 
-
+# pylint: disable=too-many-locals
 def train_regression_model(training_data='../ETL_pipeline/datasets/west-virginia-dataset.csv'):
     """
     train_regression_model trains the model to estimate how likely a bill is to pass or fail
