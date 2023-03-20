@@ -57,8 +57,6 @@ def test_predict_pass():
     pred5 = pass_model.predict_pass(model, vectorizer, test_text_5)
     pred6 = pass_model.predict_pass(model, vectorizer, test_text_6)
 
-    pred6 = pass_model.predict_pass(model, vectorizer, test_text_6)
-
     # Check that the predicted subject is not None
     assert pred1 is not None
     assert pred2 is not None
