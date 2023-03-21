@@ -89,7 +89,7 @@ def get_bills_from_search(query_state, search_query, csv_name, num_pages, legi_e
     print(already_pulled)
     csv_filename = csv_name
     header = ['ID', 'Title', 'Text', 'Status', 'Subject']
-    with open(csv_filename, 'a+', encoding='UTF-8') as csvfile:
+    with open(csv_filename, 'a+', encoding='UTF-8',newline='') as csvfile:
         csvwriter = csv.writer(csvfile, delimiter=',')
         csvwriter.writerow(header)
         for page_index in range(num_pages):
@@ -152,11 +152,11 @@ def get_bills_from_search(query_state, search_query, csv_name, num_pages, legi_e
                         #Get bill subject matter
                             bill_subject = data['bill']['subjects'][0]['subject_name']
                             print("Bill Subject: " + str(bill_subject))
+                            #Write all relevant bill information into csv
+                            csv_row = [bill_id, bill_title, document_text, bill_status, bill_subject]
+                            csvwriter.writerow(csv_row)
                         else:
-                            print("No Bill Subject")
-                        #Write all relevant bill information into csv
-                        csv_row = [bill_id, bill_title, document_text, bill_status, bill_subject]
-                        csvwriter.writerow(csv_row)
+                            print("No Bill Subject - Not writing")
                     else:
                         print("No texts")
 
