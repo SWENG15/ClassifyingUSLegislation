@@ -153,7 +153,7 @@ def get_bills_from_search(query_state, search_query, csv_name, num_pages, legi_e
                             bill_subject = data['bill']['subjects'][0]['subject_name']
                             print("Bill Subject: " + str(bill_subject))
                             #Write all relevant bill information into csv
-                            csv_row = [bill_id, bill_title, document_text, bill_status, bill_subject]
+                            csv_row=[bill_id, bill_title, document_text, bill_status, bill_subject]
                             csvwriter.writerow(csv_row)
                         else:
                             print("No Bill Subject - Not writing")
