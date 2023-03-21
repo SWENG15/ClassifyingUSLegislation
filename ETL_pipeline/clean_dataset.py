@@ -1,15 +1,21 @@
+"""This module is used to clean dataset csvs"""
+
 import csv
 
 def remove_blank_rows_csv(filename):
-    with open(filename + ".csv","r", encoding='UTF-8') as f, open(filename + "_cleaned.csv","w", encoding='UTF-8') as outfile:
-        for i in f.readlines():
+    """Removes blank rows from csvs leaving only data"""
+    # pylint: disable=line-too-long
+    with open(filename + ".csv","r", encoding='UTF-8') as infile, open(filename + "_cleaned.csv","w", encoding='UTF-8') as outfile:
+        for i in infile.readlines():
             if not i.strip():
                 continue
             if i:
-                outfile.write(i)  
+                outfile.write(i)
 
 def remove_no_subject_csv(filename):
+    """Removes all bills that have no assigned subject"""
     csv.field_size_limit(100000000)
+    # pylint: disable=line-too-long
     with open(filename + '.csv', 'r', encoding='UTF-8') as fin, open(filename + '_purged.csv', 'w', newline='', encoding='UTF-8') as fout:
         reader = csv.reader(fin, skipinitialspace=True)
         writer = csv.writer(fout, delimiter=',')
