@@ -5,37 +5,40 @@ import csv
 import sys
 import pandas as pd
 
-def analyse_data(data):
-    """
-    This function returns the list of subject matters in a dataset, 
-    as well as the overall length of the dataset
-    """
-    max_int = sys.maxsize
-    while True:
-        try:
-            csv.field_size_limit(max_int)
-            break
-        except OverflowError:
-            max_int = int(max_int/10)
+max_int = sys.maxsize
+while True:
+    try:
+        csv.field_size_limit(max_int)
+        break
+    except OverflowError:
+        max_int = int(max_int/10)
 
-    with codecs.open(data, 'r', encoding='Latin1') as file:
-        reader = csv.reader(file)
-        data = pd.DataFrame(reader, columns=['ID', 'title', 'text', 'status', 'subject'])
+with codecs.open("ETL_pipeline/datasets/alabama-dataset.csv", 'r', encoding='Latin1') as file:
+    reader = csv.reader(file)
+    data = pd.DataFrame(reader, columns=['ID', 'title', 'text', 'status', 'subject'])
 
-    data.drop('ID', axis=1)
-    data.drop('title',axis=1)
-    data.drop('text',axis=1)
-    data.drop('status',axis=1)
+data.drop('ID', axis=1)
+data.drop('title',axis=1)
+data.drop('text',axis=1)
 
-    subject_counts = {}
+subject_counts = {}
+status_counts = {}
 
-    for _, row in data.iterrows():
-        subject = row['subject']
-        if subject not in subject_counts:
-            subject_counts[subject] = 1
-        else:
-            subject_counts[subject] += 1
+for _, row in data.iterrows():
+    subject = row['subject']
+    if subject not in subject_counts:
+        subject_counts[subject] = 1
+    else:
+        subject_counts[subject] += 1
 
-    sorted_subjects = dict(sorted(subject_counts.items(), key=lambda x:x[1]))
+    status = row['status']
+    if status not in status_counts:
+        status_counts[status] = 1
+    else:
+        status_counts[status] += 1
 
-    return sorted_subjects, len(sorted_subjects)
+sorted_subjects = dict(sorted(subject_counts.items(), key=lambda x:x[1]))
+
+print(sorted_subjects)
+print(status_counts)
+print(f"Total number of subject matters: {len(data)}")
