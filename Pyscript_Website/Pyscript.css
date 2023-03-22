@@ -237,23 +237,13 @@ textarea {
   /*height:10px;*/
   /*margin: auto;*/
 }
-div.email_background {
-  position: relative;
-  background-color: #2247C1;
-  opacity: 0.6;
-  height: 28px;
-  width: 185px;
-  border-radius: 20px;
-  padding-left: 160px;
-  padding-right: 160px;
-  padding-top: 5px;
-  padding-bottom: 5px;
-  top: 300px;
-}
 .phone{
   color: #fff;
   /*text-shadow: -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, 1px 1px 0 #fff;*/
   text-align: right;
+  background-color: #2247C1;
+  border-radius: 20px;
+  opacity: 0.6;
   font-size: 20px;
   font-weight: 500;
   position: absolute;
@@ -262,21 +252,6 @@ div.email_background {
   width:92%;
   /*height:40px;*/
   margin:auto;
-}
-div.phone_background {
-  position: relative;
-  background-color: #2247C1;
-  opacity: 0.6;
-  height: 28px;
-  width: 185px;
-  border-radius: 20px;
-  padding-left: 9%;
-  padding-right: 9%;
-  padding-top: 0.3%;
-  padding-bottom: 2%;
-  margin: auto;
-  top: 330px;
-  left: 39.2%;
 }
 header {
   text-align: center;
