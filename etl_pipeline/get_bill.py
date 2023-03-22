@@ -10,7 +10,7 @@ from bs4 import BeautifulSoup
 from bs4.element import Comment
 from PyPDF2 import PdfReader
 import requests
-import env
+from ..etl_pipeline.env import API_KEY
 from legiscan import LegiScan
 import codes
 
@@ -63,7 +63,7 @@ def read_pdf_text(filename):
     return output_text
 
 #Create Legiscan API session
-legis = LegiScan(env.API_KEY)
+legis = LegiScan(API_KEY)
 
 
 #Define Search
