@@ -1,9 +1,9 @@
 /__pycache__/
-/ETL_pipeline/__pycache__/
-/ETL_pipeline/pulled_bills/
-/ETL_pipeline/.pytest_cache/
-/ETL_pipeline/pytest.csv
+/etl_pipeline/__pycache__/
+/etl_pipeline/pulled_bills/
+/etl_pipeline/.pytest_cache/
+/etl_pipeline/pytest.csv
 /.pytest_cache/
-/ETL_pipeline/env.py
+/etl_pipeline/env.py
 /PyscriptWebsite/__pycache__/
 /ML/__pycache__/

@@ -13,7 +13,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.metrics import mean_squared_error
 from sklearn.linear_model import LogisticRegression
 
-def train_model(training_data='../ETL_pipeline/dataset.csv'):
+def train_model(training_data='../etl_pipeline/dataset.csv'):
     """train_model trains a Naive Bayes classifier for subject matter based on 
         the path to a dataset given (optionally) in args"""
 
@@ -83,7 +83,7 @@ def predict_subject(clf, vectorizer, text):
     return input_pred
 
 # pylint: disable=too-many-locals
-def train_regression_model(training_data='../ETL_pipeline/datasets/west-virginia-dataset.csv'):
+def train_regression_model(training_data='../etl_pipeline/datasets/west-virginia-dataset.csv'):
     """
     train_regression_model trains the model to estimate how likely a bill is to pass or fail
     """

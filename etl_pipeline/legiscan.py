@@ -20,7 +20,7 @@ import json
 from urllib.parse import urlencode
 from urllib.parse import quote_plus
 
-from codes import BILL_STATUS, BILL_PROGRESS
+from ..etl_pipeline.codes import BILL_STATUS, BILL_PROGRESS
 
 import requests
 

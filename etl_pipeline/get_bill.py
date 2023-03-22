@@ -10,9 +10,9 @@ from bs4 import BeautifulSoup
 from bs4.element import Comment
 from PyPDF2 import PdfReader
 import requests
-import env
-from legiscan import LegiScan
-import codes
+from ..etl_pipeline.env import API_KEY
+from ..etl_pipeline.legiscan import LegiScan
+from ..etl_pipeline.codes import BILL_STATUS
 
 #Used for states with non-standard formatting
 def tag_visible(element):
@@ -49,8 +49,8 @@ def read_pdf_text(filename):
     reader = PdfReader(filename)
     output_text = ''
     # pylint: disable=consider-using-enumerate
-    for i in range(len(reader.pages)):
-        page = reader.pages[i]
+    for index in range(len(reader.pages)):
+        page = reader.pages[index]
         text = page.extract_text()
 
         # Remove line numbers
@@ -63,7 +63,7 @@ def read_pdf_text(filename):
     return output_text
 
 #Create Legiscan API session
-legis = LegiScan(env.API_KEY)
+legis = LegiScan(API_KEY)
 
 
 #Define Search
@@ -107,7 +107,7 @@ def get_bills_from_search(query_state, search_query, csv_name, num_pages, legi_e
                         with open('already_pulled.txt', 'a', encoding='utf-8') as f:
                             f.write(" " + str(bill_id))
                     #Write bill json
-                    url = f"https://api.legiscan.com/?key={env.API_KEY}&op=getBill&id={bill_id}"
+                    url = f"https://api.legiscan.com/?key={API_KEY}&op=getBill&id={bill_id}"
                     response = requests.get(url, timeout = 10)
                     data = response.json()
                     bill_title = data['bill']['title']
@@ -118,7 +118,7 @@ def get_bills_from_search(query_state, search_query, csv_name, num_pages, legi_e
                     if data['bill']['status'] == 0:
                         print("No status")
                     else:
-                        bill_status = codes.BILL_STATUS[data['bill']['status']]
+                        bill_status = BILL_STATUS[data['bill']['status']]
                         print("Bill Status: " + bill_status)
 
                     #Find number of texts associated with bill and select most recent one
