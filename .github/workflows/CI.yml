@@ -25,10 +25,6 @@ jobs:
         pip install -r requirements/web-app.txt
         pip install -r requirements/pulling-data.txt
         
-    - name: Analysing the code with pylint
-      run: |
-        pylint $(git ls-files '*.py') --good-names=ClassifyingUSLegislation
-        
     - name: Write env file (LegiScan API key)
       uses: DamianReeves/write-file-action@master
       with:
@@ -36,6 +32,10 @@ jobs:
         write-mode: overwrite
         contents: |
           API_KEY = "${{ secrets.LEGISCAN_API_KEY }}"
+      
+    - name: Analysing the code with pylint
+      run: |
+        pylint $(git ls-files '*.py') --good-names=ClassifyingUSLegislation
         
     - name: Test with pytest
       run: |
