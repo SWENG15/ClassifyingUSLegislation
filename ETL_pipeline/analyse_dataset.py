@@ -30,7 +30,7 @@ for _, row in data.iterrows():
         subject_counts[subject] = 1
     else:
         subject_counts[subject] += 1
-    
+
     status = row['status']
     if status not in status_counts:
         status_counts[status] = 1
