@@ -24,7 +24,7 @@ def train_model(training_data='../ETL_pipeline/dataset.csv'):
     text = vectorizer.fit_transform(text)
     #test_size determines how much of the data is used to test the model,
     # with the remaining used to train
-    x_train, _, y_train, _ = train_test_split(text, subject, test_size=0.005)
+    x_train, _, y_train, _ = train_test_split(text, subject, test_size=0.01)
 
     # Train a Naive Bayes classifier on the training data
     clf = MultinomialNB()
@@ -95,8 +95,6 @@ def train_model_accuracy(training_data):
     but instead of returning the model, it returns the accuracy
     """
     data = prepare_data(training_data)
-
-    print("Length of data: ",len(data))
     
     # Split the data into training and testing sets
     text = data['combined_text']
@@ -106,7 +104,7 @@ def train_model_accuracy(training_data):
 
     #test_size determines how much of the data is used to test the model,
     # with the remaining used to train
-    x_train, x_test, y_train, y_test = train_test_split(text, subject, test_size=0.005)
+    x_train, x_test, y_train, y_test = train_test_split(text, subject, test_size=0.01)
 
     # Train a Naive Bayes classifier on the training data
     clf = MultinomialNB()
