@@ -211,11 +211,16 @@ textarea {
 
 /* Contact Page CSS */
 .display_request_sent {
+  max-width: fit-content;
   text-align: center;
   color: #fff;
-  text-shadow: -1px -1px 0 #8a7c7c, 1px -1px 0 #8a7c7c, -1px 1px 0 #8a7c7c, 1px 1px 0 #8a7c7c;
   font-size: 20px;
+  margin: auto;
   margin-top: 20px;
+  background-color: rgba(95, 95, 106, 0.8);
+  border-radius: 20px;
+  padding-left: 15px;
+  padding-right: 15px;
 }
 .address_div {
   text-align:left;
@@ -229,28 +234,31 @@ textarea {
   color: #fff;
   font-size: 20px;
   font-weight: 500;
-  /*text-shadow: -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, 1px 1px 0 #fff;*/
   position: absolute;
-  padding:10px 10px;
   bottom:0;
-  /*width:10%;*/
-  /*height:10px;*/
-  /*margin: auto;*/
+  margin: auto;
+}
+.text_background {
+    background-color: rgba(34, 71, 193, 0.6);
+    border-radius: 20px;
+    padding-left: 25px;
+    padding-right: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    position: absolute;
+    bottom:0;
+    height: 4.5%;
+    width:92%;
+    margin-bottom: 1%;
 }
 .phone{
   color: #fff;
-  /*text-shadow: -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, 1px 1px 0 #fff;*/
   text-align: right;
-  background-color: #2247C1;
-  border-radius: 20px;
-  opacity: 0.6;
   font-size: 20px;
   font-weight: 500;
   position: absolute;
-  padding: 0.7% 0.7%;
   bottom:0;
   width:92%;
-  /*height:40px;*/
   margin:auto;
 }
 header {
@@ -306,10 +314,6 @@ button[type=submit-form]:hover{
 .table_layout {
   margin-left: 150px;
   margin-right: 150px;
-}
-.background_position {
-  margin: auto;
-  /* object-position: absolute; */
 }
 
 
@@ -407,8 +411,6 @@ button[type=submit-form]:hover{
 .questions__item:first-child {
   padding-left: 0;
 }
-
-.a {}
 
 .questions__item:nth-child(2) {
   -webkit-box-flex: 0;
