@@ -49,8 +49,8 @@ def read_pdf_text(filename):
     reader = PdfReader(filename)
     output_text = ''
     # pylint: disable=consider-using-enumerate
-    for i in range(len(reader.pages)):
-        page = reader.pages[i]
+    for index in range(len(reader.pages)):
+        page = reader.pages[index]
         text = page.extract_text()
 
         # Remove line numbers
