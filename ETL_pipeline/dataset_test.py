@@ -4,7 +4,7 @@ This module tests the quality of the dataset
     - Valid dataset
 """
 import pytest
-from ..ETL_pipeline.analyse_dataset import analyse_data
+from ..etl_pipeline.analyse_dataset import analyse_data
 from ..ML.subject_model import train_model_accuracy
 
 # This is the number of times the accuracy is calculated for each dataset
@@ -12,13 +12,13 @@ from ..ML.subject_model import train_model_accuracy
 NUM_TESTS = 20
 
 test_data = [
-    ("ETL_pipeline/datasets/west-virginia-dataset.csv",0.5)
+    ("etl_pipeline/datasets/west-virginia-dataset.csv",0.5)
 ]
 
 state_list = [
-    ("ETL_pipeline/datasets/west-virginia-dataset.csv"),
-    ("ETL_pipeline/datasets/new-jersey-dataset.csv"),
-    ("ETL_pipeline/datasets/alabama-dataset.csv")
+    ("etl_pipeline/datasets/west-virginia-dataset.csv"),
+    ("etl_pipeline/datasets/new-jersey-dataset.csv"),
+    ("etl_pipeline/datasets/alabama-dataset.csv")
 ]
 
 @pytest.mark.parametrize("path,expected",test_data)

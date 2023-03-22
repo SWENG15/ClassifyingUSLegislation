@@ -27,12 +27,12 @@ jobs:
         
     - name: Analysing the code with pylint
       run: |
-        pylint $(git ls-files '*.py')  
+        pylint $(git ls-files '*.py') --good-names=ClassifyingUSLegislation
         
     - name: Write env file (LegiScan API key)
       uses: DamianReeves/write-file-action@master
       with:
-        path: ETL_pipeline/env.py
+        path: etl_pipeline/env.py
         write-mode: overwrite
         contents: |
           API_KEY = "${{ secrets.LEGISCAN_API_KEY }}"

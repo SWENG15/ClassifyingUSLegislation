@@ -1,7 +1,7 @@
 """This module tests the backend functionality for the Service page"""
 import os
-from ..ETL_pipeline.get_bill import *
-from ..ETL_pipeline.legiscan import LegiScan
+from ..etl_pipeline.get_bill import get_bills_from_search
+from ..etl_pipeline.legiscan import LegiScan
 # pylint: disable=import-error
 import env
 
