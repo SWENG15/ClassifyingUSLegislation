@@ -17,7 +17,7 @@ def analyse_data(data):
         except OverflowError:
             max_int = int(max_int/10)
 
-    with codecs.open("ETL_pipeline/datasets/alabama-dataset.csv", 'r', encoding='Latin1') as file:
+    with codecs.open(data, 'r', encoding='Latin1') as file:
         reader = csv.reader(file)
         data = pd.DataFrame(reader, columns=['ID', 'title', 'text', 'status', 'subject'])
 
