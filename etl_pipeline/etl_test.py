@@ -3,11 +3,11 @@ import os
 from ..etl_pipeline.get_bill import get_bills_from_search
 from ..etl_pipeline.legiscan import LegiScan
 # pylint: disable=import-error
-import env
+from ..etl_pipeline.env import API_KEY
 
 def test_bill_extraction():
     """This function tests change_state when there is an input"""
-    legis = LegiScan(env.API_KEY)
+    legis = LegiScan(API_KEY)
     test_fname = "pytest.csv"
     get_bills_from_search("al", "specific+test", test_fname, 2, legis)
     #Test that csv was created

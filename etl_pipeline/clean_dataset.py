@@ -22,7 +22,7 @@ def remove_no_subject_csv(filename):
         writer.writerow(next(reader))
         for line in reader:
             if not line[-1] == "No Subject Provided":
-                writer.writerow(i)
+                writer.writerow(line)
 
 #DO NOT INCLUDE .CSV FILE EXTENSION IN NAME, e.g enter "dataset" not "dataset.csv"
 FILENAME = "datasets/new-jersey-dataset"
