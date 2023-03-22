@@ -16,7 +16,7 @@ def train_model(training_data='../ETL_pipeline/dataset.csv'):
     """train_model trains a Naive Bayes classifier for subject matter based on 
         the path to a dataset given (optionally) in args"""
     data = prepare_data(training_data)
-    
+
     # Split the data into training and testing sets
     text = data['combined_text']
     subject = data['subject']
@@ -95,7 +95,7 @@ def train_model_accuracy(training_data):
     but instead of returning the model, it returns the accuracy
     """
     data = prepare_data(training_data)
-    
+
     # Split the data into training and testing sets
     text = data['combined_text']
     subject = data['subject']

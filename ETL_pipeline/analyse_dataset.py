@@ -7,7 +7,8 @@ import pandas as pd
 
 def analyse_data(data):
     """
-    This function returns the list of subject matters in a dataset, as well as the overall length of the dataset
+    This function returns the list of subject matters in a dataset, 
+    as well as the overall length of the dataset
     """
     max_int = sys.maxsize
     while True:
@@ -17,7 +18,7 @@ def analyse_data(data):
         except OverflowError:
             max_int = int(max_int/10)
 
-    with codecs.open("ETL_pipeline/datasets/west-virginia-dataset.csv", 'r', encoding='Latin1') as file:
+    with codecs.open(data, 'r', encoding='Latin1') as file:
         reader = csv.reader(file)
         data = pd.DataFrame(reader, columns=['ID', 'title', 'text', 'status', 'subject'])
 
