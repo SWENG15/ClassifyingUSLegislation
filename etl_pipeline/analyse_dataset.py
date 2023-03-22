@@ -6,6 +6,9 @@ import sys
 import pandas as pd
 
 def analyse_data(data):
+    """This function returns the a dictionary of the subjects in a dataset 
+    with the number of times they appear, 
+    as well as the total number of (non-unique) subjects in the dataset"""
     max_int = sys.maxsize
     while True:
         try:

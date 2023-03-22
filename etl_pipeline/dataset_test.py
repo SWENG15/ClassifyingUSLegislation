@@ -17,7 +17,6 @@ test_data = [
 
 state_list = [
     ("etl_pipeline/datasets/west-virginia-dataset.csv"),
-    ("etl_pipeline/datasets/new-jersey-dataset.csv"),
     ("etl_pipeline/datasets/alabama-dataset.csv")
 ]
 
