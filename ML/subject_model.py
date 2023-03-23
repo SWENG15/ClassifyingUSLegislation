@@ -80,3 +80,36 @@ def predict_subject(clf, vectorizer, text):
 
     # Print the predicted subject for the new text
     return input_pred
+"""
+//commented out, uncomment when code is needed and replace // with triple " to make them into comments for function descriptions
+def save_model(clf, vectorizer, model_path='model.pkl', vectorizer_path='vectorizer.pkl'):
+    
+    //save_model saves the trained classification model and vectorizer
+    //to the specified paths
+    
+    with open(model_path, 'wb') as model_file:
+        pickle.dump(clf, model_file)
+
+    with open(vectorizer_path, 'wb') as vectorizer_file:
+        pickle.dump(vectorizer, vectorizer_file)
+
+def load_model(model_path='model.pkl', vectorizer_path='vectorizer.pkl'):
+    
+    //load_model loads a previously saved classification model and vectorizer
+    //from the specified paths
+
+    with open(model_path, 'rb') as model_file:
+        clf = pickle.load(model_file)
+
+    with open(vectorizer_path, 'rb') as vectorizer_file:
+        vectorizer = pickle.load(vectorizer_file)
+
+    return clf, vectorizer
+
+clf, vectorizer = train_model()
+save_model(clf, vectorizer)
+
+clf, vectorizer = load_model()
+//the next line is to put to predict the text later on, put in calling function for the model
+predicted_subject = predict_subject(clf, vectorizer, text)
+"""
