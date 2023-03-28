@@ -1,5 +1,3 @@
-name: Continuous Integration
-
 on: [push]
 
 permissions:
@@ -14,6 +12,8 @@ jobs:
         python-version: ["3.8"]
     steps:
     - uses: actions/checkout@v3
+    - name: Install Git LFS
+      run: sudo apt-get install git-lfs
     - name: Set up Python ${{ matrix.python-version }}
       uses: actions/setup-python@v3
       with:
@@ -33,11 +33,15 @@ jobs:
         contents: |
           API_KEY = "${{ secrets.LEGISCAN_API_KEY }}"
       
+    - name: Configure Git LFS
+      run: |
+        git lfs track "*.csv"
+        git lfs pull
+      
     - name: Analysing the code with pylint
       run: |
         pylint $(git ls-files '*.py') --good-names=ClassifyingUSLegislation
         
     - name: Test with pytest
       run: |
-        pytest $(git ls-files '*test.py')
-  
+        pytest --no-cov $(git ls-files '*test.py')
