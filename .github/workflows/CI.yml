@@ -44,4 +44,4 @@ jobs:
         
     - name: Test with pytest
       run: |
-        pytest --no-cov $(git ls-files '*test.py')
+        pytest $(git ls-files '*test.py')
