@@ -104,6 +104,7 @@ def train_model_accuracy(training_data):
 
     #test_size determines how much of the data is used to test the model,
     # with the remaining used to train
+    # pylint: disable=line-too-long
     x_train, x_test, y_train, y_test = train_test_split(text, subject, test_size=0.01, random_state=42)
 
     # Train a Naive Bayes classifier on the training data
