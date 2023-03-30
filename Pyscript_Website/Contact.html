@@ -1,3 +1,6 @@
+<!-- website for contact form: https://formsubmit.co/ -->
+<!-- Group project email: sweng.propylon.ltd@gmail.com -->
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -29,15 +32,16 @@
   </div>
   <div id="output"></div>
 
-  <form class ="form_layout" onsubmit ="return false">
+  <form class ="form_layout" action="https://formsubmit.co/sweng.propylon.ltd@gmail.com" method="POST">
       <header>Contact Us</header>
       <table class="table_layout">
+        <input type="hidden" name ="_next" value="http://127.0.0.1:5555/Pyscript_Website/Contact.html">
         <tr>
-          <td>First Name<input type="text" class="form_field" name="fname" id="fname" placeholder="First Name..."></td>
-          <td>Last Name<input type="text" class="form_field" name="lname" id="lname" placeholder="Last Name..."></td>
+          <td>First Name<input type="text" class="form_field" name="fname" id="fname" placeholder="First Name..." required></td>
+          <td>Last Name<input type="text" class="form_field" name="lname" id="lname" placeholder="Last Name..." required></td>
         </tr>
         <tr>
-          <td>Email<input type="email" class="form_field" name="email" id="email" placeholder="Email..." ></td>
+          <td>Email<input type="email" class="form_field" name="email" id="email" placeholder="Email..." required></td>
           <td>Message<input type="text" class="form_field" name="message" id="message" placeholder="Type your message..."></td>
         </tr>
       </table>
