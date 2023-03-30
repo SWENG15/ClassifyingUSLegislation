@@ -1,7 +1,10 @@
 """
 This module contains a function for submitting a contact form.
 
-The submit_contact_form function takes in any number of arguments and keyword arguments, but it is designed to work with an Element object that has an 'email' attribute. If the 'email' attribute is not empty, the function sends a message to confirm that the form has been submitted and a response will be sent to the provided email address.
+The submit_contact_form function takes in any number of arguments and keyword arguments, 
+but it is designed to work with an Element object that has an 'email' attribute. If the 'email' 
+attribute is not empty, the function sends a message to confirm that the form has been submitted 
+and a response will be sent to the provided email address.
 """
 from elements import Element
 
