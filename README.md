@@ -6,6 +6,9 @@ This is the base template for the US State Legislation website for SWENG.
 
 # Run the Website
 
+## GIT LFS
+This project uses large datasets that exceed the 100MB limit on github. To run the project you will need to have have GIT LFS installed on your machine. Steps for installing this can be found on git-lfs.com.
+
 ## Run the Website Uncontainerised
 The website is implemented using Pyscript.
 You can run it using Visual Studio Code, although you will need to install the dependencies in requirements/web-app.txt. If you do not want to do this, then read the next section.

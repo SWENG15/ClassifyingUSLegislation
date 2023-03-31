@@ -16,7 +16,7 @@ def setup_and_teardown():
     shutil.copy("ML/subject_model.py","Pyscript_Website/subject_model.py")
     shutil.copy("ML/pass_model.py","Pyscript_Website/pass_model.py")
     shutil.copy("ML/bill_similarity_model.py","Pyscript_Website/bill_similarity_model.py")
-    shutil.copy("ETL_pipeline/datasets/west-virginia-dataset.csv","west-virginia-dataset.csv")
+    shutil.copy("etl_pipeline/datasets/west-virginia-dataset.csv","west-virginia-dataset.csv")
     yield
     os.remove("Pyscript_Website/subject_model.py")
     os.remove("Pyscript_Website/pass_model.py")
