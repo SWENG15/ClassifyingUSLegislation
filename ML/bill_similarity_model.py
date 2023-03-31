@@ -4,6 +4,7 @@ import codecs
 import pandas as pd
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
+#pylint: disable=duplicate-code
 
 def train_similarity_model(training_data='etl_pipeline/datasets/west-virginia-dataset.csv'):
     """train_similarity_model is using Python's Scikit-learn library to preprocess and vectorize text data from our dataset and

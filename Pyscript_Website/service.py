@@ -18,6 +18,7 @@ def submit_bill(*_):
     """submit_bill runs when a new bill's text is submitted"""
     # Disable undefined variable as the class is defined at runtime
     # pylint: disable=undefined-variable
+    # pylint: disable=line-too-long
     text = Element("bill").element.value
     Element("bill").clear()
     if not text:
