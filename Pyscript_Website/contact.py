@@ -7,6 +7,7 @@ attribute is not empty, the function sends a message to confirm that the form ha
 and a response will be sent to the provided email address.
 """
 
+
 def submit_contact_form(*_):
     """
     This function is called when the contact form is submitted.
