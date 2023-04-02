@@ -12,6 +12,7 @@ from sklearn.naive_bayes import MultinomialNB
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import mean_squared_error
 from sklearn.linear_model import LogisticRegression
+import pickle
 
 def train_model(training_data='../ETL_pipeline/dataset.csv'):
     """train_model trains a Naive Bayes classifier for subject matter based on 
@@ -62,6 +63,12 @@ def train_model(training_data='../ETL_pipeline/dataset.csv'):
     #y_pred = clf.predict(x_test)
     #score = accuracy_score(y_test, y_pred)
     #print(score)
+    
+
+    #for serialization 
+    #uncomment to run
+  #  with open('classification_model.pkl', 'wb') as f:
+   #     pickle.dump((clf, vectorizer), f)
 
     return clf, vectorizer
 
@@ -78,9 +85,23 @@ def predict_subject(clf, vectorizer, text):
     # so omit that out beefore inputting
     input_test = vectorizer.transform([text])
     input_pred = clf.predict(input_test)
+    #for serialization
+    #clf, vectorizer = load_classification_model()
 
     # Print the predicted subject for the new text
     return input_pred
+
+#for serialization
+#def load_classification_model():
+ #   with open('classification_model.pkl', 'rb') as f:
+  #      clf, vectorizer = pickle.load(f)
+   # return clf, vectorizer
+
+#def load_regression_model():
+ #   with open('regression_model.pkl', 'rb') as f:
+  #      model, vectorizer = pickle.load(f)
+   # return model, vectorizer
+
 
 # pylint: disable=too-many-locals
 def train_regression_model(training_data='../ETL_pipeline/datasets/west-virginia-dataset.csv'):
@@ -149,6 +170,10 @@ def train_regression_model(training_data='../ETL_pipeline/datasets/west-virginia
     error_rate = mean_squared_error(y_test, y_pred)
     print(f"Error rate: {error_rate}")
 
+    #for serialization
+    #with open('regression_model.pkl', 'wb') as f:
+     #   pickle.dump((model, vectorizer), f)
+
     return model, vectorizer
 
 def predict_pass(model, vectorizer, text):
@@ -166,6 +191,9 @@ def predict_pass(model, vectorizer, text):
     input_test = vectorizer.transform([text])
     #This gets the likelihood of the bill passing - does not just classify whether it will pass/fail
     input_pred = model.predict_proba(input_test)[:, 1]
+
+    #for serialization
+    # model, vectorizer = load_regression_model()
 
     # Return the predicted likelihood for the new text
     return input_pred
