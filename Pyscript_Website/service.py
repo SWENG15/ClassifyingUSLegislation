@@ -73,7 +73,8 @@ def change_state(new_state, states_dict):
         # If the model for this state has not already been trained, train it
         # and add it to the dictionary of models
         else:
-            new_classifier, new_subject_vectorizer = ml.train_model(str(new_state)+'-dataset.csv')
+            new_classifier, new_subject_vectorizer = ml.load_model(new_state)
+            #train_model(str(new_state)+'-dataset.csv')
             new_pmodel, new_pvectorizer = pml.train_regression_model(str(new_state)+'-dataset.csv')
             states[new_state] = (new_classifier,new_subject_vectorizer,new_pmodel,new_pvectorizer)
 
