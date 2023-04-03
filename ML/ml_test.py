@@ -2,14 +2,21 @@
 
 import subject_model
 
-MODEL_TRAINING_DATA_PATH = 'ETL_pipeline/datasets/west-virginia-dataset.csv'
+MODEL_TRAINING_DATA_PATH = 'ETL_pipeline/datasets/west-virginia.csv'
 
 def test_train_model():
     """This test confirms that training the model does not return null"""
     # Train model with test data
-    clf, vectorizer = subject_model.train_model(training_data=MODEL_TRAINING_DATA_PATH)
+    clf, vectorizer = subject_model.train_model('west-virginia'
+                                                ,training_data=MODEL_TRAINING_DATA_PATH)
 
     # Check that the classifier and vectorizer are not None
+    assert clf is not None
+    assert vectorizer is not None
+
+def test_load_model():
+    """This test confrims that the model is loaded correctly"""
+    clf, vectorizer = subject_model.load_model('west-virginia')
     assert clf is not None
     assert vectorizer is not None
 
@@ -30,8 +37,8 @@ def test_predict_subject():
     with open('ML/test_data/test5.txt','r', encoding="utf-8") as file:
         test_text_5 = file.read()
     # Train model with test data
-    clf, vectorizer = subject_model.train_model(training_data=MODEL_TRAINING_DATA_PATH)
-
+    clf, vectorizer = subject_model.load_model('west-virginia')
+    #subject_model.train_model(training_data=MODEL_TRAINING_DATA_PATH)
 
     # Predict subject for test text
     pred1 = subject_model.predict_subject(clf, vectorizer, test_text_1)
