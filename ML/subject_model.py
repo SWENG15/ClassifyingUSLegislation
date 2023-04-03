@@ -6,13 +6,14 @@ including training the models as well as returning classifications
 import sys
 import csv
 import codecs
+import pickle
 import pandas as pd
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.naive_bayes import MultinomialNB
 from sklearn.model_selection import train_test_split
 #from sklearn.metrics import accuracy_score
 
-def train_model(training_data='../ETL_pipeline/dataset.csv'):
+def train_model(state, training_data='../ETL_pipeline/dataset.csv'):
     """train_model trains a Naive Bayes classifier for subject matter based on 
         the path to a dataset given (optionally) in args"""
 
@@ -61,7 +62,7 @@ def train_model(training_data='../ETL_pipeline/dataset.csv'):
     #y_pred = clf.predict(x_test)
     #score = accuracy_score(y_test, y_pred)
     #print(score)
-
+    save_model(clf, vectorizer, state)
     return clf, vectorizer
 
 def predict_subject(clf, vectorizer, text):
@@ -80,24 +81,23 @@ def predict_subject(clf, vectorizer, text):
 
     # Print the predicted subject for the new text
     return input_pred
-"""
-//commented out, uncomment when code is needed and replace // with triple " to make them into comments for function descriptions
-def save_model(clf, vectorizer, model_path='model.pkl', vectorizer_path='vectorizer.pkl'):
-    
-    //save_model saves the trained classification model and vectorizer
-    //to the specified paths
-    
+
+def save_model(clf, vectorizer, state):
+    """save_model saves the trained classification model and vectorizer 
+    to the specified paths"""
+    model_path = 'ML/saved_models/'+ state + '_model.pkl'
+    vectorizer_path='ML/saved_models/'+ state + '_vectorizer.pkl'
     with open(model_path, 'wb') as model_file:
         pickle.dump(clf, model_file)
 
     with open(vectorizer_path, 'wb') as vectorizer_file:
         pickle.dump(vectorizer, vectorizer_file)
 
-def load_model(model_path='model.pkl', vectorizer_path='vectorizer.pkl'):
-    
-    //load_model loads a previously saved classification model and vectorizer
-    //from the specified paths
-
+def load_model(state,model_path='model.pkl', vectorizer_path='vectorizer.pkl'):
+    """load_model loads a previously saved classification model and vectorizer
+    from the specified paths"""
+    model_path = 'ML/saved_models/'+ state + '_model.pkl'
+    vectorizer_path='ML/saved_models/'+ state + '_vectorizer.pkl'
     with open(model_path, 'rb') as model_file:
         clf = pickle.load(model_file)
 
@@ -106,10 +106,4 @@ def load_model(model_path='model.pkl', vectorizer_path='vectorizer.pkl'):
 
     return clf, vectorizer
 
-clf, vectorizer = train_model()
-save_model(clf, vectorizer)
 
-clf, vectorizer = load_model()
-//the next line is to put to predict the text later on, put in calling function for the model
-predicted_subject = predict_subject(clf, vectorizer, text)
-"""
