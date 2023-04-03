@@ -12,7 +12,7 @@ from ..ML.subject_model import train_model_accuracy
 NUM_TESTS = 20
 
 test_data = [
-    ("etl_pipeline/datasets/west-virginia-dataset.csv",0.5)
+    ("etl_pipeline/datasets/west-virginia-dataset.csv",0.5),
     ("etl_pipeline/datasets/montana-dataset.csv",0.5)
 ]
 
