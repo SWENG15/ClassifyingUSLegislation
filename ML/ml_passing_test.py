@@ -2,7 +2,7 @@
 
 import pass_model
 
-MODEL_TRAINING_DATA_PATH = "ETL_pipeline/datasets/west-virginia-dataset.csv"
+MODEL_TRAINING_DATA_PATH = "etl_pipeline/datasets/west-virginia-dataset.csv"
 
 
 def test_train_model():
