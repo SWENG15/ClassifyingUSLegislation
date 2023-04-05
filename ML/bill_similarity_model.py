@@ -37,7 +37,7 @@ def train_similarity_model(training_data='etl_pipeline/datasets/west-virginia-da
 
     # Vectorize text
     vectorizer = TfidfVectorizer()
-    vectorized_text = vectorizer.fit_transform(data['text'])
+    vectorized_text = vectorizer.fit_transform(data.loc[:, 'text'])
 
     # Return trained model
     return vectorizer, vectorized_text, data
