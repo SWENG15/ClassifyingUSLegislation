@@ -1,3 +1,8 @@
+"""The purpose of this algorithm is to enable our user to find and
+and read bills that are similar to the bill they are currently viewing.
+The user simply enters the bill for which they wish to find similar
+bills for and the program will return a specific number of bills that
+are similar to the one they entered (the default is set to 10)."""
 import sys
 import csv
 import codecs
@@ -37,7 +42,7 @@ def train_similarity_model(training_data='etl_pipeline/datasets/west-virginia-da
     # Return trained model
     return vectorizer, vectorized_text, data
 
-def predict_similar_bills(bill, trained_model, num_of_similar_bills=5):
+def predict_similar_bills(bill, trained_model, num_of_similar_bills=10):
     """print_similar_bills takes a single bill text, the trained model
     including vectorizer, vectorized_text, and data,
     and a number of similar bills to return, and prints the most 
@@ -60,8 +65,8 @@ def predict_similar_bills(bill, trained_model, num_of_similar_bills=5):
 
 if __name__ == '__main__':
     # Train the model
-    trained_model = train_similarity_model()
+    train_model = train_similarity_model()
 
     # Find similar bills for an input bill
-    input_bill = "An act to promote sustainability in public transportation"
-    print(predict_similar_bills(input_bill, trained_model, num_of_similar_bills=5))
+    INPUT_BILL = "An act to promote sustainability in public transportation"
+    print(predict_similar_bills(input_bill, train_model, num_of_similar_bills=5))
