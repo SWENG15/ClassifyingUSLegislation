@@ -33,7 +33,7 @@ def train_similarity_model(training_data='etl_pipeline/datasets/west-virginia-da
     data = data.drop('ID', axis=1)
 
     # Fill missing text values with empty strings
-    data['text'] = data['text'].fillna('')
+    # data['text'] = data['text'].fillna('')
 
     # Vectorize text
     vectorizer = TfidfVectorizer()
@@ -69,4 +69,4 @@ if __name__ == '__main__':
 
     # Find similar bills for an input bill
     INPUT_BILL = "An act to promote sustainability in public transportation"
-    print(predict_similar_bills(input_bill, train_model, num_of_similar_bills=5))
+    print(predict_similar_bills(INPUT_BILL, train_model, num_of_similar_bills=5))
