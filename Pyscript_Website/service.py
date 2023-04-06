@@ -89,6 +89,8 @@ def change_state(new_state, states_dict):
             print('probability fine\n')
             new_sim_model = bsm.train_similarity_model(str(new_state)+'-dataset.csv')
             print('similar fine\n')
-            states[new_state] = (new_classifier,new_subject_vectorizer,new_pmodel,new_pvectorizer,new_sim_model)
-
+            states[new_state] = (
+                new_classifier,new_subject_vectorizer,new_pmodel,new_pvectorizer,new_sim_model
+            )
+    # pylint: disable=line-too-long
     return new_state, new_classifier, new_subject_vectorizer, new_pmodel, new_pvectorizer, new_sim_model, states
