@@ -6,13 +6,14 @@ including training the models as well as returning classifications
 import sys
 import csv
 import codecs
+import pickle
 import pandas as pd
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.naive_bayes import MultinomialNB
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import mean_squared_error
 from sklearn.linear_model import LogisticRegression
-import pickle
+
 
 def train_model(training_data='../ETL_pipeline/dataset.csv'):
     """train_model trains a Naive Bayes classifier for subject matter based on 
@@ -59,17 +60,8 @@ def train_model(training_data='../ETL_pipeline/dataset.csv'):
     # Train a Naive Bayes classifier on the training data
     clf = MultinomialNB()
     clf.fit(x_train, y_train)
-
-    #y_pred = clf.predict(x_test)
-    #score = accuracy_score(y_test, y_pred)
-    #print(score)
     
-
-    #for serialization 
-    #uncomment to run
-  #  with open('classification_model.pkl', 'wb') as f:
-   #     pickle.dump((clf, vectorizer), f)
-
+    save_model(clf, vectorizer, state)
     return clf, vectorizer
 
 def predict_subject(clf, vectorizer, text):
@@ -90,17 +82,6 @@ def predict_subject(clf, vectorizer, text):
 
     # Print the predicted subject for the new text
     return input_pred
-
-#for serialization
-#def load_classification_model():
- #   with open('classification_model.pkl', 'rb') as f:
-  #      clf, vectorizer = pickle.load(f)
-   # return clf, vectorizer
-
-#def load_regression_model():
- #   with open('regression_model.pkl', 'rb') as f:
-  #      model, vectorizer = pickle.load(f)
-   # return model, vectorizer
 
 
 # pylint: disable=too-many-locals
@@ -197,3 +178,27 @@ def predict_pass(model, vectorizer, text):
 
     # Return the predicted likelihood for the new text
     return input_pred
+
+def save_model(clf, vectorizer, state):
+    """save_model saves the trained classification model and vectorizer 
+    to the specified paths"""
+    model_path = 'ML/saved_models/'+ state + '_pass_model.pkl'
+    vectorizer_path='ML/saved_models/'+ state + '_pass_vectorizer.pkl'
+    with open(model_path, 'wb') as model_file:
+        pickle.dump(clf, model_file)
+
+    with open(vectorizer_path, 'wb') as vectorizer_file:
+        pickle.dump(vectorizer, vectorizer_file)
+
+def load_model(state,model_path='model.pkl', vectorizer_path='vectorizer.pkl'):
+    """load_model loads a previously saved classification model and vectorizer
+    from the specified paths"""
+    model_path = 'ML/saved_models/'+ state + '_pass_model.pkl'
+    vectorizer_path='ML/saved_models/'+ state + '_pass_vectorizer.pkl'
+    with open(model_path, 'rb') as model_file:
+        clf = pickle.load(model_file)
+
+    with open(vectorizer_path, 'rb') as vectorizer_file:
+        vectorizer = pickle.load(vectorizer_file)
+
+    return clf, vectorizer
