@@ -1,5 +1,6 @@
 """This module is used to test the properties of a dataset"""
 #pylint: disable=invalid-name
+#pylint: disable=duplicate-code
 import codecs
 import csv
 import sys
