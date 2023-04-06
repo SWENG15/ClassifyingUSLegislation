@@ -15,8 +15,7 @@
     - ../ML/subject_model.py
     - ../ML/pass_model.py
     - ../ML/bill_similarity_model.py
-    - ../ETL_pipeline/datasets/west-virginia-dataset.csv
-    - ../ETL_pipeline/datasets/alabama-dataset.csv
+    - ../etl_pipeline/datasets/west-virginia-dataset.csv
 </py-env>
 	</head>
 	<style>
@@ -32,15 +31,51 @@
 			<a href="./Service.html">Service</a>
 			<a href="./Contact.html">Contact</a>
 		</nav>
+
+		<!-- current state selector -->
+		<p style="color:white;"><b>State Selected: <span id="selectedValue"></span></b></p>
 		
 		<div class="dropdown">
   			<button class="dropbtn">Select State</button>
   				<div class="dropdown-content">
     				<a href="#" id="WV" pys-onClick="choose_state(new_state='west-virginia')">West Virginia</a>
-					<!--<a href="#" id="AL" pys-onClick="choose_state(new_state='alabama')">Alabama</a>-->
     				<a href="#" id="none" pys-onClick="choose_state">Not Available</a>
     			</div>
   		</div>	
+
+		<!-- current state selector -->
+		<script>
+  		// Get the dropdown container element
+  		var dropdown = document.getElementsByClassName("dropdown")[0];
+		
+  		// Get all anchor tags inside the dropdown
+  		var anchors = dropdown.getElementsByClassName("dropdown-content")[0].getElementsByTagName("a");
+		
+  		// Add event listener to each anchor tag
+  		for (const element of anchors) {
+  		  element.addEventListener("click", function() {
+  		    // Get the text content of the clicked anchor tag
+  		    var selectedValue = this.textContent;
+
+			// Create a new paragraph element to display the selected value
+      		var selectedValueElement = document.createElement("p");
+
+		
+  		    // Do something with the selected value
+  		    console.log("Selected value: " + selectedValue);
+
+			// Append the new element to the document body or any other container element
+      		document.body.appendChild(selectedValueElement);
+
+			// Set the content of the new element to the value of the variable
+  			document.getElementById("selectedValue").textContent = selectedValue;
+  		  });
+  		}
+		</script>
+
+		
+
+
 		
 		<label for="bill">Bill Classification Portal</label>
 		<br>
