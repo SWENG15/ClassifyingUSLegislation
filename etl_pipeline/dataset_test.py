@@ -12,8 +12,8 @@ test_data = [
     ("etl_pipeline/datasets/west-virginia-dataset.csv",0.5),
     ("etl_pipeline/datasets/montana-dataset.csv",0.3),
     ("etl_pipeline/datasets/tennessee-dataset.csv",0.5),
-    ("etl_pipeline/datasets/idaho-dataset.csv",0.5)
-    ("etl_pipeline/datasets/louisiana-dataset.csv",0.4
+    ("etl_pipeline/datasets/idaho-dataset.csv",0.5),
+    ("etl_pipeline/datasets/louisiana-dataset.csv",0.4)
 ]
 
 state_list = [
