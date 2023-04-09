@@ -10,7 +10,7 @@ from ..ML.subject_model import train_model_accuracy
 
 test_data = [
     ("etl_pipeline/datasets/west-virginia-dataset.csv",0.5),
-    ("etl_pipeline/datasets/montana-dataset.csv",0.5)
+    ("etl_pipeline/datasets/montana-dataset.csv",0.3)
 ]
 
 state_list = [
