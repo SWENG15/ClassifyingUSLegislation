@@ -20,7 +20,6 @@ state_list = [
     ("etl_pipeline/datasets/west-virginia-dataset.csv"),
     ("etl_pipeline/datasets/alabama-dataset.csv"),
     ("etl_pipeline/datasets/montana-dataset.csv")
-    
 ]
 
 @pytest.mark.parametrize("path,expected",test_data)
