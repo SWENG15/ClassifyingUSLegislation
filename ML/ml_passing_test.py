@@ -7,7 +7,7 @@ MODEL_TRAINING_DATA_PATH = "etl_pipeline/datasets/west-virginia-dataset.csv"
 def test_train_regression_model():
     "This test comfroms that training the model does not return null"
     # Train model with test data
-    model, vectorizer = pass_model.train_regression_model('test'
+    model, vectorizer = pass_model.train_regression_model('test',
         training_data=MODEL_TRAINING_DATA_PATH
     )
 
@@ -36,7 +36,7 @@ def test_predict_pass():
     with open("ML/test_data/veto_test3.txt", "r", encoding="utf-8") as file:
         test_text_6 = file.read()
     # Train regression model with the data
-    model, vectorizer = pass_model.train_regression_model('test'
+    model, vectorizer = pass_model.train_regression_model('test',
         training_data=MODEL_TRAINING_DATA_PATH
     )
 
