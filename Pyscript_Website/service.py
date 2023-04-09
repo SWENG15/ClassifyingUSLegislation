@@ -36,7 +36,42 @@ def submit_bill(*_):
         else:
             Element('output').element.innerText = 'State not selected'
 
-def choose_state(*_, new_state=None):
+def choose_id(*_):
+    """
+    given alpha pyscript, some workarounds are necessary
+    this is called to choose idaho as a state
+    """
+    choose_state("idaho")
+
+def choose_la(*_):
+    """
+    given alpha pyscript, some workarounds are necessary
+    this is called to choose louisiana as a state
+    """
+    choose_state("louisiana")
+
+def choose_mt(*_):
+    """
+    given alpha pyscript, some workarounds are necessary
+    this is called to choose montana as a state
+    """
+    choose_state("montana")
+
+def choose_tn(*_):
+    """
+    given alpha pyscript, some workarounds are necessary
+    this is called to choose tennessee as a state
+    """
+    choose_state("tennessee")
+
+def choose_wv(*_):
+    """
+    given alpha pyscript, some workarounds are necessary
+    this is called to choose West virginia as a state
+    """
+    choose_state("west-virginia")
+
+def choose_state(new_state=None):
     """
     choose_state runs when a state is selected, 
     making sure the necessary ML model is available

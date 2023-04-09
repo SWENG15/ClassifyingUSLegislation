@@ -6,6 +6,7 @@ including training the models as well as returning classifications
 import sys
 import csv
 import codecs
+import gc
 import pandas as pd
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.naive_bayes import MultinomialNB
@@ -20,6 +21,11 @@ def train_model(training_data='../etl_pipeline/dataset.csv'):
     # Split the data into training and testing sets
     text = data['combined_text']
     subject = data['subject']
+
+    # Add explicit garbage collection
+    del data
+    gc.collect()
+
     vectorizer = CountVectorizer()
     text = vectorizer.fit_transform(text)
     #test_size determines how much of the data is used to test the model,
