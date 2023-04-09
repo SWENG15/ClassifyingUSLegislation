@@ -6,13 +6,14 @@ including training the models as well as returning classifications
 import sys
 import csv
 import codecs
+import pickle
 import pandas as pd
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.naive_bayes import MultinomialNB
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score
 
-def train_model(training_data='../etl_pipeline/dataset.csv'):
+def train_model(state, training_data='../etl_pipeline/dataset.csv'):
     """train_model trains a Naive Bayes classifier for subject matter based on 
         the path to a dataset given (optionally) in args"""
     data = prepare_data(training_data)
@@ -33,7 +34,7 @@ def train_model(training_data='../etl_pipeline/dataset.csv'):
     #y_pred = clf.predict(x_test)
     #score = accuracy_score(y_test, y_pred)
     #print(score)
-
+    save_model(clf, vectorizer, state)
     return clf, vectorizer
 
 def prepare_data(training_data):
@@ -114,6 +115,27 @@ def train_model_accuracy(training_data):
     # Find the accuracy of the model
     y_pred = clf.predict(x_test)
     return accuracy_score(y_test, y_pred)
+
+def save_model(clf, vectorizer, state):
+    """save_model saves the trained classification model and vectorizer 
+    to the specified paths"""
+    model_path = 'ML/saved_models/'+ state + '_model.pkl'
+    vectorizer_path='ML/saved_models/'+ state + '_vectorizer.pkl'
+    with open(model_path, 'wb') as model_file:
+        pickle.dump(clf, model_file)
+    with open(vectorizer_path, 'wb') as vectorizer_file:
+        pickle.dump(vectorizer, vectorizer_file)
+
+def load_model(state):
+    """load_model loads a previously saved classification model and vectorizer
+    from the specified paths"""
+    model_path = 'ML/saved_models/'+ state + '_model.pkl'
+    vectorizer_path='ML/saved_models/'+ state + '_vectorizer.pkl'
+    with open(model_path, 'rb') as model_file:
+        clf = pickle.load(model_file)
+    with open(vectorizer_path, 'rb') as vectorizer_file:
+        vectorizer = pickle.load(vectorizer_file)
+    return clf, vectorizer
 
 FILENAME = "etl_pipeline/datasets/west-virginia-dataset_purged.csv"
 if __name__ == "__main__":
