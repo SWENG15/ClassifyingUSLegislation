@@ -9,11 +9,13 @@ from ..etl_pipeline.analyse_dataset import analyse_data
 from ..ML.subject_model import train_model_accuracy
 
 test_data = [
-    ("etl_pipeline/datasets/west-virginia-dataset.csv",0.5)
+    ("etl_pipeline/datasets/west-virginia-dataset.csv",0.5),
+    ("etl_pipeline/datasets/tennessee-dataset.csv",0.5)
 ]
 
 state_list = [
-    ("etl_pipeline/datasets/west-virginia-dataset.csv")
+    ("etl_pipeline/datasets/west-virginia-dataset.csv"),
+    ("etl_pipeline/datasets/tennessee-dataset.csv")
 ]
 
 @pytest.mark.parametrize("path,expected",test_data)

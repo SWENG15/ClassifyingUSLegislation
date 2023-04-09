@@ -15,7 +15,9 @@
     - ../ML/subject_model.py
     - ../ML/pass_model.py
     - ../ML/bill_similarity_model.py
+    - ../etl_pipeline/datasets/tennessee-dataset.csv
     - ../etl_pipeline/datasets/west-virginia-dataset.csv
+    - ../etl_pipeline/datasets/alabama-dataset.csv
 </py-env>
 	</head>
 	<style>
@@ -38,6 +40,7 @@
 		<div class="dropdown">
   			<button class="dropbtn">Select State</button>
   				<div class="dropdown-content">
+					<a href="#" id="TN" pys-onClick="choose_state(new_state='tennessee')">Tennessee</a>
     				<a href="#" id="WV" pys-onClick="choose_state(new_state='west-virginia')">West Virginia</a>
     				<a href="#" id="none" pys-onClick="choose_state">Not Available</a>
     			</div>
