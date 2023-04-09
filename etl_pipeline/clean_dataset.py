@@ -3,7 +3,7 @@
 import csv
 import re
 
-from ..etl_pipeline.analyse_dataset import analyse_data
+from analyse_dataset import analyse_data
 
 def remove_blank_rows_csv(filename):
     """Removes blank rows from csvs leaving only data"""
@@ -59,7 +59,7 @@ def drop_rare_subjects(filename, occurences):
                 writer.writerow(line)
 
 #DO NOT INCLUDE .CSV FILE EXTENSION IN NAME, e.g enter "dataset" not "dataset.csv"
-FILENAME = "datasets/west-virginia-dataset"
+FILENAME = "datasets/louisiana-dataset"
 if __name__ == "__main__":
     #remove_blank_rows_csv(FILENAME)
     #remove_no_subject_csv(FILENAME)
