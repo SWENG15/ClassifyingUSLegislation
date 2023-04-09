@@ -14,9 +14,12 @@
   - paths:
     - ../ML/subject_model.py
     - ../ML/pass_model.py
-    - ../ETL_pipeline/datasets/west-virginia-dataset.csv
-    - ../ETL_pipeline/datasets/new-jersey-dataset.csv
-    - ../ETL_pipeline/datasets/alabama-dataset.csv
+    - ../ML/bill_similarity_model.py
+    - ../etl_pipeline/datasets/tennessee-dataset.csv
+    - ../etl_pipeline/datasets/west-virginia-dataset.csv
+    - ../etl_pipeline/datasets/montana-dataset.csv
+    - ../etl_pipeline/datasets/idaho-dataset.csv
+    - ../etl_pipeline/datasets/louisiana-dataset.csv
 </py-env>
 	</head>
 	<style>
@@ -32,16 +35,55 @@
 			<a href="./Service.html">Service</a>
 			<a href="./Contact.html">Contact</a>
 		</nav>
+
+		<!-- current state selector -->
+		<p style="color:white;"><b>State Selected: <span id="selectedValue"></span></b></p>
 		
 		<div class="dropdown">
   			<button class="dropbtn">Select State</button>
   				<div class="dropdown-content">
-    				<a href="#" id="WV" pys-onClick="choose_state(new_state='west-virginia')">West Virginia</a>
-					<a href="#" id="NJ" pys-onClick="choose_state(new_state='new-jersey')">New Jersey</a>
-					<a href="#" id="AL" pys-onClick="choose_state(new_state='alabama')">Alabama</a>
-    				<a href="#" id="none" pys-onClick="choose_state">Not Available</a>
+					<a href="#" id="ID" pys-onClick="choose_state(new_state='idaho')">Idaho</a>
+					<a href="#" id="LA" pys-onClick="choose_state(new_state='louisiana')">Louisiana</a>
+					<a href="#" id="MT" pys-onClick="choose_state(new_state='montana')">Montana</a>
+					<a href="#" id="TN" pys-onClick="choose_state(new_state='tennessee')">Tennessee</a>
+					<a href="#" id="WV" pys-onClick="choose_state(new_state='west-virginia')">West Virginia</a>
+					<a href="#" id="none" pys-onClick="choose_state">Not Available</a>
     			</div>
   		</div>	
+
+		<!-- current state selector -->
+		<script>
+  		// Get the dropdown container element
+  		var dropdown = document.getElementsByClassName("dropdown")[0];
+		
+  		// Get all anchor tags inside the dropdown
+  		var anchors = dropdown.getElementsByClassName("dropdown-content")[0].getElementsByTagName("a");
+		
+  		// Add event listener to each anchor tag
+  		for (const element of anchors) {
+  		  element.addEventListener("click", function() {
+  		    // Get the text content of the clicked anchor tag
+  		    var selectedValue = this.textContent;
+
+			// Create a new paragraph element to display the selected value
+      		var selectedValueElement = document.createElement("p");
+
+		
+  		    // Do something with the selected value
+  		    console.log("Selected value: " + selectedValue);
+
+			// Append the new element to the document body or any other container element
+      		document.body.appendChild(selectedValueElement);
+
+			// Set the content of the new element to the value of the variable
+  			document.getElementById("selectedValue").textContent = selectedValue;
+  		  });
+  		}
+		</script>
+
+		
+
+
 		
 		<label for="bill">Bill Classification Portal</label>
 		<br>

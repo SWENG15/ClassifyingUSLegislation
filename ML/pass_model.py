@@ -13,7 +13,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.metrics import mean_squared_error
 from sklearn.linear_model import LogisticRegression
 
-def train_model(training_data='../ETL_pipeline/dataset.csv'):
+def train_model(training_data='../etl_pipeline/dataset.csv'):
     """train_model trains a Naive Bayes classifier for subject matter based on 
         the path to a dataset given (optionally) in args"""
 
@@ -53,7 +53,7 @@ def train_model(training_data='../ETL_pipeline/dataset.csv'):
     #test_size determines how much of the data is used to test the model,
     # with the remaining used to train
     #x_train, x_test, y_train, y_test = train_test_split(text, subject, test_size=0.2)
-    x_train, _, y_train, _ = train_test_split(text, subject, test_size=0.1)
+    x_train, _, y_train, _ = train_test_split(text, subject, test_size=0.1, random_state=42)
 
     # Train a Naive Bayes classifier on the training data
     clf = MultinomialNB()
@@ -83,7 +83,7 @@ def predict_subject(clf, vectorizer, text):
     return input_pred
 
 # pylint: disable=too-many-locals
-def train_regression_model(training_data='../ETL_pipeline/datasets/west-virginia-dataset.csv'):
+def train_regression_model(training_data='../etl_pipeline/datasets/west-virginia-dataset.csv'):
     """
     train_regression_model trains the model to estimate how likely a bill is to pass or fail
     """
@@ -137,8 +137,10 @@ def train_regression_model(training_data='../ETL_pipeline/datasets/west-virginia
     text = vectorizer.fit_transform(text)
 
     #test_size determines how much of the data is used to test the model, remaining used to train
-    x_train, x_test, y_train, y_test = train_test_split(text, status, test_size=0.1)
-    #x_train, _, y_train, _ = train_test_split(text, status, test_size=0.1)
+    x_train, x_test, y_train, y_test = train_test_split(
+        text, status, test_size=0.1, random_state=42
+    )
+    #x_train, _, y_train, _ = train_test_split(text, status, test_size=0.1, random_state=42)
 
     # Train a logistic regression model on the training set
     model = LogisticRegression()

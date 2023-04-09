@@ -14,19 +14,23 @@ def setup_and_teardown():
     """
     # These need to be copied in the same way they are at runtime by pyscript
     shutil.copy("ML/subject_model.py","Pyscript_Website/subject_model.py")
-    shutil.copy("ETL_pipeline/datasets/west-virginia-dataset.csv","west-virginia-dataset.csv")
+    shutil.copy("ML/pass_model.py","Pyscript_Website/pass_model.py")
+    shutil.copy("ML/bill_similarity_model.py","Pyscript_Website/bill_similarity_model.py")
+    shutil.copy("etl_pipeline/datasets/west-virginia-dataset.csv","west-virginia-dataset.csv")
     yield
     os.remove("Pyscript_Website/subject_model.py")
+    os.remove("Pyscript_Website/pass_model.py")
+    os.remove("Pyscript_Website/bill_similarity_model.py")
     os.remove("west-virginia-dataset.csv")
 
 def test_change_state_none():
     """This function tests change_state when the input is None"""
     import service
-    assert service.change_state(None,{})==(None,None,None,None,None,{})
+    assert service.change_state(None,{})==(None,None,None,None,None,None,{})
 
 def test_change_state():
     """This function tests change_state when there is an input"""
     import service
-    state,_,_,_,_,states= service.change_state("west-virginia",{})
+    state,_,_,_,_,_,states= service.change_state("west-virginia",{})
     assert state=="west-virginia"
     assert "west-virginia" in states

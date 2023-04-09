@@ -14,6 +14,8 @@ jobs:
         python-version: ["3.8"]
     steps:
     - uses: actions/checkout@v3
+    - name: Install Git LFS
+      run: sudo apt-get install git-lfs
     - name: Set up Python ${{ matrix.python-version }}
       uses: actions/setup-python@v3
       with:
@@ -25,19 +27,23 @@ jobs:
         pip install -r requirements/web-app.txt
         pip install -r requirements/pulling-data.txt
         
-    - name: Analysing the code with pylint
-      run: |
-        pylint $(git ls-files '*.py')  
-        
     - name: Write env file (LegiScan API key)
       uses: DamianReeves/write-file-action@master
       with:
-        path: ETL_pipeline/env.py
+        path: etl_pipeline/env.py
         write-mode: overwrite
         contents: |
           API_KEY = "${{ secrets.LEGISCAN_API_KEY }}"
+      
+    - name: Configure Git LFS
+      run: |
+        git lfs track "*.csv"
+        git lfs pull
+      
+    - name: Analysing the code with pylint
+      run: |
+        pylint $(git ls-files '*.py') --good-names=ClassifyingUSLegislation
         
     - name: Test with pytest
       run: |
         pytest $(git ls-files '*test.py')
-  
