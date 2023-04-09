@@ -8,7 +8,8 @@ MODEL_TRAINING_DATA_PATH = 'etl_pipeline/datasets/west-virginia-dataset.csv'
 def test_train_model():
     """This test confirms that training the model does not return null"""
     # Train model with test data
-    clf, vectorizer = subject_model.train_model('west-virginia', training_data=MODEL_TRAINING_DATA_PATH)
+    clf, vectorizer = subject_model.train_model('west-virginia',
+    training_data=MODEL_TRAINING_DATA_PATH)
     pass_model.train_regression_model('west-virginia', training_data=MODEL_TRAINING_DATA_PATH)
     bill_similarity_model.train_similarity_model('west-virginia',
                                                  training_data=MODEL_TRAINING_DATA_PATH)
@@ -33,7 +34,7 @@ def test_predict_subject():
     with open('ML/test_data/test5.txt','r', encoding="utf-8") as file:
         test_text_5 = file.read()
     # Train model with test data
-    clf, vectorizer = subject_model.train_model(training_data=MODEL_TRAINING_DATA_PATH)
+    clf, vectorizer = subject_model.train_model('test', training_data=MODEL_TRAINING_DATA_PATH)
 
 
     # Predict subject for test text
