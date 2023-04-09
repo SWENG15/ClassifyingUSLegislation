@@ -1,3 +1,5 @@
+"""The purpose of the following program is to enable our user to identify bills that
+are similar in content to the original bill our user has entered."""
 import sys
 import csv
 import codecs
@@ -6,7 +8,8 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 
 def train_similarity_model(training_data='west-virginia-dataset.csv'):
-    """train_similarity_model is using Python's Scikit-learn library to preprocess and vectorize text data from our dataset and
+    """train_similarity_model is using Python's Scikit-learn library 
+    to preprocess and vectorize text data from our dataset and
 calculate the cosine similarity between the vectors of the bills in the file"""
 
     max_int = sys.maxsize
@@ -16,7 +19,7 @@ calculate the cosine similarity between the vectors of the bills in the file"""
             break
         except OverflowError:
             max_int = int(max_int/10)
-            
+
     # Load the data from a CSV file in Latin1 encoding
     with codecs.open(training_data, 'r', encoding='Latin1') as file:
         reader = csv.reader(file)
@@ -24,7 +27,7 @@ calculate the cosine similarity between the vectors of the bills in the file"""
 
     # Drop the ID column
     #data = data.drop('ID', axis=1)
-    
+
     # Fill missing text values with empty strings
     data['text'] = data['text'].fillna('')
 
@@ -36,12 +39,14 @@ calculate the cosine similarity between the vectors of the bills in the file"""
     return vectorizer, vectorized_text, data
 
 def print_similar_bills(bill, trained_model, num_of_similar_bills=10):
-    """print_similar_bills takes a single bill text, the trained model including vectorizer, vectorized_text, and data,
-    and a number of similar bills to return, and prints the most similar bills based on the cosine similarity scores"""
+    """print_similar_bills takes a single bill text, the trained 
+    model including vectorizer, vectorized_text, and data,
+    and a number of similar bills to return, and prints the most 
+    similar bills based on the cosine similarity scores"""
 
     # Extract trained model components
     vectorizer, vectorized_text, data = trained_model
-    
+
     # Transform input bill text using the trained vectorizer
     bill_vectorized = vectorizer.transform([bill])
 
@@ -64,4 +69,3 @@ def print_similar_bills(bill, trained_model, num_of_similar_bills=10):
 # Find similar bills for an input bill
 #input_bill = "An act to promote sustainability in public transportation"
 #print_similar_bills(input_bill, trained_model, num_of_similar_bills=5)
-    
