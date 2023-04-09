@@ -1,3 +1,6 @@
+<!-- website for contact form: https://formsubmit.co/ -->
+<!-- Group project email: sweng.propylon.ltd@gmail.com -->
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -29,38 +32,39 @@
   </div>
   <div id="output"></div>
 
-  <form class ="form_layout">
+  <form class ="form_layout" action="https://formsubmit.co/sweng.propylon.ltd@gmail.com" method="POST">
       <header>Contact Us</header>
       <table class="table_layout">
+        <input id="next" type="hidden" name ="_next" value="http://127.0.0.1:5555/Pyscript_Website/Contact.html">
         <tr>
-          <td>First Name<input type="text" class="form_field" name="fname" placeholder="First Name..."></td>
-          <td>Last Name<input type="text" class="form_field" name="lname" placeholder="Last Name..."></td>
+          <td>First Name<input type="text" class="form_field" name="fname" id="fname" placeholder="First Name..." required></td>
+          <td>Last Name<input type="text" class="form_field" name="lname" id="lname" placeholder="Last Name..." required></td>
         </tr>
         <tr>
-          <td>Email<input type="email" class="form_field" name="email" placeholder="Email..." ></td>
-          <td>Message<input type="text" class="form_field" name="message" placeholder="Type your message..."></td>
+          <td>Email<input type="email" class="form_field" name="email" id="email" placeholder="Email..." required></td>
+          <td>Message<input type="text" class="form_field" name="message" id="message" placeholder="Type your message..."></td>
         </tr>
       </table>
-      <button id="form-btn" class="formButton" type="submit" pys-onClick="submit_task" >
+      <button id="form-btn" class="formButton" type="submit-form" pys-onClick="submit_contact_form" >
         Submit
       </button>
   </form>
 
-  <!--<div class="address_div">
-    <p><b>Dublin Office Location</b><br>
-      Dublin, Ireland<br>
-      36 Blackbourne Square, Rathfarnham Gate, Dublin 14, Ireland, D14 DW30<br>
-      <b>Phone:</b> 01 492 7444</p>
-  </div>-->
-  
-  <!--<div class="text_position">-->
-  <div class="background_position">
-    <div class="phone_background"></div>
-    <div class="phone"><b>Phone: </b>1-855-776-7956</div>
-    <div class="email_background"></div>
-    <div class="email"><b>Email: </b>webquery@propylon.com</div>
+  <p id='form_recieved' class="display_request_sent"></p>
+
+  <div class="text_background">
+    <div class="phone"><b>Phone: </b>Not Available</div>
+    <div class="email"><b>Email: </b>sweng.propylon.ltd@gmail.com</div>
   </div>
   <!--</div>-->
+  <div>
+    <py-script src="contact.py"/>
+    <script>
+      window.onload = function() {
+        document.getElementById("next").action=window.location.href;
+      }
+    </script>
+  </div>
 </body>
 
 </html>

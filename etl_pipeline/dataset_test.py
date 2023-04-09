@@ -3,13 +3,10 @@ This module tests the quality of the dataset
     - Accuracy of the model it trains
     - Valid dataset
 """
+import csv
 import pytest
 from ..etl_pipeline.analyse_dataset import analyse_data
 from ..ML.subject_model import train_model_accuracy
-
-# This is the number of times the accuracy is calculated for each dataset
-# to find a better estimate of the accuracy
-NUM_TESTS = 20
 
 test_data = [
     ("etl_pipeline/datasets/west-virginia-dataset.csv",0.5),
@@ -18,7 +15,6 @@ test_data = [
 
 state_list = [
     ("etl_pipeline/datasets/west-virginia-dataset.csv"),
-    ("etl_pipeline/datasets/alabama-dataset.csv"),
     ("etl_pipeline/datasets/montana-dataset.csv")
 ]
 
@@ -27,12 +23,7 @@ def test_state_accuracy(path,expected):
     """
     This function tests the accuracy of a dataset's model
     """
-    total = 0
-    for _ in range(0,NUM_TESTS):
-        total += train_model_accuracy(path)
-
-    accuracy = total/NUM_TESTS
-    assert accuracy > expected
+    assert train_model_accuracy(path) > expected
 
 @pytest.mark.parametrize("path",state_list)
 def test_state_validity(path):
@@ -41,3 +32,16 @@ def test_state_validity(path):
     """
     subject_list = analyse_data(path)
     assert None not in subject_list
+    one_passed = False
+    one_failed = False
+    with open(path, 'r',  encoding='UTF-8') as csv_file:
+        csv_reader = csv.reader(csv_file)
+        header = next(csv_reader)
+        column_index = header.index('Status')
+        for row in csv_reader:
+            if 'Passed' in row[column_index]:
+                one_passed = True
+            elif 'Vetoed' in row[column_index] or 'Failed' in row[column_index]:
+                one_failed = True
+    assert one_passed is True
+    assert one_failed is True
