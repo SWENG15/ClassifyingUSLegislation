@@ -92,6 +92,7 @@ def get_bills_from_search(query_state, search_query, csv_name, num_pages, legi_e
     with open(csv_filename, 'a+', encoding='UTF-8',newline='') as csvfile:
         csvwriter = csv.writer(csvfile, delimiter=',')
         csvwriter.writerow(header)
+        # pylint: disable=too-many-nested-blocks
         for page_index in range(num_pages):
             bills = legi_env.search(state=query_state, query=search_query, page=page_index)
             #Populate csv file with each bill being one row
@@ -146,11 +147,18 @@ def get_bills_from_search(query_state, search_query, csv_name, num_pages, legi_e
                             print(document_text)
 
                         num_subjects = len(data['bill']['subjects'])
-                        # pylint: disable=invalid-name
                         bill_subject = "No Subject Provided"
                         if num_subjects > 0:
                         #Get bill subject matter
                             bill_subject = data['bill']['subjects'][0]['subject_name']
+                            #Clean bill subject
+                            subject_parts = bill_subject.split('--')
+                            main_subject = subject_parts[0]
+                            match = re.search(r"(.+)\(And Related Subheadings\)", main_subject)
+                            if match:
+                                trimmed_part = match.group(1)
+                                main_subject = trimmed_part
+                            bill_subject = main_subject.rstrip()
                             print("Bill Subject: " + str(bill_subject))
                             #Write all relevant bill information into csv
                             csv_row=[bill_id, bill_title, document_text, bill_status, bill_subject]
