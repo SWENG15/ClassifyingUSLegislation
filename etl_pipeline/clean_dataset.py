@@ -3,6 +3,7 @@
 import csv
 import re
 
+#pylint: disable=import-error
 from analyse_dataset import analyse_data
 
 def remove_blank_rows_csv(filename):

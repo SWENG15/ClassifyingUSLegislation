@@ -52,3 +52,4 @@ FILENAME = "etl_pipeline/datasets/louisiana-dataset.csv"
 if __name__ == "__main__":
     subjects, length = analyse_data(FILENAME)
     print(f"Length: {length}, \nSubjects: {subjects}")
+    
