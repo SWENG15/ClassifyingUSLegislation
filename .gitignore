@@ -5,5 +5,5 @@
 /etl_pipeline/pytest.csv
 /.pytest_cache/
 /etl_pipeline/env.py
-/PyscriptWebsite/__pycache__/
+/Pyscript_Website/__pycache__/
 /ML/__pycache__/
