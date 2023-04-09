@@ -3,7 +3,7 @@
 import csv
 import re
 
-from analyse_dataset import analyse_data
+from ..etl_pipeline.analyse_dataset import analyse_data
 
 def remove_blank_rows_csv(filename):
     """Removes blank rows from csvs leaving only data"""
@@ -44,10 +44,12 @@ def drop_rare_subjects(filename, occurences):
     csv.field_size_limit(100000000)
     counts = analyse_data(filename + ".csv")[0]
     low_counts = []
+    # pylint: disable=consider-using-dict-items
     for key in counts.keys():
         print(key + ": " + str(counts[key]))
         if counts[key] <= occurences:
             low_counts.append(key)
+    # pylint: disable=line-too-long
     with open(filename + '.csv', 'r', encoding='UTF-8') as fin, open(filename + '_denoised.csv', 'w', newline='', encoding='UTF-8') as fout:
         reader = csv.reader(fin, skipinitialspace=True)
         writer = csv.writer(fout, delimiter=',')
@@ -57,7 +59,7 @@ def drop_rare_subjects(filename, occurences):
                 writer.writerow(line)
 
 #DO NOT INCLUDE .CSV FILE EXTENSION IN NAME, e.g enter "dataset" not "dataset.csv"
-FILENAME = "wv-dataset"
+FILENAME = "datasets/west-virginia-dataset"
 if __name__ == "__main__":
     #remove_blank_rows_csv(FILENAME)
     #remove_no_subject_csv(FILENAME)
