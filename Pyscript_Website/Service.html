@@ -18,6 +18,7 @@
     - ../etl_pipeline/datasets/tennessee-dataset.csv
     - ../etl_pipeline/datasets/west-virginia-dataset.csv
     - ../etl_pipeline/datasets/montana-dataset.csv
+    - ../etl_pipeline/datasets/idaho-dataset.csv
 </py-env>
 	</head>
 	<style>
@@ -40,10 +41,11 @@
 		<div class="dropdown">
   			<button class="dropbtn">Select State</button>
   				<div class="dropdown-content">
-            <a href="#" id="MT" pys-onClick="choose_state(new_state='montana')">Montana</a>
-            <a href="#" id="TN" pys-onClick="choose_state(new_state='tennessee')">Tennessee</a>
-            <a href="#" id="WV" pys-onClick="choose_state(new_state='west-virginia')">West Virginia</a>
-            <a href="#" id="none" pys-onClick="choose_state">Not Available</a>
+					<a href="#" id="ID" pys-onClick="choose_state(new_state='idaho')">Idaho</a>
+					<a href="#" id="MT" pys-onClick="choose_state(new_state='montana')">Montana</a>
+					<a href="#" id="TN" pys-onClick="choose_state(new_state='tennessee')">Tennessee</a>
+					<a href="#" id="WV" pys-onClick="choose_state(new_state='west-virginia')">West Virginia</a>
+					<a href="#" id="none" pys-onClick="choose_state">Not Available</a>
     			</div>
   		</div>	
 
