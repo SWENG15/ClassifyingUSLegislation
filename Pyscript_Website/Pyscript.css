@@ -683,3 +683,32 @@ body.dark .questions__icon path {
 
 
 /* END OF ABOUT PAGE */
+
+/* Load Scren */
+.Load__screen__overlay {
+  background-color: #fafafa;
+  align-items: center;
+  width: 100%;
+  left: 0;
+  height: 100%;
+  z-index: 100;
+  position: absolute;
+}
+
+.load__button {
+ background-color: #1a1a1a;
+ color: #FFFFFF;
+ 
+
+}
+
+.Load_screen_label {
+  color: #464646;
+  width: 50%;
+  font-size: 24px;
+  font-weight: 500;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}

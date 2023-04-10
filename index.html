@@ -21,6 +21,16 @@ body {
 </style>
         
   <body class="container">
+  <div class="Load__screen__overlay">
+    <div class="Load_screen_label">This machine learning model is designed to analyze legal 
+    text and therefore the ML model must go through a training process During a training process. 
+    It is important to note that the training process may take some time. 
+    </div>
+  <button id="load-btn" class="load__button" type="submit" pys-onClick="removeText">
+				Click here to continue
+	</button>
+
+  </div> 
    <nav>
       <a href="./">Home</a>
       <a href="./Pyscript_Website/About.html">About</a>
@@ -30,11 +40,12 @@ body {
   </div>
   <div id="output"></div>
 
-
-
   </body>
-  
-  <py-script src="./index.py"></py-script>
+  <py-script>
+   def removeText(*_) {
+        Element('Load__screen__overlay').element.style.background = #0088ff
+   }
+  </py-script>
 
   <main class="max-w-xs mx-auto mt-4">
     <section>
