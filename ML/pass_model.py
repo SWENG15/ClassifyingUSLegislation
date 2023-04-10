@@ -135,4 +135,3 @@ STATE = "west-virginia"
 FILENAME = f"etl_pipeline/datasets/{STATE}-dataset.csv"
 if __name__ == "__main__":
     train_regression_model(STATE, training_data=FILENAME)
-
