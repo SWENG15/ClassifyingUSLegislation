@@ -31,6 +31,9 @@ def train_regression_model(state,
         reader = csv.reader(file)
         data = pd.DataFrame(reader, columns=['ID', 'title', 'text', 'status', 'subject'])
 
+    data = data.replace(to_replace="Failed/Dead", value="Vetoed")
+    data = data.replace(to_replace="Failed", value="Vetoed")
+
     # Only the bills with the tags 'passed' and 'vetoed'
     # will be considered in the training of the regression algorithm
     bill_tags = ["Passed", "Vetoed"]
@@ -118,8 +121,8 @@ def save_model(clf, vectorizer, state):
 def load_model(state):
     """load_model loads a previously saved pass model and vectorizer
     from the specified paths"""
-    model_path = 'ML/saved_models/'+ state + '_pass_model.pkl'
-    vectorizer_path='ML/saved_models/'+ state + '_pass_vectorizer.pkl'
+    model_path = state + '_pass_model.pkl'
+    vectorizer_path=state + '_pass_vectorizer.pkl'
     with open(model_path, 'rb') as model_file:
         clf = pickle.load(model_file)
 
@@ -127,3 +130,9 @@ def load_model(state):
         vectorizer = pickle.load(vectorizer_file)
 
     return clf, vectorizer
+
+STATE = "west-virginia"
+FILENAME = f"etl_pipeline/datasets/{STATE}-dataset.csv"
+if __name__ == "__main__":
+    train_regression_model(STATE, training_data=FILENAME)
+

@@ -81,9 +81,9 @@ def save_model(vectorizer, vectorized_text, data, state):
 def load_model(state):
     """load_model loads a previously saved similarity 
     model from the specified paths"""
-    vectorizer_path = 'ML/saved_models/'+ state + '_similarity_vectorizer.pkl'
-    vectorized_text_path = 'ML/saved_models/'+ state + '_similarity_vectorized_data.pkl'
-    data_path = 'ML/saved_models/'+ state + '_similarity_data.pkl'
+    vectorizer_path = state + '_similarity_vectorizer.pkl'
+    vectorized_text_path = state + '_similarity_vectorized_data.pkl'
+    data_path =  state + '_similarity_data.pkl'
     with open(vectorizer_path, 'rb') as vectorizer_file:
         vectorizer = pickle.load(vectorizer_file)
     with open(vectorized_text_path, 'rb') as vectorized_text_file:
@@ -92,11 +92,12 @@ def load_model(state):
         data = pickle.load(data_file)
     return vectorizer, vectorized_text, data
 
-
+STATE = "idaho"
+FILENAME = f"etl_pipeline/datasets/{STATE}-dataset.csv"
 if __name__ == '__main__':
     # Train the model
-    train_model = train_similarity_model("state")
+    train_model = train_similarity_model(STATE, training_data=FILENAME)
 
     # Find similar bills for an input bill
-    INPUT_BILL = "An act to promote sustainability in public transportation"
-    print(predict_similar_bills(INPUT_BILL, train_model, num_of_similar_bills=5))
+    #INPUT_BILL = "An act to promote sustainability in public transportation"
+    #print(predict_similar_bills(INPUT_BILL, train_model, num_of_similar_bills=5))

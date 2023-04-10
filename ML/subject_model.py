@@ -129,14 +129,15 @@ def save_model(clf, vectorizer, state):
 def load_model(state):
     """load_model loads a previously saved classification model and vectorizer
     from the specified paths"""
-    model_path = 'ML/saved_models/'+ state + '_model.pkl'
-    vectorizer_path='ML/saved_models/'+ state + '_vectorizer.pkl'
+    model_path = state + '_model.pkl'
+    vectorizer_path = state + '_vectorizer.pkl'
     with open(model_path, 'rb') as model_file:
         clf = pickle.load(model_file)
     with open(vectorizer_path, 'rb') as vectorizer_file:
         vectorizer = pickle.load(vectorizer_file)
     return clf, vectorizer
 
-FILENAME = "etl_pipeline/datasets/west-virginia-dataset_purged.csv"
+STATE = "tennessee"
+FILENAME = f"etl_pipeline/datasets/{STATE}-dataset.csv"
 if __name__ == "__main__":
-    print(train_model_accuracy(FILENAME))
+    train_model(STATE, training_data=FILENAME)
