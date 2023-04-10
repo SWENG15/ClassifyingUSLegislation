@@ -45,10 +45,10 @@ def analyse_data(data):
 
     sorted_subjects = dict(sorted(subject_counts.items(), key=lambda x:x[1]))
 
-    return sorted_subjects, len(data)
     #print(status_counts)
+    return sorted_subjects, len(data)
 
-FILENAME = "etl_pipeline/datasets/louisiana-dataset.csv"
+FILENAME = "etl_pipeline/datasets/tennessee-dataset.csv"
 if __name__ == "__main__":
     subjects, length = analyse_data(FILENAME)
     print(f"Length: {length}, \nSubjects: {subjects}")
