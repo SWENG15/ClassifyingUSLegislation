@@ -9,6 +9,7 @@ import model as ml
 # pylint: disable=invalid-name
 state, classifier, vectorizer = None, None, None
 states = {}
+remove_overlay()
 
 def submit_bill(*_):
     """submit_bill runs when a new bill's text is submitted"""
@@ -66,3 +67,10 @@ def change_state(new_state, states_dict):
             states[new_state] = (new_classifier,new_vectorizer)
 
     return new_state, new_classifier, new_vectorizer, states
+
+
+def remove_overlay(): 
+    Element('load_overlay').clear()
+Element('load_overlay').remove_class("Load__screen__overlay")
+
+remove_overlay()
