@@ -5,6 +5,8 @@
 import subject_model as ml
 import pass_model as pml
 import bill_similarity_model as bsm
+import threading
+import time
 
 # Pylint labels these as constants incorrectly
 # pylint: disable=invalid-name
@@ -13,7 +15,6 @@ classifier, subject_vectorizer = None, None
 pass_model, pass_vectorizer = None, None
 similarity_model = None
 states = {}
-remove_overlay()
 
 def submit_bill(*_):
     """submit_bill runs when a new bill's text is submitted"""
@@ -104,3 +105,8 @@ def change_state(new_state, states_dict):
 def remove_overlay(): 
     Element('load_overlay').clear()
     Element('load_overlay').remove_class("Load__screen__overlay")
+    stop_flag = True
+
+
+remove_overlay()
+

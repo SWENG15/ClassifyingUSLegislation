@@ -706,3 +706,12 @@ body.dark .questions__icon path {
   left: 50%;
   transform: translate(-50%, -50%);
 }
+
+.stand_out {
+  color: #FF4455;
+  font-size: 24px;
+  font-weight: 500;
+  position: relative;
+
+}
+
