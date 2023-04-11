@@ -12,8 +12,44 @@
   - pandas
   - scikit-learn
   - paths:
-    - ../ML/model.py
-    - ../ETL_pipeline/datasets/west-virginia-dataset.csv
+    - ../ML/subject_model.py
+    - ../ML/pass_model.py
+    - ../ML/bill_similarity_model.py
+    - ../ML/saved_models/idaho_model.pkl
+    - ../ML/saved_models/idaho_pass_model.pkl
+    - ../ML/saved_models/idaho_pass_vectorizer.pkl
+    - ../ML/saved_models/idaho_similarity_data.pkl
+    - ../ML/saved_models/idaho_similarity_vectorized_data.pkl
+    - ../ML/saved_models/idaho_similarity_vectorizer.pkl
+    - ../ML/saved_models/idaho_vectorizer.pkl
+    - ../ML/saved_models/louisiana_model.pkl
+    - ../ML/saved_models/louisiana_pass_model.pkl
+    - ../ML/saved_models/louisiana_pass_vectorizer.pkl
+    - ../ML/saved_models/louisiana_similarity_data.pkl
+    - ../ML/saved_models/louisiana_similarity_vectorized_data.pkl
+    - ../ML/saved_models/louisiana_similarity_vectorizer.pkl
+    - ../ML/saved_models/louisiana_vectorizer.pkl
+    - ../ML/saved_models/montana_model.pkl
+    - ../ML/saved_models/montana_pass_model.pkl
+    - ../ML/saved_models/montana_pass_vectorizer.pkl
+    - ../ML/saved_models/montana_similarity_data.pkl
+    - ../ML/saved_models/montana_similarity_vectorized_data.pkl
+    - ../ML/saved_models/montana_similarity_vectorizer.pkl
+    - ../ML/saved_models/montana_vectorizer.pkl
+    - ../ML/saved_models/tennessee_model.pkl
+    - ../ML/saved_models/tennessee_pass_model.pkl
+    - ../ML/saved_models/tennessee_pass_vectorizer.pkl
+    - ../ML/saved_models/tennessee_similarity_data.pkl
+    - ../ML/saved_models/tennessee_similarity_vectorized_data.pkl
+    - ../ML/saved_models/tennessee_similarity_vectorizer.pkl
+    - ../ML/saved_models/tennessee_vectorizer.pkl
+    - ../ML/saved_models/west-virginia_model.pkl
+    - ../ML/saved_models/west-virginia_pass_model.pkl
+    - ../ML/saved_models/west-virginia_pass_vectorizer.pkl
+    - ../ML/saved_models/west-virginia_similarity_data.pkl
+    - ../ML/saved_models/west-virginia_similarity_vectorized_data.pkl
+    - ../ML/saved_models/west-virginia_similarity_vectorizer.pkl
+    - ../ML/saved_models/west-virginia_vectorizer.pkl
 </py-env>
 	</head>
 	<style>
@@ -38,14 +74,55 @@
 			<a href="./Service.html">Service</a>
 			<a href="./Contact.html">Contact</a>
 		</nav>
+
+		<!-- current state selector -->
+		<p style="color:white;"><b>State Selected: <span id="selectedValue"></span></b></p>
 		
 		<div class="dropdown">
   			<button class="dropbtn">Select State</button>
   				<div class="dropdown-content">
-    				<a href="#" id="WV" pys-onClick="choose_state(new_state='west-virginia')">West Virginia</a>
-    				<a href="#" id="none" pys-onClick="choose_state">Not Available</a>
+					<a href="#" id="ID" pys-onClick="choose_state(new_state='idaho')">Idaho</a>
+					<a href="#" id="LA" pys-onClick="choose_state(new_state='louisiana')">Louisiana</a>
+					<a href="#" id="MT" pys-onClick="choose_state(new_state='montana')">Montana</a>
+					<a href="#" id="TN" pys-onClick="choose_state(new_state='tennessee')">Tennessee</a>
+					<a href="#" id="WV" pys-onClick="choose_state(new_state='west-virginia')">West Virginia</a>
+					<a href="#" id="none" pys-onClick="choose_state">Not Available</a>
     			</div>
   		</div>	
+
+		<!-- current state selector -->
+		<script>
+  		// Get the dropdown container element
+  		var dropdown = document.getElementsByClassName("dropdown")[0];
+		
+  		// Get all anchor tags inside the dropdown
+  		var anchors = dropdown.getElementsByClassName("dropdown-content")[0].getElementsByTagName("a");
+		
+  		// Add event listener to each anchor tag
+  		for (const element of anchors) {
+  		  element.addEventListener("click", function() {
+  		    // Get the text content of the clicked anchor tag
+  		    var selectedValue = this.textContent;
+
+			// Create a new paragraph element to display the selected value
+      		var selectedValueElement = document.createElement("p");
+
+		
+  		    // Do something with the selected value
+  		    console.log("Selected value: " + selectedValue);
+
+			// Append the new element to the document body or any other container element
+      		document.body.appendChild(selectedValueElement);
+
+			// Set the content of the new element to the value of the variable
+  			document.getElementById("selectedValue").textContent = selectedValue;
+  		  });
+  		}
+		</script>
+
+		
+
+
 		
 		<label for="bill">Bill Classification Portal</label>
 		<br>
@@ -55,11 +132,12 @@
 				<button id="new-bill-btn" class="buttonStyle" type="submit" pys-onClick="submit_bill">
 				Classify Bill
 				</button>
+				<h2 class="output_header">Subject</h2>
 				<div id="output" class="output_style"></div>
 				
 			</div>
 			<py-script src="service.py"/>
-			<py-script src="../ML/model.py"/>
+			<py-script src="../ML/subject_model.py"/>
 		</div>
 	</body>
 </html>

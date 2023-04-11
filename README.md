@@ -1,10 +1,15 @@
 # ClassifyingUSLegislation
 University project to design ML classification for US State Legislation.
 
-# About
-This is the base template for the US State Legislation website for SWENG. 
+# Access the Website
+The current developing version of the website can be accessed at https://sweng15.github.io/ClassifyingUSLegislation/.
+
+Note that this will change as people push code. The official releases can be accessed via DockerHub as described below.
 
 # Run the Website
+
+## GIT LFS
+This project uses large datasets that exceed the 100MB limit on github. To run the project you will need to have have GIT LFS installed on your machine. Steps for installing this can be found on git-lfs.com.
 
 ## Run the Website Uncontainerised
 The website is implemented using Pyscript.
@@ -29,8 +34,15 @@ Then, you should be able to access the website at 127.0.0.1:5500.
 
 
 ## Run Releases
+### Release 3
+This release contains an expanded prototype, with checking for the probability of a bill passing. To run this, run the following with Docker Desktop open:
+
+```
+docker run --name=web-app-container -p 5500:5500 clairegregg/classifying-us-legislation:v2
+```
+
 ### Release 2
-This release a fully functioning prototype. To run this, run the following with Docker Desktop open:
+This release contains a fully functioning prototype. To run this, run the following with Docker Desktop open:
 
 ```
 docker run --name=web-app-container -p 5500:5500 clairegregg/classifying-us-legislation:v1
