@@ -65,7 +65,7 @@ def predict_similar_bills(bill, trained_model, num_of_similar_bills=10):
     similar_bills = similar_bills.drop('text', axis=1)
     similar_bills = similar_bills.drop('subject', axis=1)
     similar_bills = similar_bills.drop('status', axis=1)
-    similar_bills = similar_bills.drop('id', axis=1)
+    
     
     # Return results
     return similar_bills

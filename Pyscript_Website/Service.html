@@ -55,7 +55,7 @@
 	<style>
 		body {
 		background-image: url('background-image.jpg');
-		background-size: 30% 100%;
+		background-size: 35% 100%;
 		} 
 	</style>
 	<body class="container">
@@ -138,8 +138,11 @@
 				<button id="new-bill-btn" class="buttonStyle" type="submit" pys-onClick="submit_bill">
 				Classify Bill
 				</button>
-				<h2 class="output_header">Subject</h2>
-				<div id="output" class="output_style"></div>
+				<h2 class="output_header" >Output requested by user:</h2>
+				<div id="output" class="output_style" ></div>
+				<div id="subject" class="output_style" style="border: 1px solid red;">Subject of bill:</div>
+				<div id="prob_pass" class="output_style" style="border: 1px solid red;">Probability of passing:</div>
+				<div id="similar_bills" class="output_style_similar_bills" >Similar bills:</div>
 				
 			</div>
 			<py-script src="service.py"/>

@@ -181,9 +181,25 @@ textarea {
   margin: auto;
   border-radius: 10px;
   height: 40px;
+  width: 250px;
+  font-family:PT Mono;
+  padding:10px;
+}
+
+.output_style_similar_bills {
+  color: #1a1a1a;
+  line-height: 25px;
+  text-align: right;
+  padding-top: 20px;
+  font-size: 14px;
+  font-weight: 500;
+  margin: auto;
+  border-radius: 10px;
+  height: 40px;
   width: 400px;
   font-family:PT Mono;
-  
+  padding:5px;
+
 }
 
 .output_header {
@@ -193,7 +209,7 @@ textarea {
   font-size: 20px;
   font-weight: 500;
   margin: auto;
-  height: 30px;
+  height: 40px;
   width: 390px;
   font-family: Georgia, serif;
   color: #1a1a1a;
