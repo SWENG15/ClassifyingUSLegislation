@@ -6,14 +6,14 @@ including training the models as well as returning classifications
 import sys
 import csv
 import codecs
-import gc
+import pickle
 import pandas as pd
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.naive_bayes import MultinomialNB
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score
 
-def train_model(training_data='../etl_pipeline/dataset.csv'):
+def train_model(state, training_data='../etl_pipeline/dataset.csv'):
     """train_model trains a Naive Bayes classifier for subject matter based on 
         the path to a dataset given (optionally) in args"""
     data = prepare_data(training_data)
@@ -21,10 +21,6 @@ def train_model(training_data='../etl_pipeline/dataset.csv'):
     # Split the data into training and testing sets
     text = data['combined_text']
     subject = data['subject']
-
-    # Add explicit garbage collection
-    del data
-    gc.collect()
 
     vectorizer = CountVectorizer()
     text = vectorizer.fit_transform(text)
@@ -39,7 +35,7 @@ def train_model(training_data='../etl_pipeline/dataset.csv'):
     #y_pred = clf.predict(x_test)
     #score = accuracy_score(y_test, y_pred)
     #print(score)
-
+    save_model(clf, vectorizer, state)
     return clf, vectorizer
 
 def prepare_data(training_data):
@@ -121,6 +117,28 @@ def train_model_accuracy(training_data):
     y_pred = clf.predict(x_test)
     return accuracy_score(y_test, y_pred)
 
-FILENAME = "etl_pipeline/datasets/west-virginia-dataset_purged.csv"
+def save_model(clf, vectorizer, state):
+    """save_model saves the trained classification model and vectorizer 
+    to the specified paths"""
+    model_path = 'ML/saved_models/'+ state + '_model.pkl'
+    vectorizer_path='ML/saved_models/'+ state + '_vectorizer.pkl'
+    with open(model_path, 'wb') as model_file:
+        pickle.dump(clf, model_file)
+    with open(vectorizer_path, 'wb') as vectorizer_file:
+        pickle.dump(vectorizer, vectorizer_file)
+
+def load_model(state):
+    """load_model loads a previously saved classification model and vectorizer
+    from the specified paths"""
+    model_path = state + '_model.pkl'
+    vectorizer_path = state + '_vectorizer.pkl'
+    with open(model_path, 'rb') as model_file:
+        clf = pickle.load(model_file)
+    with open(vectorizer_path, 'rb') as vectorizer_file:
+        vectorizer = pickle.load(vectorizer_file)
+    return clf, vectorizer
+
+STATE = "tennessee"
+FILENAME = f"etl_pipeline/datasets/{STATE}-dataset.csv"
 if __name__ == "__main__":
-    print(train_model_accuracy(FILENAME))
+    train_model(STATE, training_data=FILENAME)
