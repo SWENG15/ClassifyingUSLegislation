@@ -21,6 +21,7 @@ def train_model(state, training_data='../etl_pipeline/dataset.csv'):
     # Split the data into training and testing sets
     text = data['combined_text']
     subject = data['subject']
+
     vectorizer = CountVectorizer()
     text = vectorizer.fit_transform(text)
     #test_size determines how much of the data is used to test the model,
