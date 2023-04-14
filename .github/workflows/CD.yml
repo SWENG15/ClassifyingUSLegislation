@@ -17,6 +17,13 @@ jobs:
         with:
           username: ${{ secrets.DOCKER_HUB_USERNAME }}
           password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
+          
+      - name: Install Git LFS
+        run: sudo apt-get install git-lfs
+      
+      - name: Configure Git LFS
+        run: |
+          git lfs pull
 
       - name: Set up Docker Buildx
         id: buildx
