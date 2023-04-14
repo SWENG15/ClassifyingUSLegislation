@@ -2,9 +2,7 @@
 University project to design ML classification for US State Legislation.
 
 # Access the Website
-The current developing version of the website can be accessed at https://sweng15.github.io/ClassifyingUSLegislation/.
-
-Note that this will change as people push code. The official releases can be accessed via DockerHub as described below.
+The current version of the website can be accessed at https://sweng15.github.io/ClassifyingUSLegislation/.
 
 # Run the Website
 
@@ -34,6 +32,13 @@ Then, you should be able to access the website at 127.0.0.1:5500.
 
 
 ## Run Releases
+### Release 4
+This release contains the final version of the website, which can also be accessed at https://sweng15.github.io/ClassifyingUSLegislation/. This contains 3 ML models. To run this, run the following with Docker Desktop open:
+
+```
+docker run --name=web-app-container -p 5500:5500 clairegregg/classifying-us-legislation:v3
+```
+
 ### Release 3
 This release contains an expanded prototype, with checking for the probability of a bill passing. To run this, run the following with Docker Desktop open:
 
