@@ -14,34 +14,120 @@
   - paths:
     - ../ML/subject_model.py
     - ../ML/pass_model.py
-    - ../ETL_pipeline/datasets/west-virginia-dataset.csv
-    - ../ETL_pipeline/datasets/new-jersey-dataset.csv
-    - ../ETL_pipeline/datasets/alabama-dataset.csv
+    - ../ML/bill_similarity_model.py
+    - ../ML/saved_models/idaho_model.pkl
+    - ../ML/saved_models/idaho_pass_model.pkl
+    - ../ML/saved_models/idaho_pass_vectorizer.pkl
+    - ../ML/saved_models/idaho_similarity_data.pkl
+    - ../ML/saved_models/idaho_similarity_vectorized_data.pkl
+    - ../ML/saved_models/idaho_similarity_vectorizer.pkl
+    - ../ML/saved_models/idaho_vectorizer.pkl
+    - ../ML/saved_models/louisiana_model.pkl
+    - ../ML/saved_models/louisiana_pass_model.pkl
+    - ../ML/saved_models/louisiana_pass_vectorizer.pkl
+    - ../ML/saved_models/louisiana_similarity_data.pkl
+    - ../ML/saved_models/louisiana_similarity_vectorized_data.pkl
+    - ../ML/saved_models/louisiana_similarity_vectorizer.pkl
+    - ../ML/saved_models/louisiana_vectorizer.pkl
+    - ../ML/saved_models/montana_model.pkl
+    - ../ML/saved_models/montana_pass_model.pkl
+    - ../ML/saved_models/montana_pass_vectorizer.pkl
+    - ../ML/saved_models/montana_similarity_data.pkl
+    - ../ML/saved_models/montana_similarity_vectorized_data.pkl
+    - ../ML/saved_models/montana_similarity_vectorizer.pkl
+    - ../ML/saved_models/montana_vectorizer.pkl
+    - ../ML/saved_models/tennessee_model.pkl
+    - ../ML/saved_models/tennessee_pass_model.pkl
+    - ../ML/saved_models/tennessee_pass_vectorizer.pkl
+    - ../ML/saved_models/tennessee_similarity_data.pkl
+    - ../ML/saved_models/tennessee_similarity_vectorized_data.pkl
+    - ../ML/saved_models/tennessee_similarity_vectorizer.pkl
+    - ../ML/saved_models/tennessee_vectorizer.pkl
+    - ../ML/saved_models/west-virginia_model.pkl
+    - ../ML/saved_models/west-virginia_pass_model.pkl
+    - ../ML/saved_models/west-virginia_pass_vectorizer.pkl
+    - ../ML/saved_models/west-virginia_similarity_data.pkl
+    - ../ML/saved_models/west-virginia_similarity_vectorized_data.pkl
+    - ../ML/saved_models/west-virginia_similarity_vectorizer.pkl
+    - ../ML/saved_models/west-virginia_vectorizer.pkl
 </py-env>
 	</head>
 	<style>
 		body {
 		background-image: url('background-image.jpg');
-		background-size: 50% 100%;
+		background-size: 35% 100%;
 		} 
 	</style>
 	<body class="container">
+
+	<div id="load_overlay" class="Load__screen__overlay">
+    <div class="Load_screen_label">Our machine learning model is
+	 designed to accurately analyze legal text, but requires a 
+	 rigorous training process to achieve this level of accuracy.
+	  Due to the complexity of legal language and the large amount
+	   of data to be processed, training may take some time. 
+	   We appreciate your patience as we strive to provide the
+	    most accurate and reliable predictions.
+		 <span class="stand_out">Training ML model...</span>
+    </div>
+    </div>
+ 
+
+  </div> 
 		<nav>
 			<a href="../index.html">Home</a>
 			<a href="./About.html">About</a>
 			<a href="./Service.html">Service</a>
 			<a href="./Contact.html">Contact</a>
 		</nav>
+
+		<!-- current state selector -->
+		<p style="color:white;"><b>State Selected: <span id="selectedValue">None</span></b></p>
 		
 		<div class="dropdown">
   			<button class="dropbtn">Select State</button>
   				<div class="dropdown-content">
-    				<a href="#" id="WV" pys-onClick="choose_state(new_state='west-virginia')">West Virginia</a>
-					<a href="#" id="NJ" pys-onClick="choose_state(new_state='new-jersey')">New Jersey</a>
-					<a href="#" id="AL" pys-onClick="choose_state(new_state='alabama')">Alabama</a>
-    				<a href="#" id="none" pys-onClick="choose_state">Not Available</a>
+					<a href="#" id="ID" pys-onClick="choose_id">Idaho</a>
+					<a href="#" id="LA" pys-onClick="choose_la">Louisiana</a>
+					<a href="#" id="MT" pys-onClick="choose_mt">Montana</a>
+					<a href="#" id="TN" pys-onClick="choose_tn">Tennessee</a>
+					<a href="#" id="WV" pys-onClick="choose_wv">West Virginia</a>
     			</div>
   		</div>	
+
+		<!-- current state selector -->
+		<script>
+  		// Get the dropdown container element
+  		var dropdown = document.getElementsByClassName("dropdown")[0];
+		
+  		// Get all anchor tags inside the dropdown
+  		var anchors = dropdown.getElementsByClassName("dropdown-content")[0].getElementsByTagName("a");
+		
+  		// Add event listener to each anchor tag
+  		for (const element of anchors) {
+  		  element.addEventListener("click", function() {
+  		    // Get the text content of the clicked anchor tag
+  		    var selectedValue = this.textContent;
+
+			// Create a new paragraph element to display the selected value
+      		var selectedValueElement = document.createElement("p");
+
+		
+  		    // Do something with the selected value
+  		    console.log("Selected value: " + selectedValue);
+
+			// Append the new element to the document body or any other container element
+      		document.body.appendChild(selectedValueElement);
+
+			// Set the content of the new element to the value of the variable
+  			document.getElementById("selectedValue").textContent = selectedValue;
+  		  });
+  		}
+		</script>
+
+		
+
+
 		
 		<label for="bill">Bill Classification Portal</label>
 		<br>
@@ -51,13 +137,13 @@
 				<button id="new-bill-btn" class="buttonStyle" type="submit" pys-onClick="submit_bill">
 				Classify Bill
 				</button>
-				<h2 class="output_header">Subject</h2>
-				<div id="output" class="output_style"></div>
+				<h2 class="output_header" >Output requested by user:</h2>
+				<div id="output" class="output_style" ></div>
+				<div id="subject" class="output_style" style="border: 1px solid red;">Subject of bill:</div>
+				<div id="prob_pass" class="output_style" style="border: 1px solid red;">Probability of passing:</div>
+				<div id="similar_bills" class="output_style_similar_bills" >Similar bills:</div>
 				
 			</div>
-
-			
-			
 			<py-script src="service.py"/>
 			<py-script src="../ML/subject_model.py"/>
 		</div>

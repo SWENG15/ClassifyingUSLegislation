@@ -1,14 +1,18 @@
 """This module tests the ML classification model defined in subject_model.py"""
-
 import subject_model
+import pass_model
+import bill_similarity_model
 
-MODEL_TRAINING_DATA_PATH = 'ETL_pipeline/datasets/west-virginia-dataset.csv'
+MODEL_TRAINING_DATA_PATH = 'etl_pipeline/datasets/west-virginia-dataset.csv'
 
 def test_train_model():
     """This test confirms that training the model does not return null"""
     # Train model with test data
-    clf, vectorizer = subject_model.train_model(training_data=MODEL_TRAINING_DATA_PATH)
-
+    clf, vectorizer = subject_model.train_model('west-virginia',
+    training_data=MODEL_TRAINING_DATA_PATH)
+    pass_model.train_regression_model('west-virginia', training_data=MODEL_TRAINING_DATA_PATH)
+    bill_similarity_model.train_similarity_model('west-virginia',
+                                                 training_data=MODEL_TRAINING_DATA_PATH)
     # Check that the classifier and vectorizer are not None
     assert clf is not None
     assert vectorizer is not None
@@ -30,7 +34,7 @@ def test_predict_subject():
     with open('ML/test_data/test5.txt','r', encoding="utf-8") as file:
         test_text_5 = file.read()
     # Train model with test data
-    clf, vectorizer = subject_model.train_model(training_data=MODEL_TRAINING_DATA_PATH)
+    clf, vectorizer = subject_model.train_model('test', training_data=MODEL_TRAINING_DATA_PATH)
 
 
     # Predict subject for test text

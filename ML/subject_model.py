@@ -6,16 +6,44 @@ including training the models as well as returning classifications
 import sys
 import csv
 import codecs
+import pickle
 import pandas as pd
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.naive_bayes import MultinomialNB
 from sklearn.model_selection import train_test_split
-#from sklearn.metrics import accuracy_score
+from sklearn.metrics import accuracy_score
 
-def train_model(training_data='../ETL_pipeline/dataset.csv'):
+def train_model(state, training_data='../etl_pipeline/dataset.csv'):
     """train_model trains a Naive Bayes classifier for subject matter based on 
         the path to a dataset given (optionally) in args"""
+    data = prepare_data(training_data)
 
+    # Split the data into training and testing sets
+    text = data['combined_text']
+    subject = data['subject']
+
+    vectorizer = CountVectorizer()
+    text = vectorizer.fit_transform(text)
+    #test_size determines how much of the data is used to test the model,
+    # with the remaining used to train
+    x_train, _, y_train, _ = train_test_split(text, subject, test_size=0.01, random_state=42)
+
+    # Train a Naive Bayes classifier on the training data
+    clf = MultinomialNB()
+    clf.fit(x_train, y_train)
+
+    #y_pred = clf.predict(x_test)
+    #score = accuracy_score(y_test, y_pred)
+    #print(score)
+    save_model(clf, vectorizer, state)
+    return clf, vectorizer
+
+def prepare_data(training_data):
+    """
+    prepare_data takes in the path to the training data, 
+    then modifies it as necessary 
+    before returning the data in the correct form
+    """
     max_int = sys.maxsize
     while True:
         try:
@@ -44,25 +72,7 @@ def train_model(training_data='../ETL_pipeline/dataset.csv'):
     # Combine text and title columns
     data['combined_text'] = data['text'] + ' ' + data['title']
 
-    # Split the data into training and testing sets
-    text = data['combined_text']
-    subject = data['subject']
-    vectorizer = CountVectorizer()
-    text = vectorizer.fit_transform(text)
-    #test_size determines how much of the data is used to test the model,
-    # with the remaining used to train
-    #x_train, x_test, y_train, y_test = train_test_split(text, subject, test_size=0.2)
-    x_train, _, y_train, _ = train_test_split(text, subject, test_size=0.1)
-
-    # Train a Naive Bayes classifier on the training data
-    clf = MultinomialNB()
-    clf.fit(x_train, y_train)
-
-    #y_pred = clf.predict(x_test)
-    #score = accuracy_score(y_test, y_pred)
-    #print(score)
-
-    return clf, vectorizer
+    return data
 
 def predict_subject(clf, vectorizer, text):
     """
@@ -80,3 +90,55 @@ def predict_subject(clf, vectorizer, text):
 
     # Print the predicted subject for the new text
     return input_pred
+
+def train_model_accuracy(training_data):
+    """
+    train_model_accuracy trains the model, 
+    but instead of returning the model, it returns the accuracy
+    """
+    data = prepare_data(training_data)
+
+    # Split the data into training and testing sets
+    text = data['combined_text']
+    subject = data['subject']
+    vectorizer = CountVectorizer()
+    text = vectorizer.fit_transform(text)
+
+    #test_size determines how much of the data is used to test the model,
+    # with the remaining used to train
+    # pylint: disable=line-too-long
+    x_train, x_test, y_train, y_test = train_test_split(text, subject, test_size=0.01, random_state=42)
+
+    # Train a Naive Bayes classifier on the training data
+    clf = MultinomialNB()
+    clf.fit(x_train, y_train)
+
+    # Find the accuracy of the model
+    y_pred = clf.predict(x_test)
+    return accuracy_score(y_test, y_pred)
+
+def save_model(clf, vectorizer, state):
+    """save_model saves the trained classification model and vectorizer 
+    to the specified paths"""
+    model_path = 'ML/saved_models/'+ state + '_model.pkl'
+    vectorizer_path='ML/saved_models/'+ state + '_vectorizer.pkl'
+    with open(model_path, 'wb') as model_file:
+        pickle.dump(clf, model_file)
+    with open(vectorizer_path, 'wb') as vectorizer_file:
+        pickle.dump(vectorizer, vectorizer_file)
+
+def load_model(state):
+    """load_model loads a previously saved classification model and vectorizer
+    from the specified paths"""
+    model_path = state + '_model.pkl'
+    vectorizer_path = state + '_vectorizer.pkl'
+    with open(model_path, 'rb') as model_file:
+        clf = pickle.load(model_file)
+    with open(vectorizer_path, 'rb') as vectorizer_file:
+        vectorizer = pickle.load(vectorizer_file)
+    return clf, vectorizer
+
+STATE = "tennessee"
+FILENAME = f"etl_pipeline/datasets/{STATE}-dataset.csv"
+if __name__ == "__main__":
+    train_model(STATE, training_data=FILENAME)
