@@ -31,8 +31,12 @@ def submit_bill(*_):
             print('prob fine\n')
             similar_bills = bsm.predict_similar_bills(text, similarity_model)
             print('sim fine\n')
-            output = f"Subject: {subject[0]}, Probability of passing: {pass_prob}, Similar bills: {similar_bills}"
-            Element('output').element.innerText = output
+            Element('subject').element.innerText = subject[0]
+            Element('prob_pass').element.innerText = pass_prob[0]
+            Element('similar_bills').element.innerText = similar_bills
+            Element('output').element.innerText = ""
+
+
         else:
             Element('output').element.innerText = 'State not selected'
 
